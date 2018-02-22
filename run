@@ -5,14 +5,72 @@
 # 3. Installs the Ansible prerequisites
 # 4. Hands off to Ansible to ensure the local system matches the desired state
 
-# Exit immediately if a command exits with a non-zero status
-set -e
+ANSIBLE_ENV_SETUP=vendor/ansible/hacking/env-setup
+export PYENV_ROOT="$(pwd)/vendor/pyenv"
+PYENV_INIT="${PYENV_ROOT}/bin/pyenv"
+PATH="${PYENV_ROOT}/bin:$PATH"
+PYTHON_27="${PYENV_ROOT}/versions/2.7.14"
 
 progress(){
     echo -ne "\r["
     printf "%0.s=" `seq $1`
     echo -n ">"
 }
+
+usage() {
+  echo "./install [options] [roles...]"
+  echo "Supported options:"
+  echo "  -f/--force"
+  echo "  -h/--help"
+  echo "  -v/--verbose (repeat for more verbosity)"
+  echo "Other options (passed through to Ansible):"
+  echo "  --check"
+  echo "  --step"
+  echo "  --start-at-task='role | task'"
+  echo "Supported roles:"
+  for ROLE in $(ls roles); do
+    echo "  $ROLE"
+    echo "    $(cat roles/$ROLE/description)"
+  done
+}
+
+EXTRA_ARGS=()
+while [ $# -gt 0 ]; do
+  if [ "$1" = '--force' -o "$1" = '-f' ]; then
+    FORCE=1
+  elif [ "$1" = '--verbose' -o "$1" = '-v' ]; then
+    VERBOSE=$((VERBOSE + 1))
+  elif [ "$1" = '--help' -o "$1" = '-h' -o "$1" = 'help' ]; then
+    usage
+    exit
+  elif [ -n "$1" ]; then
+    if [ -d "roles/$1" ]; then
+      if [ -z "$ROLES" ]; then
+        ROLES="--tags $1"
+      else
+        ROLES="$ROLES,$1"
+      fi
+    elif [[ "$1" == --* ]]; then
+      EXTRA_ARGS+=("$1")
+    else
+      echo "Unrecognized argument(s): $*"
+      usage
+      exit 1
+    fi
+  fi
+  shift
+done
+
+if [[ $VERBOSE ]]; then
+  DEV_NULL=/dev/stdout
+  if [ $VERBOSE -gt 1 ]; then
+    echo 'Enabling extremely verbose output'
+    set -x
+  fi
+else
+  trap 'echo "Exiting: run with -v/--verbose for more info"' EXIT
+  DEV_NULL=/dev/null
+fi
 
 # Install Xcode, if it is missing
 check=$((xcode-select --install) 2>&1)
@@ -28,3 +86,68 @@ if [[ "$check" == "$str" ]]; then
     sleep 1
   done
 fi
+
+if [ ! -e $PYENV_INIT ]; then
+  echo "Not found: $PYENV_INIT"
+  echo "Did you forget to 'git submodule update --init --recursive'?"
+  exit 1
+fi
+
+#if [ ! -e $ANSIBLE_ENV_SETUP ]; then
+#  echo "Not found: $ANSIBLE_ENV_SETUP"
+#  echo "Did you forget to 'git submodule update --init --recursive'?"
+#  exit 1
+#fi
+
+# Install pyenv 2.7.14 version, if missing or forced
+eval "$(pyenv init -)"
+if [ ! -e "$PYTHON_27" ]; then
+  echo "Installing Python 2.7.14..."
+  pyenv install 2.7.14 &> $DEV_NULL
+elif [ -e "$PYTHON_27" ] && [ "$FORCE" ]; then
+  echo "Forcing reinstall of Python 2.7.14..."
+  pyenv install -f 2.7.14 &> $DEV_NULL
+elif [ -e "$PYTHON_27" ]; then
+  echo "Skipping Python 2.7.14 pyenv install (already exists); use --force to override"
+fi
+
+# Activate pyenv 2.7.14 environment
+pyenv shell 2.7.14
+
+# Troubleshooting during OS upgrades, or new machine installs: may need:
+#
+#   sudo -H pip install --upgrade cryptography
+#   pip install --upgrade pip
+#
+if [[ -z $(pip show paramiko pycrypto PyYAML Jinja2 httplib2) || $FORCE ]]; then
+  if ! pip install paramiko pycrypto PyYAML Jinja2 httplib2 &> $DEV_NULL; then
+    echo "Failed: pip install"
+    echo "Did you forget to 'export https_proxy=fwdproxy:8080' or similar?"
+    exit 1
+  fi
+elif [[ ! $FORCE ]]; then
+  echo "Skipping pip installs (already exists); use --force to override"
+fi
+
+# Activate Ansible
+source vendor/ansible/hacking/env-setup &> $DEV_NULL
+
+if [[ $VERBOSE ]]; then
+  # Print Python, pip, and Ansible versions
+  python --version
+  pip --version
+  ansible --version
+fi
+
+HOST_OS=$(uname)
+
+#if [ "$HOST_OS" = 'Darwin' ]; then
+#  ansible-playbook --ask-become-pass -i inventory ${VERBOSE+-v} ${ROLES} "${EXTRA_ARGS[@]}" macos.yml
+#elif [ "$HOST_OS" = 'Linux' ]; then
+#  ansible-playbook -i inventory ${VERBOSE+-v} ${ROLES} "${EXTRA_ARGS[@]}" linux.yml
+#else
+#  echo "Unknown host OS: $HOST_OS"
+#  exit 1
+#fi
+
+trap - EXIT
