@@ -18,7 +18,7 @@ progress(){
 }
 
 usage() {
-  echo "./install [options] [roles...]"
+  echo "./run [options] [roles...]"
   echo "Supported options:"
   echo "  -f/--force"
   echo "  -h/--help"
