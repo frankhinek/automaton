@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# 1. Installs Xcode, if it is missing
+# 2. Sets up a local Python environment via pyenv
+# 3. Installs the Ansible prerequisites
+# 4. Hands off to Ansible to ensure the local system matches the desired state
+
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+if test ! $(which gcc); then
+  echo "Installing Xcode..."
+  xcode-select --install
+fi
