@@ -18,15 +18,15 @@ progress(){
 }
 
 usage() {
-  echo "./run [options] [roles...]"
-  echo "Supported options:"
-  echo "  -f/--force"
-  echo "  -h/--help"
-  echo "  -v/--verbose (repeat for more verbosity)"
-  echo "Other options (passed through to Ansible):"
-  echo "  --check"
-  echo "  --step"
-  echo "  --start-at-task='role | task'"
+  echo "Usage: run [options...] [roles...]"
+  echo "Options:"
+  echo " -f, --force"
+  echo " -h, --help"
+  echo " -v, --verbose (repeat for more verbosity)"
+  echo "Ansible options:"
+  echo "     --check"
+  echo "     --step"
+  echo "     --start-at-task='role | task'"
   echo "Supported roles:"
   for ROLE in $(ls roles); do
     echo "  $ROLE"
@@ -112,7 +112,7 @@ elif [ -e "$PYTHON_27" ]; then
 fi
 
 # Activate pyenv 2.7.14 environment
-pyenv shell 2.7.14
+pyenv global 2.7.14
 
 # Troubleshooting during OS upgrades, or new machine installs: may need:
 #
@@ -137,17 +137,22 @@ if [[ $VERBOSE ]]; then
   python --version
   pip --version
   ansible --version
+  which python
+  which pip
+  which ansible
 fi
 
 HOST_OS=$(uname)
 
-#if [ "$HOST_OS" = 'Darwin' ]; then
-#  ansible-playbook --ask-become-pass -i inventory ${VERBOSE+-v} ${ROLES} "${EXTRA_ARGS[@]}" macos.yml
-#elif [ "$HOST_OS" = 'Linux' ]; then
+if [ "$HOST_OS" = 'Darwin' ]; then
+  pip install jinja2
+  ansible-playbook --ask-become-pass -i inventory ${VERBOSE+-v} ${ROLES} "${EXTRA_ARGS[@]}" macos.yml
+elif [ "$HOST_OS" = 'Linux' ]; then
 #  ansible-playbook -i inventory ${VERBOSE+-v} ${ROLES} "${EXTRA_ARGS[@]}" linux.yml
-#else
-#  echo "Unknown host OS: $HOST_OS"
-#  exit 1
-#fi
+  echo "Ansible playbook for Linux not yet available"
+else
+  echo "Unknown host OS: $HOST_OS"
+  exit 1
+fi
 
 trap - EXIT

@@ -1,0 +1,52 @@
+# Based on the output of `brew bundle dump` (which must be run outside of tmux).
+#
+# {{ ansible_managed }}
+
+cask_args appdir: '/Applications'
+
+tap 'caskroom/cask'
+tap 'caskroom/fonts'
+tap 'caskroom/versions'
+tap 'homebrew/bundle'
+tap 'homebrew/core'
+tap 'homebrew/services'
+tap 'frankhinek/tap'
+
+# Packages to install on all macOS systems
+brew 'frankhinek/tap/defaultbrowser'
+brew 'git'
+brew 'grc'
+brew 'neovim'
+brew 'pyenv'
+brew 'pyenv-virtualenv'
+brew 'tree'
+brew 'wget'
+brew 'zsh'
+
+# Applications to install on all macOS sytems
+cask '1password'
+cask 'atom'
+cask 'docker'
+cask 'firefox'
+cask 'slack'
+cask 'sourcetree'
+
+{% if 'work' in group_names %}
+# Only on work machines.
+cask 'transmit'
+{% endif %}
+
+# Fonts to install on all macOS systems
+# monospace
+cask 'font-camingocode'
+cask 'font-open-sans'
+cask 'font-fira-code'
+# presentations
+cask 'font-bebas-neue'
+cask 'font-fontawesome'
+cask 'font-lato'
+cask 'font-poiret-one'
+cask 'font-questrial'
+cask 'font-roboto'
+cask 'font-roboto-condensed'
+cask 'font-ubuntu'

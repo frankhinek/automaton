@@ -1,0 +1,4 @@
+---
+- name: browsers | ensure Firefox is the default web browser
+  command: defaultbrowser firefox
+  when: is_macos

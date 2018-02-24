@@ -1,0 +1,7 @@
+---
+{% if 'personal' in group_names %}
+git_user_email: frank.hinek@gmail.com
+{% elif 'work' in group_names %}
+git_user_email: frank.hinek@honeywell.com
+{% endif %}
+git_user_name: Frank Hinek

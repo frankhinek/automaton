@@ -1,0 +1,17 @@
+---
+- name: shell | gets the zsh path
+  shell: which zsh
+  register: bin_zsh
+
+- name: shell | add /usr/local/bin/zsh to /etc/shells
+  lineinfile:
+    path: /etc/shells
+    line: '{{ bin_zsh.stdout }}'
+    owner: root
+    group: wheel
+
+- name: Set Homebrew zsh as default shell
+  command: dscl . -{{ item }}
+  with_items:
+    - create /Users/{{ ansible_env.USER }} UserShell /usr/local/bin/zsh
+  when: run_dscl_commands
