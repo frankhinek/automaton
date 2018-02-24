@@ -25,7 +25,9 @@ brew 'zsh'
 
 # Applications to install on all macOS sytems
 cask '1password'
+cask 'alfred'
 cask 'atom'
+cask 'dash'
 cask 'docker'
 cask 'firefox'
 cask 'slack'
