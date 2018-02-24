@@ -155,7 +155,7 @@ fi
 HOST_OS=$(uname)
 
 if [ "$HOST_OS" = 'Darwin' ]; then
-  ansible-playbook --ask-become-pass -i inventory ${VERBOSE+-v} ${ROLES} "${EXTRA_ARGS[@]}" macos.yml
+  ansible-playbook --ask-become-pass --ask-vault-pass -i inventory ${VERBOSE+-v} ${ROLES} "${EXTRA_ARGS[@]}" macos.yml
 elif [ "$HOST_OS" = 'Linux' ]; then
   # ansible-playbook -i inventory ${VERBOSE+-v} ${ROLES} "${EXTRA_ARGS[@]}" linux.yml
   echo "Ansible playbook for Linux not yet available"

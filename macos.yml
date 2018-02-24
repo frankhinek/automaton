@@ -1,6 +1,7 @@
 ---
 - hosts: localhost
   roles:
+    - { role: mas, tags: mas }
     - { role: homebrew, tags: homebrew }
     - { role: shell, tags: shell }
     - { role: browsers, tags: browsers }
