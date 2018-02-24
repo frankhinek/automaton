@@ -1,1 +1,1 @@
-!roles/dotfiles/files/.pyenv/plugins/pyenv-doctor
+*.pyc
