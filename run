@@ -5,8 +5,21 @@
 # 3. Installs the Ansible prerequisites
 # 4. Hands off to Ansible to ensure the local system matches the desired state
 
+# Store the current PATH and PYENV_ROOT and then reset to default values
+SYSTEM_PATH=$PATH
+unset PATH
+PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH
+
+# Store the curent PYENV_ROOT/PYENV_VERSION and reset to the submodule version
+SYSTEM_PYENV_ROOT=$PYENV_ROOT
+SYSTEM_PYENV_VERSION=$PYENV_VERSION
+unset PYENV_ROOT
+unset PYENV_VERSION
+PYENV_ROOT="$(pwd)/vendor/pyenv"
+export PYENV_ROOT
+
 ANSIBLE_ENV_SETUP=vendor/ansible/hacking/env-setup
-export PYENV_ROOT="$(pwd)/vendor/pyenv"
 PYENV_INIT="${PYENV_ROOT}/bin/pyenv"
 PATH="${PYENV_ROOT}/bin:$PATH"
 PYTHON_27="${PYENV_ROOT}/versions/2.7.14"
@@ -150,5 +163,17 @@ else
   echo "Unknown host OS: $HOST_OS"
   exit 1
 fi
+
+# Restore the previous PATH value
+unset PATH
+PATH=$SYSTEM_PATH
+export PATH
+
+# Restore the previous PYENV_ROOT/PYENV_VERSION value
+unset PYENV_ROOT
+PYENV_ROOT=$SYSTEM_PYENV_ROOT
+PYENV_VERSION=$SYSTEM_PYENV_VERSION
+export PYENV_ROOT
+export PYENV_VERSION
 
 trap - EXIT
