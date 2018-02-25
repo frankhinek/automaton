@@ -1,11 +1,11 @@
 #!/bin/zsh
 
 # Directory for storing development projects that can be `c [tab]` to
-export PROJECTS="$HOME/code"
+export PROJECTS='{{ directories.dev_projects }}'
 
 # Default editor
-export EDITOR='vim'
-export VEDITOR='pycharm'
+export EDITOR='{{ default_editor.shell }}'
+export VEDITOR='{{ default_editor.visual }}'
 
 if [ "$(uname)" = "Darwin" ]; then
   # Suppress unwanted Homebrew-installed stuff.

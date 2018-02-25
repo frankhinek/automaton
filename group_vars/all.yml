@@ -1,5 +1,13 @@
 ---
+default_editor:
+  shell: vim
+  visual: pycharm
+
+directories:
+  dev_projects: "{{ ansible_env.HOME }}/Code"
+
 http_proxy: ""
+
 iterm_dynamic_profiles:
   external: []
   retina: []
