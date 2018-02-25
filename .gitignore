@@ -1,1 +1,3 @@
 *.pyc
+
+roles/dotfiles/templates/iterm/com.googlecode.iterm2.plist

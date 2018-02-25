@@ -16,3 +16,5 @@ git_user_email_work: !vault |
           38363238383932353538356561653962316431303536313238613837383538333136
 
 git_user_name: Frank Hinek
+
+config_directory: ~/.config

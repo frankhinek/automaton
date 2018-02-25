@@ -1,4 +1,12 @@
 ---
+
+- name: dotfiles | create config dotfiles directory
+  file: path={{ config_directory }} state=directory
+
+###############################################################################
+# Find dotfiles to be symlinked and generated using templates
+###############################################################################
+
 - name: dotfiles | find files ending with the .symlink extension
   find:
     paths: '{{ playbook_dir }}/roles/dotfiles/files'
@@ -107,4 +115,5 @@
 ###############################################################################
 
 - include_tasks: antibody.yml
+- include_tasks: iterm.yml
 - include_tasks: zsh.yml
