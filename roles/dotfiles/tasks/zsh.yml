@@ -1,0 +1,4 @@
+---
+# Provide an extension point for other roles to dump .zshenv stuff into.
+- name: dotfiles | make ~/.zshenv.d
+  file: path=~/.zshenv.d state=directory

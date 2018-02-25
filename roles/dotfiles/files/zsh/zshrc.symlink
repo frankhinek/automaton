@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+# Directory for storing development projects that can be `c [tab]` to
+export PROJECTS="$HOME/code"
+
+# Default editor
+export EDITOR='vim'
+export VEDITOR='pycharm'
+
+if [ "$(uname)" = "Darwin" ]; then
+  # Suppress unwanted Homebrew-installed stuff.
+  if [ -e /usr/local/share/zsh/site-functions/_git ]; then
+    mv -f /usr/local/share/zsh/site-functions/{,disabled.}_git
+  fi
+fi
