@@ -39,4 +39,23 @@ for file in ${${${config_files:#*/exports.zsh}:#*/path.zsh}:#*/completion.zsh}; 
   source "$file"
 done
 
-unset config_files
+# Load completions
+autoload -Uz compinit
+# Only update .zcompdump once a day since this slows down the launch of a new shell session
+typeset -i updated_at=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
+if [ $(date +'%j') != $updated_at ]; then
+  compinit -i
+else
+  compinit -C -i
+fi
+
+# Load every completion after autocomplete loads
+for file in ${(M)config_files:#*/completion.zsh}; do
+  source "$file"
+done
+
+# Unsets the parameters since we no longer need them
+unset config_files updated_at
+
+# Use .localrc for SECRETS that you don't want in your public, versioned repo.
+[ -f ~/.localrc ] && . ~/.localrc
