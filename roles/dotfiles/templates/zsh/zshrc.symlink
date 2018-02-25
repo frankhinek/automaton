@@ -1,4 +1,7 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
+
+# Location of Zsh configuration files
+export DOTFILES='{{ playbook_dir }}/roles/dotfiles/files'
 
 # Directory for storing development projects that can be `c [tab]` to
 export PROJECTS='{{ directories.dev_projects }}'
@@ -13,3 +16,27 @@ if [ "$(uname)" = "Darwin" ]; then
     mv -f /usr/local/share/zsh/site-functions/{,disabled.}_git
   fi
 fi
+
+# All of our zsh files
+typeset -U config_files
+config_files=($DOTFILES/*/*.zsh)
+
+# load the exports files
+for file in ${(M)config_files:#*/exports.zsh}; do
+  source "$file"
+done
+
+# load the path files
+for file in ${(M)config_files:#*/path.zsh}; do
+  source "$file"
+done
+
+# Load antibody plugins
+source ~/.zsh_plugins.sh
+
+# Load everything but the exports, path, and completion files
+for file in ${${${config_files:#*/exports.zsh}:#*/path.zsh}:#*/completion.zsh}; do
+  source "$file"
+done
+
+unset config_files

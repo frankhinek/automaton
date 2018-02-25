@@ -1,0 +1,5 @@
+---
+- name: antibody | generate static plugins file
+  shell: antibody bundle <{{ playbook_dir }}/roles/dotfiles/files/antibody/zsh_plugins.txt >~/.zsh_plugins.sh
+  args:
+    executable: /usr/local/bin/zsh

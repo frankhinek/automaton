@@ -11,42 +11,42 @@
     paths: '{{ playbook_dir }}/roles/dotfiles/templates'
     patterns: '*.symlink'
     recurse: yes
-  register: find_template_symlinks
+  register: find_dotfile_templates
 
-###############################################################################
-# Backup existing dotfiles in the home directory before symlinking new paths
-###############################################################################
-
-- name: dotfiles | gather stats on any existing ~/.dotfile
-  stat:
-    path: ~/.{{ (item.path | basename | splitext)[0] }}
-  register: existing_dotfiles
-  with_items: '{{find_file_symlinks.files + find_template_symlinks.files}}'
-
-- name: dotfiles | create backup directory for non-symlink originals
+- name: dotfiles | create backup directory for non-Automaton originals
   file: path=~/.backups state=directory
 
-- name: dotfiles | gather stats on any existing ~/.backups/.dotfile
+###############################################################################
+# Backup existing dotfiles in home directory before replacing with symlinks
+###############################################################################
+
+- name: dotfiles | gather stats on existing ~/.dotfile duplicates of symlinks
+  stat:
+    path: ~/.{{ (item.path | basename | splitext)[0] }}
+  register: existing_symlink_dotfiles
+  with_items: '{{find_file_symlinks.files}}'
+
+- name: dotfiles | gather stats on any existing ~/.backups/.dotfile of symlinks
   stat:
     path: ~/.backups/.{{ (item.path | basename | splitext)[0] }}
-  register: existing_backups
-  with_items: '{{find_file_symlinks.files + find_template_symlinks.files}}'
+  register: existing_symlink_backups
+  with_items: '{{find_file_symlinks.files}}'
 
 - name: dotfiles | halt if ~/.dotfile and backup ~/.backups/.dotfile both exist and ~/.dotfile isn't a symlink
   fail: msg="Cannot create backup!  ~/.backups/{{ (item.0.stat.path | basename | splitext)[0] }} already exists!"
   with_together:
-    - '{{existing_dotfiles.results}}'
-    - '{{existing_backups.results}}'
+    - '{{existing_symlink_dotfiles.results}}'
+    - '{{existing_symlink_backups.results}}'
   when: item.0.stat.exists and item.1.stat.exists and item.0.stat.islnk == False
 
-- name: dotfiles | backup originals
+- name: dotfiles | backup originals before creating symlinks
   command:
     mv ~/.{{ (item.0.path | basename | splitext)[0] }} ~/.backups/
     creates=~/.backups/.{{ (item.0.path | basename | splitext)[0] }}
     removes=~/.{{ (item.0.path | basename | splitext)[0] }}
   with_together:
-    - '{{find_file_symlinks.files + find_template_symlinks.files}}'
-    - '{{existing_dotfiles.results}}'
+    - '{{find_file_symlinks.files}}'
+    - '{{existing_symlink_dotfiles.results}}'
   when: item.1.stat.islnk is defined and item.1.stat.islnk == False  # item exists and is not a symlink
   loop_control:
     label: '.{{ (item.0.path | basename | splitext)[0] }}'
@@ -62,16 +62,49 @@
         force=yes
   with_items: '{{find_file_symlinks.files}}'
 
+###############################################################################
+# Backup existing dotfiles in home directory before replacing with templates
+###############################################################################
+
+- name: dotfiles | gather stats on existing ~/.dotfile duplicates of templates
+  stat:
+    path: ~/.{{ (item.path | basename | splitext)[0] }}
+  register: existing_template_dotfiles
+  with_items: '{{find_dotfile_templates.files}}'
+
+- name: dotfiles | gather stats on any existing ~/.backups/.dotfile of templates
+  stat:
+    path: ~/.backups/.{{ (item.path | basename | splitext)[0] }}
+  register: existing_symlink_backups
+  with_items: '{{find_dotfile_templates.files}}'
+
+- name: dotfiles | backup originals before generating templates
+  command:
+    mv ~/.{{ (item.0.path | basename | splitext)[0] }} ~/.backups/
+    creates=~/.backups/.{{ (item.0.path | basename | splitext)[0] }}
+    removes=~/.{{ (item.0.path | basename | splitext)[0] }}
+  with_together:
+    - '{{find_dotfile_templates.files}}'
+    - '{{existing_template_dotfiles.results}}'
+  when: item.1.stat.exists  # item exists
+  loop_control:
+    label: '.{{ (item.0.path | basename | splitext)[0] }}'
+
+###############################################################################
+# Generate and write template-based dotfiles
+###############################################################################
+
 # Note some nasty dependencies here between creating the symlinks (eg.
 # effectively creating ~/mutt/config/) and then templating into it (eg.
 # ~/.mutt/config/settings.mutt).
-- name: dotfiles | create symlinks for templates
+- name: dotfiles | generate and write template-based dotfiles
   template: src={{ item.path }}
             dest=~/.{{ (item.path | basename | splitext)[0] }}
-  with_items: '{{find_template_symlinks.files}}'
+  with_items: '{{find_dotfile_templates.files}}'
 
 ###############################################################################
 # Run other tasks that are part of the role
 ###############################################################################
 
+- include_tasks: antibody.yml
 - include_tasks: zsh.yml
