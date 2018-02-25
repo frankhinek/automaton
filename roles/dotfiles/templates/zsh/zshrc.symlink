@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+# {{ ansible_managed }}
+
 # Location of Zsh configuration files
 export DOTFILES='{{ playbook_dir }}/roles/dotfiles/files'
 
