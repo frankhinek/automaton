@@ -1,4 +1,7 @@
 ---
+- name: iterm | create iterm config dotfiles directory
+  file: path={{ config_directory }}/iterm state=directory
+
 - name: iterm | generate and write iterm preferences file
   template: src={{ playbook_dir }}/roles/dotfiles/templates/iterm/com.googlecode.iterm2.plist
             dest={{ config_directory }}/iterm/com.googlecode.iterm2.plist
