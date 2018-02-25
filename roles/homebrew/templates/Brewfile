@@ -11,9 +11,11 @@ tap 'homebrew/bundle'
 tap 'homebrew/core'
 tap 'homebrew/services'
 tap 'frankhinek/tap'
+tap 'getantibody/tap'
 
 # Packages to install on all macOS systems
 brew 'frankhinek/tap/defaultbrowser'
+brew 'getantibody/tap/antibody'
 brew 'git'
 brew 'grc'
 brew 'mas'

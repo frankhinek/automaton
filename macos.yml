@@ -1,9 +1,9 @@
 ---
 - hosts: localhost
   roles:
-    - { role: dotfiles, tags: dotfiles }
-    - { role: mas, tags: mas }
     - { role: homebrew, tags: homebrew }
+    - { role: mas, tags: mas }
+    - { role: dotfiles, tags: dotfiles }
     - { role: shell, tags: shell }
     - { role: browsers, tags: browsers }
     - { role: macdefaults, tags: macdefaults }
