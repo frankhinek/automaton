@@ -115,5 +115,6 @@
 ###############################################################################
 
 - include_tasks: antibody.yml
+- include_tasks: automounter.yml
 - include_tasks: iterm.yml
 - include_tasks: zsh.yml

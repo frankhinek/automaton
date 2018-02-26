@@ -1,0 +1,5 @@
+---
+- name: automounter | apply configuration profile
+  shell: profiles -I -F {{ playbook_dir }}/roles/dotfiles/files/automounter/AutoMounterSettings.configprofile
+  args:
+    executable: /usr/local/bin/zsh
