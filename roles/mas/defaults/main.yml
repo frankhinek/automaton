@@ -1,6 +1,7 @@
 ---
 mas_installed_apps:
   - { id: 1160435653, name: "AutoMounter (1.5.7)" }
+  - { id: 1091189122, name: "Bear (1.4.3)" }
 
 mas_email: !vault |
           $ANSIBLE_VAULT;1.1;AES256
