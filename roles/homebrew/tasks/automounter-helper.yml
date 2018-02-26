@@ -1,0 +1,12 @@
+---
+- name: automounter-helper | run graphical installer
+  shell: open -a /usr/local/Caskroom/automounter-helper/1.3.1/AutoMounterHelper.app
+  args:
+    creates: '{{ ansible_env.HOME }}/Library/AutoMounterHelper/AutoMounterHelper.app'
+
+- name: automounter-helper | wait until the graphical installer completes
+  wait_for:
+    path: '{{ ansible_env.HOME }}/Library/LaunchAgents/nz.co.pixeleyes.AutoMounterHelper.plist'
+  with_items:
+    - '{{ ansible_env.HOME }}/Library/LaunchAgents/nz.co.pixeleyes.AutoMounterHelper.plist'
+    - '{{ ansible_env.HOME }}/Library/AutoMounterHelper/AutoMounterHelper.app'

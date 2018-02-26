@@ -24,3 +24,9 @@
 
 - name: homebrew | clean up old casks
   command: brew cask cleanup
+
+###############################################################################
+# Run other tasks that are part of the role
+###############################################################################
+
+- include_tasks: automounter-helper.yml
