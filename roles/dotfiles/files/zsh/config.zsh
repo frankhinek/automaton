@@ -52,7 +52,7 @@ unsetopt HUP                    # no hup signal at shell exit
 unsetopt LIST_BEEP              # no bell on ambiguous completion
 setopt LOCAL_OPTIONS            # allow functions to have local options
 setopt LOCAL_TRAPS              # allow functions to have local traps
-setopt PRINT_EXIT_VALUE         # print return value if non-zero
+unsetopt PRINT_EXIT_VALUE       # do not print return value if non-zero
 unsetopt RM_STAR_SILENT         # ask for confirmation for `rm *' or `rm path/*'
 
 zle -N up-line-or-beginning-search
