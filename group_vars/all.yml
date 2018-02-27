@@ -6,8 +6,6 @@ default_editor:
 directories:
   dev_projects: "{{ ansible_env.HOME }}/Code"
 
-http_proxy: ""
+git_user_name: Frank Hinek
 
-iterm_dynamic_profiles:
-  external: []
-  retina: []
+http_proxy: ""
