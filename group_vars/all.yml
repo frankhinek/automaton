@@ -6,6 +6,8 @@ default_editor:
 directories:
   dev_projects: "{{ ansible_env.HOME }}/Code"
 
+enable_git_signing: true
+
 git_user_name: Frank Hinek
 
 http_proxy: ""

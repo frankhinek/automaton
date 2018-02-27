@@ -5,19 +5,41 @@
 
 [commit]
 	cleanup = strip
+{% if enable_git_signing %}
 	gpgsign = true
+{% endif %}
 	template = {{ playbook_dir }}/roles/dotfiles/files/git/template.txt
 
 [core]
+	autocrlf = input
+	compression = -1  # default, Zlib
+	editor = nvim
 	excludesfile = ~/.gitignore
+{% if is_macos %}
+	precomposeunicode = true
+{% endif %}
+	whitespace = trailing-space,space-before-tab
 
+{% if enable_git_signing %}
 [gpg]
 	program = /usr/local/bin/gpg
+
+{% endif %}
+[help]
+	autocorrect = 1
+
+[push]
+	default = simple
+
+[submodule]
+	fetchJobs = 4
 
 [user]
 	email = {{ git_user_email }}
 	name = {{ git_user_name }}
+{% if enable_git_signing %}
 	signingkey = {{ git_signing_key }}
+{% endif %}
 
 # ignored by Git older than 1.7.10
 [include]
