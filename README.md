@@ -89,4 +89,4 @@ that the secret master key is missing as we intended.
 
 ## To Do
 
-1. Create a custom Homebrew formula to install the Automounter Helper.
+- [x] Create a custom Homebrew formula to install the Automounter Helper.
