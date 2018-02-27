@@ -1,0 +1,4 @@
+---
+- name: gnupg | generate and write gpg-agent.conf
+  copy: src={{ playbook_dir }}/roles/dotfiles/files/gpg/gpg-agent.conf
+        dest=~/.gnupg/gpg-agent.conf

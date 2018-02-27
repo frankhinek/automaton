@@ -1,0 +1,24 @@
+# {{ ansible_managed }}
+
+[color]
+	ui = auto
+
+[commit]
+	cleanup = strip
+	gpgsign = true
+	template = {{ playbook_dir }}/roles/dotfiles/files/git/template.txt
+
+[core]
+	excludesfile = ~/.gitignore
+
+[gpg]
+	program = /usr/local/bin/gpg
+
+[user]
+	email = {{ git_user_email }}
+	name = {{ git_user_name }}
+	signingkey = {{ git_signing_key }}
+
+# ignored by Git older than 1.7.10
+[include]
+	path = .gitconfig.local
