@@ -13,8 +13,15 @@ manual procedures after the Ansible run.
 Automaton includes support for using PGP keys to sign git commits.  If you wish
 to sign your commits, then follow the steps below.
 
-Start by ensuring that `enable_git_signing` is set to `true` in the `all.yml`
+Start by ensuring that `enable_git_signing` is set to `true` in the `all`
 group variables.
+
+Next, generate new `git_signing_key` variable values for the `personal` and
+`work` group variables.  Use the following command to create a new encrypted string with Ansible vault:
+
+```bash
+$ ansible-vault encrypt_string --vault-id @prompt 'secret' --name 'git_signing_key'
+```
 
 For daily use, especially on a mobile device such as a MacBook or Linux laptop,
 a strong security measure is to remove the master secret key from the keyring.
@@ -79,14 +86,6 @@ $ gpg --import secret-subkeys.asc
 Regardless of which approach you took, the output from the `gpg -K` command
 should display the master key with a hash character (e.g., `sec#`) indicating
 that the secret master key is missing as we intended.
-
-## Customization
-
-Use the following command to create a new encrypted string with Ansible vault:
-
-```bash
-ansible-vault encrypt_string --vault-id @prompt 'secret' --name 'var_name'
-```
 
 ## To Do
 
