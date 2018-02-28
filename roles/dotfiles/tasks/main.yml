@@ -1,7 +1,7 @@
 ---
 
 - name: dotfiles | create config dotfiles directory
-  file: path={{ config_directory }} state=directory
+  file: path={{ directories.dotconfig }} state=directory
 
 ###############################################################################
 # Find dotfiles to be symlinked and generated using templates
@@ -117,5 +117,6 @@
 - include_tasks: antibody.yml
 - include_tasks: automounter.yml
 - include_tasks: gpg.yml
+- include_tasks: git.yml
 - include_tasks: iterm.yml
 - include_tasks: zsh.yml

@@ -1,0 +1,4 @@
+---
+- name: git | generate project directory .zshrc for dynamic git user changing
+  template: src={{ playbook_dir }}/roles/dotfiles/templates/git/projects.zshrc
+            dest={{ directories.dev_projects }}/.zshrc

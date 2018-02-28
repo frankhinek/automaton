@@ -35,10 +35,18 @@
 	fetchJobs = 4
 
 [user]
-	email = {{ git_user_email }}
-	name = {{ git_user_name }}
+{% if 'personal' in group_names %}
+	email = {{ git.email.personal }}
+{% elif 'work' in group_names %}
+	email = {{ git.email.work }}
+{% endif %}
+	name = {{ git.name }}
 {% if enable_git_signing %}
-	signingkey = {{ git_signing_key }}
+  {% if 'personal' in group_names %}
+	signingkey = {{ git.signing_key.personal }}
+  {% elif 'work' in group_names %}
+	signingkey = {{ git.signing_key.work }}
+  {% endif %}
 {% endif %}
 
 # ignored by Git older than 1.7.10

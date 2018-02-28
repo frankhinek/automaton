@@ -1561,7 +1561,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>{{ config_directory | expanduser }}/iterm</string>
+	<string>{{ directories.dotconfig | expanduser }}/iterm</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnClose</key>

@@ -1,17 +1,17 @@
 ---
 - name: iterm | create iterm config dotfiles directory
-  file: path={{ config_directory }}/iterm state=directory
+  file: path={{ directories.dotconfig }}/iterm state=directory
 
 - name: iterm | generate and write iterm preferences file
   template: src={{ playbook_dir }}/roles/dotfiles/templates/iterm/com.googlecode.iterm2.plist
-            dest={{ config_directory }}/iterm/com.googlecode.iterm2.plist
+            dest={{ directories.dotconfig }}/iterm/com.googlecode.iterm2.plist
 
 - name: iterm | configure custom preferences folder path
   osx_defaults:
     domain: com.googlecode.iterm2
     key: PrefsCustomFolder
     type: string
-    value: '{{ config_directory }}/iterm'
+    value: '{{ directories.dotconfig }}/iterm'
     state: present
 
 - name: iterm | enable reading preferences from the templated generated file

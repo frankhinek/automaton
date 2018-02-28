@@ -68,8 +68,8 @@ bindkey '^P'     up-line-or-history            # [Ctrl-P] - Up a line of history
 bindkey '^N'     down-line-or-history          # [Ctrl-N] - Down a line of history
 bindkey '^[[A'   history-substring-search-up   # start typing + [Up-Arrow] - fuzzy find history forward
 bindkey '^[[B'   history-substring-search-down # start typing + [Down-Arrow] - fuzzy find history backward
-bindkey '^[^[[D' backward-word                 # [Alt-RightArrow] - move forward one word
 bindkey '^[^[[C' forward-word                  # [Alt-RightArrow] - move forward one word
+bindkey '^[^[[D' backward-word                 # [Alt-LeftArrow] - move backward one word
 bindkey '^A'     beginning-of-line             # [Ctrl-A] - Go to beginning of line
 bindkey '^E'     end-of-line                   # [Ctrl-E] - Go to end of line
 bindkey '^[[3~'  delete-char                   # [fn-Delete] - delete forward
