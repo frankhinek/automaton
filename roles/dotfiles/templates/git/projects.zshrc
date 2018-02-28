@@ -30,18 +30,20 @@ function dynamic_git_user() {
 
       # If origin is github.com, assume it is a personal project
       if [ "$(echo $origin_url | sed -n '/github\.com/p')" ]; then
-        # Only modify .git/config if a local user.email was not manually set
-        if [ "$git_email" != "{{ git.email.personal }}" ] && [ ! "$git_email_local_only" ]; then
-          #git config user.email {{ git.email.personal }}
-          echo -e "{{f(252)}}{{b(237)}}  {{glyph_git}}  {{f(237)}}{{b(239)}}{{glyph_rt_arrow}}{{f(252)}} {{ glyph_lock if enable_git_signing else ' ' }}  {{f(239)}}{{b(32)}}{{glyph_rt_arrow}}{{f(236)}} {{ git.email.personal }} {{reset}}{{f(32)}}{{glyph_rt_arrow}}{{reset}}"
-        fi
+        assumed_git_email="{{ git.email.personal }}"
+        {{ 'assumed_signing_key=' + git.signing_key.personal|string if enable_git_signing }}
       # If origin is honeywell.com, assume it is a work project
       elif [ "$(echo $origin_url | sed -n '/honeywell\.com/p')" ]; then
-        # Only modify .git/config if a local user.email was not manually set
-        if [ "$git_email" != "{{ git.email.work }}" ] && [ ! "$git_email_local_only" ]; then
-          #git config user.email {{ git.email.work }}
-          echo -e "{{f(252)}}{{b(237)}}  {{glyph_git}}  {{f(237)}}{{b(239)}}{{glyph_rt_arrow}}{{f(252)}} {{ glyph_lock if enable_git_signing else ' ' }}  {{f(239)}}{{b(32)}}{{glyph_rt_arrow}}{{f(236)}} {{ git.email.work }} {{reset}}{{f(32)}}{{glyph_rt_arrow}}{{reset}}"
-        fi
+        assumed_git_email="{{ git.email.work }}"
+        {{ 'assumed_signing_key="' + git.signing_key.work|string + '"' if enable_git_signing }}
+      else
+        assumed_git_email=""
+      fi
+      # Only modify .git/config if a local user.email was not manually set
+      if [ "$assumed_git_email" ] && [ "$git_email" != "$assumed_git_email" ] && [ ! "$git_email_local_only" ]; then
+        git config user.email "$assumed_git_email"
+        {{ 'git config user.signingkey "$assumed_signing_key"' if enable_git_signing }}
+        echo -e "{{f(252)}}{{b(237)}}  {{glyph_git}}  {{f(237)}}{{b(239)}}{{glyph_rt_arrow}}{{f(252)}} {{ glyph_lock if enable_git_signing else ' ' }}  {{f(239)}}{{b(32)}}{{glyph_rt_arrow}}{{f(236)}} $assumed_git_email {{reset}}{{f(32)}}{{glyph_rt_arrow}}{{reset}}"
       fi
     fi
   fi
