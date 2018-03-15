@@ -39,7 +39,7 @@ function dynamic_git_user() {
       else
         assumed_git_email=""
       fi
-      # Only modify .git/config if a local user.email was not manually set
+      # Only modify .git/config if user.email doesn't match the assumed value and was not manually set locally
       if [ "$assumed_git_email" ] && [ "$git_email" != "$assumed_git_email" ] && [ ! "$git_email_local_only" ]; then
         git config user.email "$assumed_git_email"
         {{ 'git config user.signingkey "$assumed_signing_key"' if enable_git_signing }}
