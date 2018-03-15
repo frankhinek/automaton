@@ -26,8 +26,22 @@
 
 - name: mas | ensure MAS apps suitable for all macOS systems are installed
   command: mas install "{{ item.id }}"
-  with_items: "{{ mas_installed_apps }}"
+  with_items: "{{ mas_installed_apps.all }}"
   when: item.id|string not in mas_list.stdout
+
+- name: mas | ensure MAS apps suitable for personal macOS systems are installed
+  command: mas install "{{ item.id }}"
+  with_items: "{{ mas_installed_apps.personal }}"
+  when:
+    - "'personal' in group_names"
+    - item.id|string not in mas_list.stdout
+
+- name: mas | ensure MAS apps suitable for work macOS systems are installed
+  command: mas install "{{ item.id }}"
+  with_items: "{{ mas_installed_apps.work }}"
+  when:
+    - "'work' in group_names"
+    - item.id|string not in mas_list.stdout
 
 - name: mas | upgrade all apps (if configured)
   command: mas upgrade

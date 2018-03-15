@@ -1,7 +1,10 @@
 ---
 mas_installed_apps:
-  - { id: 1160435653, name: "AutoMounter (1.5.7)" }
-  - { id: 1091189122, name: "Bear (1.4.3)" }
+  all:
+    - { id: 1160435653, name: "AutoMounter (1.5.7)" }
+    - { id: 1091189122, name: "Bear (1.4.3)" }
+  work:
+    - { id: 1289583905, name: "Pixelmator Pro (1.0.8)" }
 
 mas_email: !vault |
           $ANSIBLE_VAULT;1.1;AES256
