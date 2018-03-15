@@ -81,3 +81,55 @@
   command: defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad DragLock -bool true
 - name: macdefaults | System Preferences -> Accessibility -> Mouse & Trackpad -> Trackpad Options -> Enable dragging (with drag lock) - external Trackpad
   command: defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -bool true
+
+###############################################################################
+# Energy Saver                                                                #
+###############################################################################
+
+# References:
+#     https://apple.stackexchange.com/a/262593
+#     https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/pmset.1.html
+#
+# Simplistically, there are two energy saving modes:
+#     - Sleep: RAM contents will be maintained
+#     - Hibernation: RAM contents will be saved to persistent storage (SSD)
+#
+# Current settings can get checked using `pmset -g custom` command
+#
+# The -a, -b, -c, -u flags deter-mine determine whether the settings apply to
+# battery (-b), charger (wall power) (-c), UPS (-u) or all (-a).
+#
+# If sleep == 0, the system will not sleep or hibernate
+# If standby == 1 and hibernatemode == 3, the system will wait standbydelay
+#     seconds before entering Hibernation
+# autopoweroff is an extra implementation to comply with European regulatory
+#     requirements and has the same impact as standby
+# If both sleep and hibernate are enabled, the one that is reached first,
+#     from a time delay perspective, takes effect
+# If standby == 1 and hibernatemode == 25, the system will enter hibernation
+#     immediately after sleep minutes
+#
+# autopoweroff - Where supported, enabled per default as an implementation of
+#     Lot 6 to the European Energy-related Products Directive. After sleeping
+#     for <autopoweroffdelay> minutes, the system will write a hibernation image
+#     and go into a lower power chipset sleep. Wakeups from this state will take
+#     longer than wakeups from regular sleep. The system will not auto power off
+#     if any external devices are connected, if the system is on battery power,
+#     or if the system is bound to a network and wake for network access is
+#     enabled.
+
+- name: macdefaults | set standby delay for battery to 12 hours (default is 3)
+  command: pmset -b standbydelay 43200
+  become: true
+
+- name: macdefaults | set standby delay for charger to 12 hours (default is 3)
+  command: pmset -c standbydelay 43200
+  become: true
+
+- name: macdefaults | set auto power off delay for battery to 24 hours (default is 8)
+  command: pmset -b autopoweroffdelay 86400
+  become: true
+
+- name: macdefaults | set auto power off delay for charger to 24 hours (default is 8)
+  command: pmset -c autopoweroffdelay 86400
+  become: true
