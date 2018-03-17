@@ -52,7 +52,7 @@ cask 'suspicious-package'
 
 {% if 'work' in group_names %}
 # Only on work machines.
-cask 'microsoft-teams'
+#cask 'microsoft-teams'
 cask 'transmit'
 {% endif %}
 
