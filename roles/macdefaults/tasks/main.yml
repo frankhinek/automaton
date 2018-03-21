@@ -133,3 +133,6 @@
 - name: macdefaults | set auto power off delay for charger to 24 hours (default is 8)
   command: pmset -c autopoweroffdelay 86400
   become: true
+
+- name: macdefaults | show battery percentage in menu battery
+  osx_defaults: domain=com.apple.menuextra.battery key=ShowPercent type=string value=YES
