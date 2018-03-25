@@ -1,4 +1,13 @@
 ---
+- name: Ensure .gnupg directory exists
+  file:
+    path: ~/.gnupg
+    state: directory
+    mode: 0700
+
 - name: gnupg | generate and write gpg-agent.conf
-  copy: src={{ playbook_dir }}/roles/dotfiles/files/gpg/gpg-agent.conf
-        dest=~/.gnupg/gpg-agent.conf
+  copy: src={{ playbook_dir }}/roles/dotfiles/files/gpg/{{ item }}
+        dest=~/.gnupg/{{ item }}
+  with_items:
+    - gpg-agent.conf
+    - gpg.conf
