@@ -13,6 +13,11 @@ tap 'homebrew/services'
 tap 'frankhinek/tap'
 tap 'getantibody/tap'
 
+# Taps only for Work macOS systems
+{% if 'work' in group_names %}
+tap 'pachyderm/tap'
+{% endif %}
+
 # Packages to install on all macOS systems
 brew 'getantibody/tap/antibody'
 brew 'awscli'
@@ -30,6 +35,12 @@ brew 'pyenv-virtualenv'
 brew 'tree'
 brew 'wget'
 brew 'zsh'
+
+# Packages to install only on Work macOS systems
+{% if 'work' in group_names %}
+brew 'pachyderm/tap/pachctl@1.7'
+brew 's3cmd'
+{% endif %}
 
 # Applications to install on all macOS sytems
 cask '1password'
@@ -54,13 +65,6 @@ cask 'qlstephen'
 cask 'quicklook-json'
 cask 'suspicious-package'
 
-
-{% if 'work' in group_names %}
-# Only on work machines.
-#cask 'microsoft-teams'
-cask 'transmit'
-{% endif %}
-
 # Fonts to install on all macOS systems
 # monospace
 cask 'font-camingocode'
@@ -75,3 +79,9 @@ cask 'font-questrial'
 cask 'font-roboto'
 cask 'font-roboto-condensed'
 cask 'font-ubuntu'
+
+# Casks to install only on Work macOS systems
+{% if 'work' in group_names %}
+#cask 'microsoft-teams'
+cask 'transmit'
+{% endif %}
