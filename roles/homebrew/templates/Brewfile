@@ -14,9 +14,9 @@ tap 'frankhinek/tap'
 tap 'getantibody/tap'
 
 # Packages to install on all macOS systems
-brew 'frankhinek/tap/defaultbrowser'
 brew 'getantibody/tap/antibody'
 brew 'awscli'
+brew 'frankhinek/tap/defaultbrowser'
 brew 'git'
 brew 'gnupg'
 brew 'hopenpgp-tools'
@@ -32,10 +32,10 @@ brew 'wget'
 brew 'zsh'
 
 # Applications to install on all macOS sytems
-cask 'frankhinek/tap/automounter-helper'
 cask '1password'
 cask 'alfred'
 cask 'atom'
+cask 'frankhinek/tap/automounter-helper'
 cask 'dash'
 cask 'docker'
 cask 'firefox'
