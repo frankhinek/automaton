@@ -38,6 +38,7 @@ brew 'zsh'
 
 # Packages to install only on Work macOS systems
 {% if 'work' in group_names %}
+brew 'gimme'
 brew 'pachyderm/tap/pachctl@1.7'
 brew 's3cmd'
 {% endif %}
