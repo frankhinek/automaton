@@ -58,6 +58,7 @@ cask 'pycharm'
 cask 'slack'
 cask 'sourcetree'
 cask 'typora'
+cask 'virtualbox'
 
 # Quick Look Plugins - https://github.com/sindresorhus/quick-look-plugins
 cask 'betterzip'
