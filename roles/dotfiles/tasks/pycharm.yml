@@ -1,0 +1,11 @@
+---
+- name: pycharm | create PyCharm config dotfiles directory
+  file: path={{ directories.dotconfig }}/pycharm state=directory
+
+- name: pycharm | generate custom PyCharm properties file pointing to home directory
+  template: src={{ playbook_dir }}/roles/dotfiles/templates/pycharm/idea.properties
+            dest={{ directories.dotconfig }}/pycharm/idea.properties
+
+- name: pycharm | set user environment variable that tells PyCharm where to find the idea.properties file
+  template: src={{ playbook_dir }}/roles/dotfiles/templates/pycharm/pycharm.properties.plist
+            dest={{ ansible_env.HOME }}/Library/LaunchAgents/pycharm.properties.plist

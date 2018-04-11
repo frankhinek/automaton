@@ -1,0 +1,27 @@
+<application>
+  <component name="PropertiesComponent">
+    <property name="PyCharm.InitialConfiguration" value="true" />
+    <property name="PyCharm.InitialConfiguration.V2" value="true" />
+    <property name="PyCharm.InitialConfiguration.V3" value="true" />
+    <property name="PyCharm.InitialConfiguration.V4" value="true" />
+    <property name="PyCharm.InitialConfiguration.V5" value="true" />
+    <property name="PyCharm.InitialConfiguration.V6" value="true" />
+    <property name="PyCharm.InitialConfiguration.V7" value="true" />
+    <property name="com.chrisrm.idea.MaterialThemeUI.theme" value="one.dark" />
+    <property name="Darcula.savedEditorTheme" value="_@user_Material One Dark" />
+    <property name="Default.savedEditorTheme" value="_@user_Default" />
+    <property name="MTTabsHeight" value="42" />
+    <property name="fileTypeChangedCounter" value="1" />
+    <property name="PyCharm.initialConfigurationShown" value="true" />
+    <property name="DeploymentNotificationsComponent.WarnDisplayed.Java7&amp;Windows7FTPIssue" value="false" />
+    <property name="file.gist.reindex.count" value="3160" />
+    <property name="ts.lib.d.ts.version" value="2.6.2" />
+    <property name="lastTip" value="1" />
+    <property name="PLUGIN_FILTER" value="material theme ui" />
+    <property name="FileColorsForTabsEnabled" value="true" />
+    <property name="FileColorsForProjectViewEnabled" value="true" />
+    <property name="file.colors.enable.non.project" value="6d5080" />
+    <property name="selected.color.option.type" value="FILESTATUS_NOT_CHANGED" />
+    <property name="ColorChooser.RecentColors" value="109-80-128-255" />
+  </component>
+</application>

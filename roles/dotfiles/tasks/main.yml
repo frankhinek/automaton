@@ -7,8 +7,9 @@
 # Find dotfiles to be symlinked and generated using templates
 ###############################################################################
 
-- name: dotfiles | find files ending with the .symlink extension
+- name: dotfiles | find files and directories ending with the .symlink extension
   find:
+    file_type: any
     paths: '{{ playbook_dir }}/roles/dotfiles/files'
     patterns: '*.symlink'
     recurse: yes
@@ -119,4 +120,5 @@
 - include_tasks: gpg.yml
 - include_tasks: git.yml
 - include_tasks: iterm.yml
+- include_tasks: pycharm.yml
 - include_tasks: zsh.yml
