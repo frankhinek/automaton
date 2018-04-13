@@ -5,7 +5,7 @@ import socket
 
 host = socket.gethostname()
 
-if host == 'GA69MLN0001E1':
+if host == 'ga69mln0001e1':
     group = 'work'
 elif re.match(r'fdh-mbp(?:\.(?:local|lan)?)?\Z', host):
     group = 'personal'
