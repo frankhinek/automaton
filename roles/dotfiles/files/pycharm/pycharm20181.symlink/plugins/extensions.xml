@@ -618,6 +618,19 @@
         </option>
       </plugins>
     </entry>
+    <entry key="*.cmi">
+      <plugins>
+        <option name="myPlugins">
+          <set>
+            <plugin>
+              <option name="myPluginId" value="reasonml" />
+              <option name="myPluginName" />
+              <option name="myBundled" value="false" />
+            </plugin>
+          </set>
+        </option>
+      </plugins>
+    </entry>
     <entry key="*.community">
       <plugins>
         <option name="myPlugins">
@@ -1166,7 +1179,7 @@
         <option name="myPlugins">
           <set>
             <plugin>
-              <option name="myPluginId" value="cucumber" />
+              <option name="myPluginId" value="cucumber-java" />
               <option name="myPluginName" value="Gherkin" />
               <option name="myBundled" value="true" />
             </plugin>
@@ -1744,6 +1757,32 @@
           <set>
             <plugin>
               <option name="myPluginId" value="com.github.bjansen.intellij.pebble" />
+              <option name="myPluginName" />
+              <option name="myBundled" value="false" />
+            </plugin>
+          </set>
+        </option>
+      </plugins>
+    </entry>
+    <entry key="*.hx">
+      <plugins>
+        <option name="myPlugins">
+          <set>
+            <plugin>
+              <option name="myPluginId" value="com.intellij.plugins.haxe" />
+              <option name="myPluginName" />
+              <option name="myBundled" value="false" />
+            </plugin>
+          </set>
+        </option>
+      </plugins>
+    </entry>
+    <entry key="*.hxml">
+      <plugins>
+        <option name="myPlugins">
+          <set>
+            <plugin>
+              <option name="myPluginId" value="com.intellij.plugins.haxe" />
               <option name="myPluginName" />
               <option name="myBundled" value="false" />
             </plugin>
@@ -2570,6 +2609,19 @@
           <set>
             <plugin>
               <option name="myPluginId" value="nix-idea" />
+              <option name="myPluginName" />
+              <option name="myBundled" value="false" />
+            </plugin>
+          </set>
+        </option>
+      </plugins>
+    </entry>
+    <entry key="*.nmml">
+      <plugins>
+        <option name="myPlugins">
+          <set>
+            <plugin>
+              <option name="myPluginId" value="com.intellij.plugins.haxe" />
               <option name="myPluginName" />
               <option name="myBundled" value="false" />
             </plugin>
