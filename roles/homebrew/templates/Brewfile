@@ -33,6 +33,7 @@ brew 'pinentry-mac'
 brew 'pyenv'
 brew 'pyenv-virtualenv'
 brew 'tree'
+brew 'watch'
 brew 'wget'
 brew 'zsh'
 
