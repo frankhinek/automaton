@@ -121,4 +121,5 @@
 - include_tasks: git.yml
 - include_tasks: iterm.yml
 - include_tasks: pycharm.yml
+- include_tasks: vscode.yml
 - include_tasks: zsh.yml
