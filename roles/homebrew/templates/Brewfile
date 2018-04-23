@@ -55,7 +55,6 @@ cask 'docker'
 cask 'firefox'
 cask 'iterm2-beta'
 cask 'keybase'
-cask 'pycharm'
 cask 'slack'
 cask 'sourcetree'
 cask 'typora'
@@ -85,8 +84,14 @@ cask 'font-roboto'
 cask 'font-roboto-condensed'
 cask 'font-ubuntu'
 
+# Casks to install only on Personal macOS systems
+{% if 'personal' in group_names %}
+cask 'pycharm'
+{% endif %}
+
 # Casks to install only on Work macOS systems
 {% if 'work' in group_names %}
 #cask 'microsoft-teams'
 cask 'transmit'
+cask 'visual-studio-code'
 {% endif %}
