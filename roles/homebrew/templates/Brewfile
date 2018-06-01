@@ -91,6 +91,7 @@ cask 'pycharm'
 
 # Casks to install only on Work macOS systems
 {% if 'work' in group_names %}
+cask 'microsoft-remote-desktop-beta'
 #cask 'microsoft-teams'
 cask 'transmit'
 cask 'visual-studio-code'
