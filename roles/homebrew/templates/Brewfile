@@ -41,6 +41,7 @@ brew 'zsh'
 {% if 'work' in group_names %}
 brew 'gimme'
 brew 'kubernetes-helm'
+brew 'mercurial'
 brew 'pachyderm/tap/pachctl@1.7'
 brew 's3cmd'
 {% endif %}
