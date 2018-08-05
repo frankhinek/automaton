@@ -46,3 +46,9 @@
 - name: mas | upgrade all apps (if configured)
   command: mas upgrade
   when: mas_upgrade_all_apps
+
+###############################################################################
+# Run other tasks that are part of the role
+###############################################################################
+
+- include_tasks: automounter-helper.yml
