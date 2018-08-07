@@ -1,6 +1,6 @@
 ---
 - name: automounter-helper | run graphical installer
-  shell: open -a /usr/local/Caskroom/automounter-helper/1.3.1/AutoMounterHelper.app
+  shell: open -a /usr/local/Caskroom/automounter-helper/1.3.3/AutoMounterHelper.app
   args:
     creates: '{{ ansible_env.HOME }}/Library/AutoMounterHelper/AutoMounterHelper.app'
 
