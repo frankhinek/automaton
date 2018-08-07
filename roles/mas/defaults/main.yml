@@ -3,6 +3,8 @@ mas_installed_apps:
   all:
     - { id: 1160435653, name: "AutoMounter (1.5.7)" }
     - { id: 557168941, name: "Tweetbot for Twitter (2.5.4)" }
+  personal:
+    - { id: 1055511498, name: "Day One (2.7.4)"}
   work:
     - { id: 1289583905, name: "Pixelmator Pro (1.0.8)" }
 
