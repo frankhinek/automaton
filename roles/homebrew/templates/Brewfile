@@ -89,6 +89,7 @@ cask 'font-ubuntu'
 
 # Casks to install only on Personal macOS systems
 {% if 'personal' in group_names %}
+cask 'arq'
 cask 'box-drive'
 cask 'microsoft-office'
 cask 'pycharm'
