@@ -51,7 +51,6 @@ brew 's3cmd'
 cask '1password'
 cask 'alfred'
 cask 'astro'
-cask 'atom'
 cask 'frankhinek/tap/automounter-helper'
 cask 'dash'
 cask 'docker'
@@ -62,6 +61,7 @@ cask 'slack'
 cask 'sourcetree'
 cask 'typora'
 cask 'virtualbox'
+cask 'visual-studio-code'
 
 # Quick Look Plugins - https://github.com/sindresorhus/quick-look-plugins
 cask 'betterzip'
@@ -94,7 +94,6 @@ cask 'arq'
 cask 'box-drive'
 cask 'microsoft-office'
 cask 'pycharm'
-cask 'visual-studio-code'
 {% endif %}
 
 # Casks to install only on Work macOS systems
@@ -102,5 +101,4 @@ cask 'visual-studio-code'
 cask 'microsoft-remote-desktop-beta'
 cask 'microsoft-teams'
 cask 'transmit'
-cask 'visual-studio-code'
 {% endif %}
