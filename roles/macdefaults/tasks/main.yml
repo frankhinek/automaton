@@ -82,6 +82,20 @@
 - name: macdefaults | System Preferences -> Accessibility -> Mouse & Trackpad -> Trackpad Options -> Enable dragging (with drag lock) - external Trackpad
   command: defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -bool true
 
+# Last tested [10.13.6]
+- name: macdefaults | System Preferences -> Keyboard  -> Text -> Use smart quotes and dashes
+  command: defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+- name: macdefaults | System Preferences -> Keyboard  -> Text -> Use smart quotes and dashes
+  command: defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+# Last tested [10.13.6]
+- name: macdefaults | disable auto capitalize
+  command: defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+
+# Last tested [10.13.6]
+- name: macdefaults | disable auto period insert
+  command: defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+
 ###############################################################################
 # Energy Saver                                                                #
 ###############################################################################
