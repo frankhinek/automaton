@@ -8,6 +8,7 @@ mas_installed_apps:
     - { id: 406056744, name: "Evernote – stay organized (7.3.1)" }
     - { id: 408981434, name: "iMovie (10.1.9)" }
     - { id: 409183694, name: "Keynote (8.1)" }
+    - { id: 1289197285, name: "MindNode 5 (5.1.3)" }
     - { id: 409203825, name: "Numbers (5.1)" }
     - { id: 409201541, name: "Pages (7.1)" }
     - { id: 1303222628, name: "Paprika Recipe Manager 3 (3.2.3)"}
