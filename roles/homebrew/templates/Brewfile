@@ -99,5 +99,4 @@ cask 'virtualbox'
 {% if 'work' in group_names %}
 cask 'microsoft-remote-desktop-beta'
 cask 'microsoft-teams'
-cask 'transmit'
 {% endif %}
