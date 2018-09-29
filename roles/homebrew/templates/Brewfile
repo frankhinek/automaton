@@ -95,6 +95,7 @@ cask 'adobe-creative-cloud'
 cask 'arq'
 cask 'box-drive'
 cask 'microsoft-office'
+cask 'private-internet-access'
 cask 'pycharm'
 {% endif %}
 
