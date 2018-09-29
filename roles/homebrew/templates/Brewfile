@@ -58,7 +58,6 @@ cask 'kindle'
 cask 'slack'
 cask 'sourcetree'
 cask 'typora'
-cask 'virtualbox'
 cask 'visual-studio-code'
 
 # Quick Look Plugins - https://github.com/sindresorhus/quick-look-plugins
@@ -93,6 +92,7 @@ cask 'box-drive'
 cask 'microsoft-office'
 cask 'private-internet-access'
 cask 'pycharm'
+cask 'virtualbox'
 {% endif %}
 
 # Casks to install only on Work macOS systems
