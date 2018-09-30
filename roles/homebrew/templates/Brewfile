@@ -92,6 +92,7 @@ cask 'box-drive'
 cask 'microsoft-office'
 cask 'private-internet-access'
 cask 'pycharm'
+cask 'transmission'
 cask 'virtualbox'
 {% endif %}
 
