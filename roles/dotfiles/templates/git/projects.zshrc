@@ -32,8 +32,8 @@ function dynamic_git_user() {
       if [ "$(echo $origin_url | sed -n '/github\.com/p')" ]; then
         assumed_git_email="{{ git.email.personal }}"
         {{ 'assumed_signing_key=' + git.signing_key.personal|string if enable_git_signing }}
-      # If origin is honeywell.com, assume it is a work project
-      elif [ "$(echo $origin_url | sed -n '/honeywell\.com/p')" ]; then
+      # If origin is ncr.com, assume it is a work project
+      elif [ "$(echo $origin_url | sed -n '/ncr\.com/p')" ]; then
         assumed_git_email="{{ git.email.work }}"
         {{ 'assumed_signing_key="' + git.signing_key.work|string + '"' if enable_git_signing }}
       else
