@@ -106,4 +106,5 @@ cask 'virtualbox'
 cask 'microsoft-remote-desktop-beta'
 cask 'microsoft-teams'
 cask 'sketchup-pro'
+cask 'vmware-fusion'
 {% endif %}
