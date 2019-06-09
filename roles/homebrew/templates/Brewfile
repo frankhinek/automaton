@@ -46,7 +46,6 @@ brew 's3cmd'
 # Applications to install on all macOS sytems
 cask '1password'
 cask 'alfred'
-cask 'astro'
 cask 'frankhinek/tap/automounter-helper'
 cask 'dash'
 cask 'docker'
