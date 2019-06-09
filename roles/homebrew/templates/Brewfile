@@ -61,7 +61,6 @@ cask 'typora'
 cask 'visual-studio-code'
 
 # Quick Look Plugins - https://github.com/sindresorhus/quick-look-plugins
-cask 'betterzip'
 cask 'qlcolorcode'
 cask 'qlimagesize'
 cask 'qlmarkdown'
