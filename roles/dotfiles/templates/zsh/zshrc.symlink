@@ -51,6 +51,9 @@ else
   compinit -C -i
 fi
 
+# Enable a menu list from which to highlight and select completion results
+zmodload -i zsh/complist
+
 # Load every completion after autocomplete loads
 for file in ${(M)config_files:#*/completion.zsh}; do
   source "$file"

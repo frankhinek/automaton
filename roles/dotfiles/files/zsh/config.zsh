@@ -19,6 +19,8 @@ setopt PROMPT_SUBST     # allow funky stuff in prompt
 # Completion
 ##
 setopt ALWAYS_TO_END            # when completing from the middle of a word, move the cursor to the end of the word
+setopt AUTO_LIST                # automatically list choices on ambiguous completion
+setopt AUTO_MENU                # automatically use menu completion
 setopt COMPLETE_IN_WORD         # allow completion from within a word/phrase
 setopt CORRECT                  # spelling correction for commands
 setopt LIST_AMBIGUOUS           # complete as much of a completion until it gets ambiguous.
@@ -33,13 +35,13 @@ setopt APPEND_HISTORY           # append
 setopt BANG_HIST                # !keyword
 setopt EXTENDED_HISTORY         # add timestamps to history
 setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_IGNORE_ALL_DUPS     # no duplicates
+setopt HIST_IGNORE_ALL_DUPS     # remove older duplicate entries from history
 setopt HIST_IGNORE_DUPS         # no duplicates
 unsetopt HIST_IGNORE_SPACE      # don't ignore space prefixed commands
 setopt HIST_REDUCE_BLANKS       # trim blanks
 setopt HIST_VERIFY              # show before executing history commands
 setopt INC_APPEND_HISTORY       # add commands as they are typed, don't wait until shell exit
-setopt SHARE_HISTORY            # share history between sessions
+setopt SHARE_HISTORY            # share history between different instances of the shell
 
 ##
 # Various
