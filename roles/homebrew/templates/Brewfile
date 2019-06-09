@@ -43,7 +43,7 @@ brew 'zsh'
 brew 's3cmd'
 {% endif %}
 
-# Applications to install on all macOS sytems
+# Applications to install on all macOS systems
 cask '1password'
 cask 'alfred'
 cask 'frankhinek/tap/automounter-helper'
