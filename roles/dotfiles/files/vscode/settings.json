@@ -4,6 +4,8 @@
   "editor.cursorWidth": 3,
   "editor.cursorBlinking": "solid",
   "editor.wordWrap": "on",
+  "workbench.activityBar.visible": false,
+  "workbench.sideBar.location": "left",
   "editor.renderWhitespace": "all",
   "editor.rulers": [
     80,
