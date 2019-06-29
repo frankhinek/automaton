@@ -38,6 +38,7 @@ brew 'terraform'
 brew 'tree'
 brew 'watch'
 brew 'wget'
+brew 'yarn'
 brew 'zsh'
 
 # Packages to install only on Work macOS systems
