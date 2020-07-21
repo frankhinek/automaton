@@ -20,5 +20,5 @@ alias gs='git status -sb'
 alias gcl='git clone'
 
 gi() {
-  curl -s "https://www.gitignore.io/api/$*";
+  curl -sLw n https://www.toptal.com/developers/gitignore/api/$@;
 }
