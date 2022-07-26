@@ -8,7 +8,7 @@
 # Store the current PATH and PYENV_ROOT and then reset to default values
 SYSTEM_PATH=$PATH
 unset PATH
-PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH
 
 # Store the curent PYENV_ROOT/PYENV_VERSION and reset to the submodule version
@@ -22,7 +22,7 @@ export PYENV_ROOT
 ANSIBLE_ENV_SETUP=vendor/ansible/hacking/env-setup
 PYENV_INIT="${PYENV_ROOT}/bin/pyenv"
 PATH="${PYENV_ROOT}/bin:$PATH"
-PYTHON_27="${PYENV_ROOT}/versions/2.7.14"
+PYTHON_39="${PYENV_ROOT}/versions/3.9.13"
 
 progress(){
     echo -ne "\r["
@@ -112,28 +112,28 @@ fi
 #  exit 1
 #fi
 
-# Install pyenv 2.7.14 version, if missing or forced
+# Install pyenv 3.9.13 version, if missing or forced
 eval "$(pyenv init -)"
-if [ ! -e "$PYTHON_27" ]; then
-  echo "Installing Python 2.7.14..."
-  pyenv install 2.7.14 &> $DEV_NULL
-elif [ -e "$PYTHON_27" ] && [ "$FORCE" ]; then
-  echo "Forcing reinstall of Python 2.7.14..."
-  pyenv install -f 2.7.14 &> $DEV_NULL
-elif [ -e "$PYTHON_27" ]; then
-  echo "Skipping Python 2.7.14 pyenv install (already exists); use --force to override"
+if [ ! -e "$PYTHON_39" ]; then
+  echo "Installing Python 3.9.13..."
+  pyenv install 3.9.13 &> $DEV_NULL
+elif [ -e "$PYTHON_39" ] && [ "$FORCE" ]; then
+  echo "Forcing reinstall of Python 3.9.13..."
+  pyenv install -f 3.9.13 &> $DEV_NULL
+elif [ -e "$PYTHON_39" ]; then
+  echo "Skipping Python 3.9.13 pyenv install (already exists); use --force to override"
 fi
 
-# Activate pyenv 2.7.14 environment
-pyenv global 2.7.14
+# Activate pyenv 3.9.13 environment
+pyenv global 3.9.13
 
 # Troubleshooting during OS upgrades, or new machine installs: may need:
 #
 #   sudo -H pip install --upgrade cryptography
 #   pip install --upgrade pip
 #
-if [[ -z $(pip show paramiko pycrypto PyYAML Jinja2 httplib2) || $FORCE ]]; then
-  if ! pip install paramiko pycrypto PyYAML Jinja2 httplib2 &> $DEV_NULL; then
+if [[ -z $(pip show jinja2 PyYAML cryptography packaging resolvelib) || $FORCE ]]; then
+  if ! pip install -r vendor/ansible/requirements.txt &> $DEV_NULL; then
     echo "Failed: pip install"
     echo "Did you forget to 'export https_proxy=fwdproxy:8080' or similar?"
     exit 1
