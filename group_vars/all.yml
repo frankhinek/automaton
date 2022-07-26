@@ -1,7 +1,7 @@
 ---
 default_editor:
   shell: vim
-  visual: pycharm
+  visual: code
 
 directories:
   dev_projects: "{{ ansible_env.HOME }}/Code"
