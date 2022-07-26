@@ -2,11 +2,11 @@
 - hosts: localhost
   roles:
     - { role: directories, tags: directories }
-    - { role: homebrew, tags: homebrew }
-    - { role: mas, tags: mas }
-    - { role: dotfiles, tags: dotfiles }
-    - { role: shell, tags: shell }
+    # - { role: homebrew, tags: homebrew }
+    # - { role: mas, tags: mas }
+    # - { role: dotfiles, tags: dotfiles }
+    # - { role: shell, tags: shell }
     - { role: browsers, tags: browsers }
-    - { role: macdefaults, tags: macdefaults }
+    # - { role: macdefaults, tags: macdefaults }
   vars:
     - is_macos: ansible_os_family == 'Darwin'
