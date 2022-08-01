@@ -3,3 +3,8 @@
   shell: set -Ux DOTFILES {{ playbook_dir }}/roles/dotfiles/files
   args:
     executable: /opt/homebrew/bin/fish
+
+- name: fish | set development projects directory
+  shell: set -Ux PROJECTS {{ directories.dev_projects }}
+  args:
+    executable: /opt/homebrew/bin/fish
