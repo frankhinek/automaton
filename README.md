@@ -22,8 +22,8 @@ First, make sure you have all those things installed:
 Then, run these steps:
 
 ```console
-$ git clone https://github.com/frankhinek/automaton ~/Code/automaton
-$ cd ~/Code/automaton
+$ git clone https://github.com/frankhinek/automaton ~/.automaton
+$ cd ~/.automaton
 $ git submodule update --init --recursive
 $ ./run
 ```
@@ -33,7 +33,7 @@ $ ./run
 To update, you just need to `git pull` and run the bootstrap script again:
 
 ```console
-$ cd ~/Code/automaton
+$ cd ~/.automaton
 $ git pull origin master
 $ ./run
 ```
