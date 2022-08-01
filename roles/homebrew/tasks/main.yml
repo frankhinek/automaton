@@ -6,7 +6,10 @@
     mode: 'u+rx'
 
 - name: homebrew | install Homebrew
-  shell: vendor/homebrew/install.sh creates=/usr/local/bin/brew
+  shell: vendor/homebrew/install.sh
+  args:
+    creates: /opt/homebrew/bin/brew
+    executable: /bin/bash
 
 - name: homebrew | update Homebrew
   homebrew: update_homebrew=yes
