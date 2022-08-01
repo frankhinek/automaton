@@ -8,3 +8,11 @@
   shell: set -Ux PROJECTS {{ directories.dev_projects }}
   args:
     executable: /opt/homebrew/bin/fish
+
+- name: fish | set code editors
+  shell: set -Ux {{ item }}
+  args:
+    executable: /opt/homebrew/bin/fish
+  with_items:
+    - EDITOR {{ default_editor.shell }}
+    - VISUAL {{ default_editor.visual }}
