@@ -29,13 +29,13 @@
 - name: fish | find install.fish scripts
   find:
     file_type: any
-    paths: '{{ playbook_dir }}/roles/dotfiles/files'
-    patterns: 'install.fish'
+    paths: "{{ playbook_dir }}/roles/dotfiles/files"
+    patterns: "install.fish"
     recurse: yes
   register: find_file_install_fish
 
 - name: fish | execute install.fish scripts
-  ansible.builtin.shell: {{ item.path }}
+  shell: "{{ item.path }}"
   args:
     executable: /opt/homebrew/bin/fish
-  with_items: '{{find_file_install_fish.files}}'
+  with_items: "{{find_file_install_fish.files}}"
