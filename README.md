@@ -17,9 +17,14 @@ First, make sure you have all those things installed:
 - git: to clone the repo
 - curl: to download files
 
+### Install
+
+Then, run these steps:
+
 ```console
 $ git clone https://github.com/frankhinek/automaton ~/Code/automaton
 $ cd ~/Code/automaton
+$ git submodule update --init --recursive
 $ ./run
 ```
 
