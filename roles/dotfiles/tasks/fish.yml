@@ -1,16 +1,16 @@
 ---
 - name: fish | set dotfiles directory
-  shell: set -Ux DOTFILES {{ playbook_dir }}/roles/dotfiles/files
+  ansible.builtin.shell: set -Ux DOTFILES {{ playbook_dir }}/roles/dotfiles/files
   args:
     executable: /opt/homebrew/bin/fish
 
 - name: fish | set development projects directory
-  shell: set -Ux PROJECTS {{ directories.dev_projects }}
+  ansible.builtin.shell: set -Ux PROJECTS {{ directories.dev_projects }}
   args:
     executable: /opt/homebrew/bin/fish
 
 - name: fish | set code editors
-  shell: set -Ux {{ item }}
+  ansible.builtin.shell: set -Ux {{ item }}
   args:
     executable: /opt/homebrew/bin/fish
   with_items:
@@ -18,7 +18,7 @@
     - VISUAL {{ default_editor.visual }}
 
 - name: fish | clear fish greeting
-  shell: set -U fish_greeting
+  ansible.builtin.shell: set -U fish_greeting
   args:
     executable: /opt/homebrew/bin/fish
 
@@ -35,7 +35,7 @@
   register: find_file_install_fish
 
 - name: fish | execute install.fish scripts
-  shell: "{{ item.path }}"
+  ansible.builtin.shell: "{{ item.path }}"
   args:
     executable: /opt/homebrew/bin/fish
   with_items: "{{find_file_install_fish.files}}"
