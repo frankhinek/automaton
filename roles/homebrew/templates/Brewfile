@@ -24,6 +24,8 @@ cask_args appdir: '/Applications'
 brew "fish"
 # Distributed revision control system
 brew "git"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Terminal multiplexer
