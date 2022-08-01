@@ -1,0 +1,5 @@
+---
+- name: fish | set dotfiles directory
+  shell: set -Ux DOTFILES {{ playbook_dir }}/roles/dotfiles/files
+  args:
+    executable: /opt/homebrew/bin/fish
