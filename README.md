@@ -8,6 +8,31 @@ Although the vast majority of the tasks normally associated with setting up a
 new system have been automated, there are still a few steps that require
 manual procedures after the Ansible run.
 
+## Installation
+
+### Dependencies
+
+First, make sure you have all those things installed:
+
+- git: to clone the repo
+- curl: to download files
+
+```console
+$ git clone https://github.com/frankhinek/automaton ~/Code/automaton
+$ cd ~/Code/automaton
+$ ./run
+```
+
+### Update
+
+To update, you just need to `git pull` and run the bootstrap script again:
+
+```console
+$ cd ~/Code/automaton
+$ git pull origin master
+$ ./run
+```
+
 ### PGP Keys
 
 Automaton includes support for using PGP keys to sign git commits.  If you wish
@@ -90,3 +115,13 @@ that the secret master key is missing as we intended.
 ## To Do
 
 - [x] Create a custom Homebrew formula to install the Automounter Helper.
+
+## Thanks
+
+Rather than forking an existing Ansible macOS or Linux setup repository I
+started from a blank canvas and added only what I needed.  However, nearly every
+bit of this was copied directly from or heavily based on work by the individuals
+listed below. Thanks to all that shared their code!
+
+- [caarlos0/dotfiles.fish](https://github.com/caarlos0/dotfiles.fish)
+- [caarlos0/machine](https://github.com/caarlos0/machine)
