@@ -4,7 +4,7 @@
     - { role: directories, tags: directories }
     - { role: homebrew, tags: homebrew }
     # - { role: mas, tags: mas }
-    # - { role: dotfiles, tags: dotfiles }
+    - { role: dotfiles, tags: dotfiles }
     # - { role: shell, tags: shell }
     # - { role: browsers, tags: browsers }
     # - { role: macdefaults, tags: macdefaults }
