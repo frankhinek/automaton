@@ -19,10 +19,19 @@ cask_args appdir: '/Applications'
 {% endif %}
 
 # Packages to install on all macOS systems
+
+# User-friendly command-line shell for UNIX-like operating systems
+brew "fish"
+# Distributed revision control system
+brew "git"
+# Cross-shell prompt for astronauts
+brew "starship"
+# Terminal multiplexer
+brew "tmux"
+
 # brew 'getantibody/tap/antibody'
 # brew 'awscli'
 # brew 'frankhinek/tap/defaultbrowser'
-# brew 'git'
 # brew 'gnupg'
 # brew 'graphviz'
 # brew 'hopenpgp-tools'
@@ -31,9 +40,9 @@ cask_args appdir: '/Applications'
 # brew 'n'
 # brew 'neovim'
 # brew 'paperkey'
+# brew 'pyenv-virtualenv'
 # brew 'pinentry-mac'
 # brew 'pyenv'
-# brew 'pyenv-virtualenv'
 # brew 'terraform'
 # brew 'tree'
 # brew 'watch'
