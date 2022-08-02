@@ -6,8 +6,6 @@ env:
 import:
   - ~/.dotfiles/alacritty/night-owl.yml
 
-colors: *night-owl
-
 window:
   padding:
     x: 5
