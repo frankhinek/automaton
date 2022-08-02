@@ -28,6 +28,8 @@ brew "fzf"
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Terminal multiplexer
