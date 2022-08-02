@@ -62,6 +62,10 @@ brew "tmux"
 {% endif %}
 
 # Applications to install on all macOS systems
+
+# GPU-accelerated terminal emulator
+cask "alacritty"
+
 # cask '1password'
 # cask 'alfred'
 # cask 'android-studio'
