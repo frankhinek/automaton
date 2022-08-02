@@ -3,4 +3,6 @@ if test (uname) != Darwin
 	exit
 end
 
-fish_add_path -a /usr/local/sbin /opt/homebrew/bin || true
+set homebrew_bin_path (dirname (which brew))
+
+fish_add_path -a /usr/local/sbin $homebrew_bin_path || true

@@ -1,18 +1,22 @@
 ---
+- name: fish | gets the fish path
+  shell: which fish
+  register: bin_fish
+
 - name: fish | set dotfiles directory
   ansible.builtin.shell: set -Ux DOTFILES {{ playbook_dir }}/roles/dotfiles/files
   args:
-    executable: /opt/homebrew/bin/fish
+    executable: '{{ bin_fish.stdout }}'
 
 - name: fish | set development projects directory
   ansible.builtin.shell: set -Ux PROJECTS {{ directories.dev_projects }}
   args:
-    executable: /opt/homebrew/bin/fish
+    executable: '{{ bin_fish.stdout }}'
 
 - name: fish | set code editors
   ansible.builtin.shell: set -Ux {{ item }}
   args:
-    executable: /opt/homebrew/bin/fish
+    executable: '{{ bin_fish.stdout }}'
   with_items:
     - EDITOR {{ default_editor.shell }}
     - VISUAL {{ default_editor.visual }}
@@ -20,7 +24,7 @@
 - name: fish | clear fish greeting
   ansible.builtin.shell: set -U fish_greeting
   args:
-    executable: /opt/homebrew/bin/fish
+    executable: '{{ bin_fish.stdout }}'
 
 ###############################################################################
 # Find install scripts and execute them
@@ -37,5 +41,5 @@
 - name: fish | execute install.fish scripts
   ansible.builtin.shell: "{{ item.path }}"
   args:
-    executable: /opt/homebrew/bin/fish
+    executable: '{{ bin_fish.stdout }}'
   with_items: "{{find_file_install_fish.files}}"
