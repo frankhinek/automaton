@@ -8,7 +8,7 @@ cask_args appdir: '/Applications'
 # tap 'homebrew/bundle'
 # tap 'homebrew/core'
 # tap 'homebrew/services'
-# tap 'homebrew/cask-fonts'
+tap 'homebrew/cask-fonts'
 # tap 'homebrew/cask-versions'
 # tap 'frankhinek/tap'
 # tap 'getantibody/tap'
@@ -92,6 +92,7 @@ brew "tmux"
 # cask 'font-camingocode'
 # cask 'font-open-sans'
 # cask 'font-fira-code'
+cask "font-fira-code-nerd-font"
 # presentations
 # cask 'font-bebas-neue'
 # cask 'font-fontawesome'
