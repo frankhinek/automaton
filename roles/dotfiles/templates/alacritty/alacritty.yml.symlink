@@ -4,7 +4,7 @@ env:
   TERM: xterm-256color
 
 import:
-  - ~/.dotfiles/alacritty/night-owl.yml
+  - {{ playbook_dir }}/roles/dotfiles/files/alacritty/night-owl.yml
 
 window:
   padding:
@@ -53,8 +53,15 @@ cursor:
 live_config_reload: true
 
 key_bindings:
-  - { key: D,        mods: Command,       chars: "\x06\x76" } 
-  - { key: D,        mods: Command|Shift, chars: "\x06\x73" }
+  # Split the current pane into two, left and right
+  - { key: D, mods: Command, chars: "\x02\x25" }
+
+  # Split the current pane into two, top and bottom.
+  - { key: D, mods: Command|Shift, chars: "\x02\x22" }
+
+  # Kill the current tmux pane (and window if last pane)
+  - { key: W, mods: Command, chars: "\x02\x78" }
+
 #  - { key: N,        mods: Command, action: CreateNewWindow }
 #  - { key: E,        mods: Alt,     chars: "\x1be"          }
 #  - { key: Y,        mods: Alt,     chars: "\x1by"          }
