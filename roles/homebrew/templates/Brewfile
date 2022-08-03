@@ -20,6 +20,8 @@ tap 'homebrew/cask-fonts'
 
 # Packages to install on all macOS systems
 
+# GNU File, Shell, and Text utilities
+brew "coreutils"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
 # Command-line fuzzy finder written in Go
@@ -28,8 +30,6 @@ brew "fzf"
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
-# GNU File, Shell, and Text utilities
-brew "coreutils"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Terminal multiplexer
@@ -65,6 +65,8 @@ brew "tmux"
 
 # GPU-accelerated terminal emulator
 cask "alacritty"
+# Fast, feature-rich, GPU based terminal emulator
+cask "kitty"
 
 # cask '1password'
 # cask 'alfred'
@@ -95,8 +97,8 @@ cask "alacritty"
 # monospace
 # cask 'font-camingocode'
 # cask 'font-open-sans'
-# cask 'font-fira-code'
-cask "font-fira-code-nerd-font"
+cask 'font-fira-code'
+# cask "font-fira-code-nerd-font"
 # presentations
 # cask 'font-bebas-neue'
 # cask 'font-fontawesome'

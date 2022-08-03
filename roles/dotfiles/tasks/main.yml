@@ -116,6 +116,7 @@
 ###############################################################################
 
 - include_tasks: fish.yml
+- include_tasks: kitty.yml
 # - include_tasks: antibody.yml
 # - include_tasks: automounter.yml
 # - include_tasks: gpg.yml
