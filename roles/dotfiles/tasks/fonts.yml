@@ -5,6 +5,7 @@
     fonts:
       - name: MonoLisa
         archive: https://github.com/frankhinek/fonts-licensed.git
+        version: main
         directory: MonaLisa-Plus/v2.000/ttf
         files:
           - MonoLisa-Bold.ttf
