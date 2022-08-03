@@ -16,8 +16,8 @@
 
 - name: kitty | download night owl theme
   ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/frankhinek/night-owl-kitty-theme/main/night-owl.conf
-    dest: "{{ directories.dotconfig }}/kitty/night-owl.conf"
+    url: https://raw.githubusercontent.com/frankhinek/kitty-themes/main/dark-night.conf
+    dest: "{{ directories.dotconfig }}/kitty/dark-night.conf"
 
 - name: kitty | download alternate icon file
   ansible.builtin.get_url:
