@@ -1,5 +1,15 @@
 ---
 
+- name: fish | gets the fish path
+  ansible.builtin.shell: which fish
+  register: bin_fish
+
+- name: dotfiles | set binary path variables
+  set_fact:
+    paths:
+      fish: "{{ bin_fish.stdout }}"
+  when: paths is undefined
+
 - name: dotfiles | create config dotfiles directory
   file: path={{ directories.dotconfig }} state=directory
 

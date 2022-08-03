@@ -14,7 +14,7 @@
     - macos-launch-services-cmdline
     - kitty.conf
 
-- name: kitty | download night owl theme
+- name: kitty | download dark night theme
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/frankhinek/kitty-themes/main/dark-night.conf
     dest: "{{ directories.dotconfig }}/kitty/dark-night.conf"
@@ -24,11 +24,7 @@
     url: https://github.com/frankhinek/kitty-icon/raw/main/kitty.icns
     dest: "{{ directories.dotconfig }}/kitty/kitty.icns"
 
-- name: fish | gets the fish path
-  shell: which fish
-  register: bin_fish
-
 - name: kitty | set alternative icon for kitty app
   ansible.builtin.shell: "fileicon set /Applications/kitty.app {{ directories.dotconfig }}/kitty/kitty.icns"
   args:
-    executable: "{{ bin_fish.stdout }}"
+    executable: "{{ paths.fish }}"
