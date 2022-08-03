@@ -22,6 +22,8 @@ tap 'homebrew/cask-fonts'
 
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# Modern replacement for 'ls'
+brew "exa"
 # macOS CLI for managing custom icons for files and folders
 brew "fileicon"
 # User-friendly command-line shell for UNIX-like operating systems
@@ -36,6 +38,8 @@ brew "git-delta"
 brew "starship"
 # Terminal multiplexer
 brew "tmux"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
 
 # brew 'getantibody/tap/antibody'
 # brew 'awscli'
