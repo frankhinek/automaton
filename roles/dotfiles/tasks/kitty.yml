@@ -1,10 +1,17 @@
 ---
+- name: kitty | create kitty config directory
+  file:
+    path: "{{ directories.dotconfig }}/kitty"
+    state: directory
+
 - name: kitty | generate kitty configuration file
-  template: src={{ playbook_dir }}/roles/dotfiles/templates/kitty/kitty.conf
-            dest={{ directories.dotconfig }}/kitty/kitty.conf
+  template:
+    src: "{{ playbook_dir }}/roles/dotfiles/templates/kitty/kitty.conf"
+    dest: "{{ directories.dotconfig }}/kitty/kitty.conf"
 
 - name: kitty | create symlinks for application launch settings
-  file: src={{ playbook_dir }}/roles/dotfiles/files/kitty/macos-launch-services-cmdline
-        path={{ directories.dotconfig }}/kitty/macos-launch-services-cmdline
-        state=link
-        force=yes
+  file:
+    src: "{{ playbook_dir }}/roles/dotfiles/files/kitty/macos-launch-services-cmdline"
+    path: "{{ directories.dotconfig }}/kitty/macos-launch-services-cmdline"
+    state: link
+    force: yes
