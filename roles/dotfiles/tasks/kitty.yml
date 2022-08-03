@@ -4,14 +4,31 @@
     path: "{{ directories.dotconfig }}/kitty"
     state: directory
 
-- name: kitty | generate kitty configuration file
-  template:
-    src: "{{ playbook_dir }}/roles/dotfiles/templates/kitty/kitty.conf"
-    dest: "{{ directories.dotconfig }}/kitty/kitty.conf"
-
-- name: kitty | create symlinks for application launch settings
+- name: kitty | create symlinks for application settings
   file:
-    src: "{{ playbook_dir }}/roles/dotfiles/files/kitty/macos-launch-services-cmdline"
-    path: "{{ directories.dotconfig }}/kitty/macos-launch-services-cmdline"
+    src: "{{ playbook_dir }}/roles/dotfiles/files/kitty/{{ item }}"
+    path: "{{ directories.dotconfig }}/kitty/{{ item }}"
     state: link
     force: yes
+  with_items:
+    - macos-launch-services-cmdline
+    - kitty.conf
+
+- name: kitty | download night owl theme
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/frankhinek/night-owl-kitty-theme/main/night-owl.conf
+    dest: "{{ directories.dotconfig }}/kitty/night-owl.conf"
+
+- name: kitty | download alternate icon file
+  ansible.builtin.get_url:
+    url: https://github.com/frankhinek/kitty-icon/raw/main/kitty.icns
+    dest: "{{ directories.dotconfig }}/kitty/kitty.icns"
+
+- name: fish | gets the fish path
+  shell: which fish
+  register: bin_fish
+
+- name: kitty | set alternative icon for kitty app
+  ansible.builtin.shell: "fileicon set /Applications/kitty.app {{ directories.dotconfig }}/kitty/kitty.icns"
+  args:
+    executable: "{{ bin_fish.stdout }}"

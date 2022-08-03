@@ -22,6 +22,8 @@ tap 'homebrew/cask-fonts'
 
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# macOS CLI for managing custom icons for files and folders
+brew "fileicon"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
 # Command-line fuzzy finder written in Go
