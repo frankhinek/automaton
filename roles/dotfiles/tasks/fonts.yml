@@ -1,0 +1,40 @@
+---
+
+- name: fonts | set fonts variable
+  set_fact:
+    fonts:
+      - name: MonoLisa
+        archive: https://github.com/frankhinek/fonts-licensed.git
+        directory: MonaLisa-Plus/v2.000/ttf
+        files:
+          - MonoLisa-Bold.ttf
+          - MonoLisa-BoldItalic.ttf
+          - MonoLisa-Light.ttf
+          - MonoLisa-LightItalic.ttf
+          - MonoLisa-Medium.ttf
+          - MonoLisa-MediumItalic.ttf
+          - MonoLisa-Regular.ttf
+          - MonoLisa-RegularItalic.ttf
+  when: fonts is undefined
+
+- name: fonts | download repositories
+  git:
+    repo: "{{ item.archive }}"
+    dest: "/tmp/fonts-{{ item.name }}"
+    version: "{{ item.version | default('master') }}"
+  with_items: "{{ fonts }}"
+
+- name: fonts | install fonts from repositories
+  copy:
+    src: "/tmp/fonts-{{ item.0.name }}/{{ item.0.directory }}/{{ item.1 }}"
+    dest: "{{ ansible_env.HOME }}/Library/Fonts/{{ item.1 }}"
+  with_subelements:
+    - "{{ fonts }}"
+    - "files"
+
+- name: fonts | remove repositories
+  file:
+    path: "/tmp/fonts-{{ item.name }}"
+    state: absent
+  changed_when: false
+  with_items: "{{ fonts }}"
