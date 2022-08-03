@@ -17,6 +17,7 @@ if command -qs delta
 end
 
 abbr -a g 'git'
+abbr -a gsu 'git submodule update --init --recursive'
 abbr -a gl 'git pull --prune'
 abbr -a glg "git log --graph --decorate --oneline --abbrev-commit"
 abbr -a glga "glg --all"
