@@ -69,6 +69,8 @@ brew "tmux"
 cask "alacritty"
 # Fast, feature-rich, GPU based terminal emulator
 cask "kitty"
+# Blazingly fast, totally extendable launcher
+cask "raycast"
 
 # cask '1password'
 # cask 'alfred'
