@@ -38,6 +38,8 @@ brew "fzf"
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Colorize logfiles and command output
+brew "grc"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Terminal multiplexer

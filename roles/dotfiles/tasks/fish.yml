@@ -2,17 +2,17 @@
 - name: fish | set dotfiles directory
   ansible.builtin.shell: set -Ux DOTFILES {{ playbook_dir }}/roles/dotfiles/files
   args:
-    executable: '{{ paths.fish }}'
+    executable: "{{ paths.fish }}"
 
 - name: fish | set development projects directory
   ansible.builtin.shell: set -Ux PROJECTS {{ directories.dev_projects }}
   args:
-    executable: '{{ paths.fish }}'
+    executable: "{{ paths.fish }}"
 
 - name: fish | set code editors
   ansible.builtin.shell: set -Ux {{ item }}
   args:
-    executable: '{{ paths.fish }}'
+    executable: "{{ paths.fish }}"
   with_items:
     - EDITOR {{ default_editor.shell }}
     - VISUAL {{ default_editor.visual }}
@@ -20,7 +20,34 @@
 - name: fish | clear fish greeting
   ansible.builtin.shell: set -U fish_greeting
   args:
-    executable: '{{ paths.fish }}'
+    executable: "{{ paths.fish }}"
+
+###############################################################################
+# Install fish plugins
+###############################################################################
+
+- name: fish | check if fisher is installed
+  stat:
+    path: "{{ directories.dotconfig }}/fish/functions/fisher.fish"
+  register: fisher
+
+- name: fish | download and install fisher plugin
+  ansible.builtin.shell: curl -sL git.io/fisher | source && fisher install jorgebucaran/fisher
+  args:
+    executable: "{{ paths.fish }}"
+  when: not fisher.stat.exists
+
+- name: fish | create symlink for fish plugins
+  file:
+    src: "{{ playbook_dir }}/roles/dotfiles/files/fish/plugins"
+    path: "{{ directories.dotconfig }}/fish/fish_plugins"
+    state: link
+    force: yes
+
+- name: fish | update fish plugins
+  ansible.builtin.shell: fisher update
+  args:
+    executable: "{{ paths.fish }}"
 
 ###############################################################################
 # Find install scripts and execute them
@@ -37,5 +64,5 @@
 - name: fish | execute install.fish scripts
   ansible.builtin.shell: "{{ item.path }}"
   args:
-    executable: '{{ paths.fish }}'
+    executable: "{{ paths.fish }}"
   with_items: "{{find_file_install_fish.files}}"
