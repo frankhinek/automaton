@@ -20,10 +20,14 @@ tap 'homebrew/cask-fonts'
 
 # Packages to install on all macOS systems
 
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Modern replacement for 'ls'
 brew "exa"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
 # macOS CLI for managing custom icons for files and folders
 brew "fileicon"
 # User-friendly command-line shell for UNIX-like operating systems

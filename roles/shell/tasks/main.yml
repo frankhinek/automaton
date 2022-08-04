@@ -11,9 +11,11 @@
     group: wheel
   become: true
 
-- name: Set Homebrew fish as default shell
-  command: dscl . -{{ item }}
-  with_items:
-    - create /Users/{{ ansible_env.USER }} UserShell {{ bin_fish.stdout }}
-  when: is_macos
+- name: shell | check if user's default shell is already set to fish
+  command: dscl . -read /Users/{{ ansible_env.USER }} UserShell
+  register: current_shell
+
+- name: shell | set homebrew fish as default shell
+  command: dscl . -create /Users/{{ ansible_env.USER }} UserShell {{ bin_fish.stdout }}
+  when: is_macos and ("fish" not in current_shell.stdout)
   become: true
