@@ -77,6 +77,8 @@ brew "zoxide"
 
 # GPU-accelerated terminal emulator
 cask "alacritty"
+# Docker Desktop to build and share containerized applications
+cask 'docker'
 # Fast, feature-rich, GPU based terminal emulator
 cask "kitty"
 # Blazingly fast, totally extendable launcher
@@ -87,7 +89,6 @@ cask "raycast"
 # cask 'android-studio'
 # cask 'frankhinek/tap/automounter-helper'
 # cask 'dash'
-# cask 'docker'
 # cask 'firefox'
 # cask 'google-cloud-sdk'
 # cask 'grammarly'
