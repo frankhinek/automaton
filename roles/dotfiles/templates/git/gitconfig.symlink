@@ -20,6 +20,9 @@
 {% endif %}
 	whitespace = trailing-space,space-before-tab
 
+[format]
+	signOff = true
+
 {% if enable_git_signing %}
 [gpg]
 	program = {{ homebrew_prefix }}/bin/gpg
@@ -28,12 +31,27 @@
 [help]
 	autocorrect = 1
 
+[init]
+    defaultBranch = main
+
+[log]
+	showSignature = false
+
+[pull]
+    ff = only
+
 [push]
+	autoSetupRemote = true
 	default = simple
 
 [submodule]
 	fetchJobs = 4
 
+{% if enable_git_signing %}
+[tag]
+	gpgsign = true
+
+{% endif %}
 [user]
 {% if 'personal' in group_names %}
 	email = {{ git.email.personal }}
