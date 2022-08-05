@@ -1,16 +1,16 @@
 ---
 
+- name: dotfiles | gets the path to homebrew binaries
+  ansible.builtin.shell: brew --prefix
+  register: homebrew_prefix
+
+- name: dotfiles | set homebrew_prefix variable
+  set_fact:
+    homebrew_prefix: "{{ homebrew_prefix.stdout }}"
+
 - name: dotfiles | gets the fish path
   ansible.builtin.shell: which fish
   register: bin_fish
-
-- name: dotfiles | gets the path to homebrew binaries
-  ansible.builtin.shell: brew config | grep HOMEBREW_PREFIX
-  register: homebrew_config
-
-- name: dotfiles | set homebrew_bin_path variable
-  set_fact:
-    homebrew_prefix: "{{ (homebrew_config.stdout | split(' '))[1] }}"
 
 - name: dotfiles | set binary path variables
   set_fact:
