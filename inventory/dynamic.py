@@ -37,7 +37,7 @@ class ExampleInventory(object):
 
         if host == 'WUSFH185036-UC1':
             group = 'work'
-        elif re.match(r'fdh-mbp(?:\.(?:local|lan)?)?\Z', host):
+        elif re.match(r'frank-mbp(?:\.(?:local|lan)?)?\Z', host):
             group = 'personal'
         elif re.match(r'dev(?:vm)?\d+', host):
             group = 'devservers'
