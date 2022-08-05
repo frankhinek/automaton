@@ -8,7 +8,8 @@ cask_args appdir: '/Applications'
 # tap 'homebrew/bundle'
 # tap 'homebrew/core'
 # tap 'homebrew/services'
-tap 'homebrew/cask-fonts'
+tap "homebrew/cask-fonts"
+tap "homebrew/cask-drivers"
 # tap 'homebrew/cask-versions'
 # tap 'frankhinek/tap'
 # tap 'getantibody/tap'
@@ -38,12 +39,18 @@ brew "fzf"
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# GNU Pretty Good Privacy (PGP) package
+brew "gnupg"
 # Colorize logfiles and command output
 brew "grc"
+# Pinentry for GPG on Mac
+brew "pinentry-mac"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Terminal multiplexer
 brew "tmux"
+# Tool for managing your YubiKey configuration
+brew "ykman"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 
@@ -83,6 +90,8 @@ cask 'docker'
 cask "kitty"
 # Blazingly fast, totally extendable launcher
 cask "raycast"
+# Application for configuring any YubiKey
+cask "yubico-yubikey-manager"
 
 # cask '1password'
 # cask 'alfred'
