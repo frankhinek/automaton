@@ -136,9 +136,9 @@
 - include_tasks: fish.yml
 - include_tasks: kitty.yml
 - include_tasks: fonts.yml
+- include_tasks: gnupg.yml
 # - include_tasks: antibody.yml
 # - include_tasks: automounter.yml
-# - include_tasks: gpg.yml
 # - include_tasks: git.yml
 # - include_tasks: iterm.yml
 # - include_tasks: vscode.yml
