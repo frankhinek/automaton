@@ -45,6 +45,8 @@ brew "gnupg"
 brew "go"
 # Colorize logfiles and command output
 brew "grc"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
 # Cross-shell prompt for astronauts
@@ -65,7 +67,6 @@ brew "zoxide"
 # brew 'kubectl'
 # brew 'mas'
 # brew 'n'
-# brew 'neovim'
 # brew 'paperkey'
 # brew 'pyenv-virtualenv'
 # brew 'pinentry-mac'

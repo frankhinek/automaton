@@ -137,6 +137,7 @@
 - include_tasks: kitty.yml
 - include_tasks: fonts.yml
 - include_tasks: gnupg.yml
+- include_tasks: nvim.yml
 # - include_tasks: antibody.yml
 # - include_tasks: automounter.yml
 # - include_tasks: git.yml
