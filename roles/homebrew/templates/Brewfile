@@ -41,6 +41,8 @@ brew "git"
 brew "git-delta"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
 # Colorize logfiles and command output
 brew "grc"
 # Pinentry for GPG on Mac
