@@ -1,0 +1,52 @@
+{
+  "workbench.colorTheme": "Tokyo Night",
+  // "workbench.iconTheme": "material-icon-theme",
+  // "material-icon-theme.folders.theme": "none",
+  // "workbench.iconTheme": "vscode-icons",
+  // "workbench.iconTheme": "helium-icon-theme",
+  // "helium-icon-theme.folders.theme": "none",
+  "workbench.iconTheme": "ayu",
+
+  "breadcrumbs.enabled": true,
+  "workbench.editor.tabCloseButton": "off",
+  "editor.tabSize": 2,
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+
+  // "editor.fontFamily": "MonoLisa, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "MonoLisa Nerd Font, Menlo, Monaco, 'Courier New', monospace",
+  "editor.lineHeight": 0,
+  "editor.fontSize": 14,
+
+  "editor.fontLigatures": "'ss02' on, 'calt' on, 'liga' on, 'zero' on",
+  // zero: slashed zero
+  // ss01: normal asterisk
+  // ss02: script variant
+  // ss03: alt G 1
+  // ss04: alt G 2
+  // ss05: alt sharp s
+  // ss06: alt at
+  // onum: old style numbers
+  // frac: fractions
+  // sups: superscript
+  // subs: subscript
+  // calt: contextual alternates
+  // liga: ligatures
+
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "name": "Do not apply italics to the following elements",
+        "scope": [
+          "markup.fenced_code.block.markdown",
+        ],
+        "settings": {
+          "fontStyle": ""
+        }
+      }
+    ]
+  },
+}
