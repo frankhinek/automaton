@@ -10,6 +10,9 @@
   "breadcrumbs.enabled": true,
   "workbench.editor.tabCloseButton": "off",
   "editor.tabSize": 2,
+  "editor.rulers": [
+    120
+  ],
 
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[jsonc]": {
