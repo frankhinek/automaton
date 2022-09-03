@@ -9,24 +9,20 @@ root = true
 [*]
 charset = utf-8
 end_of_line = lf
-indent_size = 2
+indent_size = 4
 indent_style = space
 insert_final_newline = true
-max_line_length = 80
 trim_trailing_whitespace = true
 
-[*.py]
+[*.{rb,yaml,yml,lua}]
 indent_style = space
-indent_size = 4
+indent_size = 2
 
 [{package.json,.travis.yml}]
-indent_style = space
 indent_size = 2
 
 [*.{xml,java,go,sh}]
 indent_style = tab
-indent_size = 4
 
 [Makefile]
 indent_style = tab
-indent_size = 4

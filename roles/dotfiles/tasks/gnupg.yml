@@ -1,0 +1,23 @@
+---
+- name: gnupg | ensure .gnupg directory exists
+  file:
+    path: ~/.gnupg
+    state: directory
+    mode: 0700
+
+- name: gnupg | write gnupg configuration files
+  copy: src={{ playbook_dir }}/roles/dotfiles/files/gnupg/{{ item }}
+        dest=~/.gnupg/{{ item }}
+  with_items:
+    - gpg.conf
+
+- name: gnupg | generate and write template-based gnupg configuration files
+  template: src={{ playbook_dir }}/roles/dotfiles/templates/gnupg/{{ item }}
+            dest=~/.gnupg/{{ item }}
+  with_items:
+    - gpg-agent.conf
+
+- name: gnupg | reload agent
+  ansible.builtin.shell: gpg-connect-agent reloadagent /bye
+  args:
+    executable: "{{ paths.fish }}"

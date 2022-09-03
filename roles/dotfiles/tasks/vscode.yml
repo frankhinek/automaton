@@ -1,23 +1,39 @@
 ---
-- name: vscode | create Visual Studio Code config dotfiles directory
-  file: path={{ directories.dotconfig }}/vscode state=directory
+- name: vscode | create Visual Studio Code config directory
+  file:
+    path: "{{ directories.dotconfig }}/vscode"
+    state: directory
 
-- name: vscode | create Visual Studio Code snippets dotfiles directory
-  file: path={{ directories.dotconfig }}/vscode/snippets state=directory
+- name: vscode | create Visual Studio Code snippets directory
+  file:
+    path: "{{ directories.dotconfig }}/vscode/snippets"
+    state: directory
 
 - name: vscode | write Visual Studio Code setting files
-  copy: src={{ playbook_dir }}/roles/dotfiles/files/vscode/{{ item }}
-        dest={{ directories.dotconfig }}/vscode/{{ item }}
+  copy:
+    src: "{{ playbook_dir }}/roles/dotfiles/files/vscode/{{ item }}"
+    dest: "{{ directories.dotconfig }}/vscode/{{ item }}"
   with_items:
     - settings.json
     - keybindings.json
 
 - name: vscode | create symlinks for application settings
-  file: src={{ directories.dotconfig }}/vscode/{{ item }}
-        path='~/Library/Application Support/Code/User/{{ item }}'
-        state=link
-        force=yes
+  file:
+    src: "{{ directories.dotconfig }}/vscode/{{ item }}"
+    path: "~/Library/Application Support/Code/User/{{ item }}"
+    state: link
+    force: yes
   with_items:
     - settings.json
     - keybindings.json
     - snippets
+
+- name: vscode | download alternate icon file
+  ansible.builtin.get_url:
+    url: https://github.com/frankhinek/vscode-icons/raw/master/icns/default_dark.icns
+    dest: "{{ directories.dotconfig }}/vscode/default_dark.icns"
+
+- name: vscode | set alternative icon
+  ansible.builtin.shell: "fileicon set '/Applications/Visual Studio Code.app' {{ directories.dotconfig }}/vscode/default_dark.icns"
+  args:
+    executable: "{{ paths.fish }}"

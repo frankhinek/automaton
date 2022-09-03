@@ -1,0 +1,85 @@
+# vi: ft=yaml
+#
+env:
+  TERM: xterm-256color
+
+import:
+  - {{ playbook_dir }}/roles/dotfiles/files/alacritty/night-owl.yml
+
+window:
+  padding:
+    x: 5
+    y: 5
+  dynamic_padding: true
+  opacity: 1.0
+  decorations: none
+  dynamic_title: true
+  dimensions:
+   columns: 240
+   lines: 80
+  startup_mode: Maximized
+
+scrolling:
+  history: 10000
+  multiplier: 3
+  auto_scroll: false
+
+tabspaces: 4
+
+bell:
+  duration: 100
+  color: '#22212C'
+  command:
+    program: afplay
+    args: ["/System/Library/Sounds/Tink.aiff"]
+
+font:
+  normal:
+    family: FiraCode Nerd Font
+  bold:
+    family: FiraCode Nerd Font
+  italic:
+    family: FiraCode Nerd Font
+  bold_italic:
+    family: FiraCode Nerd Font
+  size: 14.0
+  use_thin_strokes: true
+
+cursor:
+  style:
+    shape: Beam
+    blinking: On
+
+live_config_reload: true
+
+key_bindings:
+  # Split the current pane into two, left and right
+  - { key: D, mods: Command, chars: "\x02\x25" }
+
+  # Split the current pane into two, top and bottom.
+  - { key: D, mods: Command|Shift, chars: "\x02\x22" }
+
+  # Kill the current tmux pane (and window if last pane)
+  - { key: W, mods: Command, chars: "\x02\x78" }
+
+# Reference: https://www.joshmedeski.com/posts/macos-keyboard-shortcuts-for-tmux
+
+#  - { key: N,        mods: Command, action: CreateNewWindow }
+#  - { key: E,        mods: Alt,     chars: "\x1be"          }
+#  - { key: Y,        mods: Alt,     chars: "\x1by"          }
+#  - { key: F,        mods: Alt,     chars: "\x1bf"          }
+#  - { key: B,        mods: Alt,     chars: "\x1bb"          }
+#  - { key: L,        mods: Alt,     chars: "\x1bl"          }
+#  - { key: O,        mods: Alt,     chars: "\x1bo"          }
+#  - { key: W,        mods: Alt,     chars: "\x1bw"          }
+#  - { key: D,        mods: Alt,     chars: "\x1bd"          }
+#  - { key: S,        mods: Alt,     chars: "\x1bs"          }
+#  - { key: H,        mods: Alt,     chars: "\x1bh"          }
+#  - { key: P,        mods: Alt,     chars: "\x1bp"          }
+#  - { key: V,        mods: Alt,     chars: "\x1bv"          }
+#  - { key: T,        mods: Alt,     chars: "\x1bt"          }
+#  - { key: U,        mods: Alt,     chars: "\x1bu"          }
+#  - { key: C,        mods: Alt,     chars: "\x1bc"          }
+
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }

@@ -1,0 +1,23 @@
+---
+- name: vscode | create Visual Studio Code config dotfiles directory
+  file: path={{ directories.dotconfig }}/vscode state=directory
+
+- name: vscode | create Visual Studio Code snippets dotfiles directory
+  file: path={{ directories.dotconfig }}/vscode/snippets state=directory
+
+- name: vscode | write Visual Studio Code setting files
+  copy: src={{ playbook_dir }}/roles/dotfiles/files/vscode/{{ item }}
+        dest={{ directories.dotconfig }}/vscode/{{ item }}
+  with_items:
+    - settings.json
+    - keybindings.json
+
+- name: vscode | create symlinks for application settings
+  file: src={{ directories.dotconfig }}/vscode/{{ item }}
+        path='~/Library/Application Support/Code/User/{{ item }}'
+        state=link
+        force=yes
+  with_items:
+    - settings.json
+    - keybindings.json
+    - snippets

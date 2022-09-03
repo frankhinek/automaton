@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+
+# This ~/.gitignore instructs git to ignore the files listed below in all
+# git repositories.
+
+# Folder view configuration files
+.DS_Store
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes

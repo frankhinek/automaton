@@ -1,19 +1,21 @@
 ---
-- name: shell | gets the zsh path
-  shell: which zsh
-  register: bin_zsh
+- name: shell | gets the fish path
+  shell: which fish
+  register: bin_fish
 
-- name: shell | add /usr/local/bin/zsh to /etc/shells
+- name: shell | add fish binary to /etc/shells
   lineinfile:
     path: /etc/shells
-    line: '{{ bin_zsh.stdout }}'
+    line: '{{ bin_fish.stdout }}'
     owner: root
     group: wheel
   become: true
 
-- name: Set Homebrew zsh as default shell
-  command: dscl . -{{ item }}
-  with_items:
-    - create /Users/{{ ansible_env.USER }} UserShell {{ bin_zsh.stdout }}
-  when: is_macos
+- name: shell | check if user's default shell is already set to fish
+  command: dscl . -read /Users/{{ ansible_env.USER }} UserShell
+  register: current_shell
+
+- name: shell | set homebrew fish as default shell
+  command: dscl . -create /Users/{{ ansible_env.USER }} UserShell {{ bin_fish.stdout }}
+  when: is_macos and ("fish" not in current_shell.stdout)
   become: true

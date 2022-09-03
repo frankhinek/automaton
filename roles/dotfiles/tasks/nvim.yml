@@ -1,0 +1,7 @@
+---
+- name: neovim | create symlink for application settings
+  file:
+    src: "{{ playbook_dir }}/roles/dotfiles/files/nvim/config"
+    path: "{{ directories.dotconfig }}/nvim"
+    state: link
+    force: yes
