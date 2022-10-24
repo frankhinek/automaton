@@ -35,7 +35,7 @@ class ExampleInventory(object):
     def example_inventory(self):
         host = socket.gethostname()
 
-        if host == 'WUSFH185036-UC1':
+        if re.match(r'frankhinek-macbookpro(?:\.(?:local|lan)?)?\Z', host):
             group = 'work'
         elif re.match(r'frank-mbp(?:\.(?:local|lan)?)?\Z', host):
             group = 'personal'
