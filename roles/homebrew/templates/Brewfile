@@ -95,8 +95,6 @@ cask 'docker'
 cask "kitty"
 # Blazingly fast, totally extendable launcher
 cask "raycast"
-# Application for configuring any YubiKey
-cask "yubico-yubikey-manager"
 
 # cask '1password'
 # cask 'alfred'
@@ -145,6 +143,10 @@ cask 'font-fira-code'
 
 # Casks to install only on Personal macOS systems
 {% if 'personal' in group_names %}
+# Application for configuring any YubiKey
+cask "yubico-yubikey-manager"
+
+# ARCHIVE
 # cask 'adobe-creative-cloud'
 # cask 'arq'
 # cask 'box-drive'
