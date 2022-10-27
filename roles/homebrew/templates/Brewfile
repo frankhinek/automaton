@@ -60,6 +60,7 @@ brew "ykman"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 
+# ARCHIVE - Old apps I used to use
 # brew 'getantibody/tap/antibody'
 # brew 'awscli'
 # brew 'frankhinek/tap/defaultbrowser'
@@ -86,8 +87,6 @@ brew "zoxide"
 
 # Applications to install on all macOS systems
 
-# GPU-accelerated terminal emulator
-cask "alacritty"
 # Voice and text chat software
 cask 'discord'
 # Docker Desktop to build and share containerized applications
@@ -101,6 +100,9 @@ cask "visual-studio-code"
 # Application for configuring any YubiKey
 cask "yubico-yubikey-manager"
 
+# ARCHIVE - Old apps I used to use
+# GPU-accelerated terminal emulator
+# cask "alacritty"
 # cask 'alfred'
 # cask 'android-studio'
 # cask 'frankhinek/tap/automounter-helper'
@@ -146,10 +148,11 @@ cask 'font-fira-code'
 {% if 'personal' in group_names %}
 # Password manager that keeps all passwords secure behind one password
 cask '1password'
+# Multi-cloud backup application
+cask 'arq'
 
 # ARCHIVE
 # cask 'adobe-creative-cloud'
-# cask 'arq'
 # cask 'box-drive'
 # cask 'microsoft-office'
 # cask 'pycharm'
