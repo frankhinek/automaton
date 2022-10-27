@@ -55,6 +55,8 @@ brew "neovim"
 brew "pinentry-mac"
 # Cross-shell prompt for astronauts
 brew "starship"
+# JavaScript toolchain manager for reproducible environments
+brew "volta"
 # Tool for managing your YubiKey configuration
 brew "ykman"
 # Shell extension to navigate your filesystem faster
