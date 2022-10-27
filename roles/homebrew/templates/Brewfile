@@ -87,6 +87,8 @@ brew "zoxide"
 
 # Applications to install on all macOS systems
 
+# Password manager that keeps all passwords secure behind one password
+cask "1password"
 # Voice and text chat software
 cask 'discord'
 # Docker Desktop to build and share containerized applications
@@ -146,10 +148,8 @@ cask 'font-fira-code'
 
 # Casks to install only on Personal macOS systems
 {% if 'personal' in group_names %}
-# Password manager that keeps all passwords secure behind one password
-cask '1password'
 # Multi-cloud backup application
-cask 'arq'
+cask "arq"
 
 # ARCHIVE
 # cask 'adobe-creative-cloud'
