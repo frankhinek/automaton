@@ -38,20 +38,41 @@ $ git pull origin master
 $ ./run
 ```
 
-### PGP Keys
+## PGP Keys
 
 Automaton includes support for using PGP keys to sign git commits.  If you wish
 to sign your commits, then follow the steps below.
 
+### Enable Git Signing
+
 Start by ensuring that `enable_git_signing` is set to `true` in the `all`
 group variables.
+
+### Store Encrypted Git Signing Keys
 
 Next, generate new `git_signing_key` variable values for the `personal` and
 `work` group variables.  Use the following command to create a new encrypted string with Ansible vault:
 
-```bash
-$ ansible-vault encrypt_string --vault-id @prompt 'secret' --name 'git_signing_key'
+```shell
+$ ./gen-secret git_signing_key
 ```
+
+When prompted, enter and confirm a vault password:
+
+```shell
+New vault password (default): 
+Confirm new vault password (default): 
+```
+
+Type the value you wish to encrypt followed by pressing Ctrl+D twice:
+
+```shell
+Reading plaintext input from stdin. (ctrl-d to end input, twice if your content does not already have a newline)
+```
+
+Save the value after `Encryption successful` to the appropriate `group_vars` YAML file.
+
+### Secure Signing Keys
 
 For daily use, especially on a mobile device such as a MacBook or Linux laptop,
 a strong security measure is to remove the master secret key from the keyring.
@@ -62,12 +83,12 @@ accomplish this.  Two options are detailed below.
 #### Option 1
 
 1. Import your public and private key pair to the new machine:
-```bash
+```shell
 $ gpg --import my_gpg_private_key.asc
 $ gpg --import my_gpg_public_key.asc
 ```
 1. Ensure that the Key ID printed is the correct one, and if so, then go ahead and add ultimate trust for it:
-```bash
+```shell
 $ gpg --edit-key <KEY_ID>
 ...
 Command>
@@ -75,12 +96,12 @@ Command>
 1. At the `Command>` prompt, type in `trust`.
 1. You will be prompted to decide how far to trust this key.  Since, presumably, this is your key that you have verified you would enter `5` and answer `y` to confirm.
 1. Export the secret subkeys to file:
-```bash
+```shell
 $ gpg --export-secret-subkeys --armor --output secret-subkeys.asc <KEY_ID>
 ```
 1. Delete all the secret keys of your key from the keyring.  This includes the
 master key and all subkeys.
-```bash
+```shell
 $ gpg --delete-secret-keys <KEY_ID>
 ```
 1. Version 2 of GnuPG will prompt you to confirm the deletion of the secret key
@@ -94,24 +115,24 @@ subkeys were *not* deleted.
 
 1. From a trusted machine that already contains your key in its keyring, export
 only the subkeys:
-```bash
+```shell
 $ gpg --export-secret-subkeys --armor --output secret-subkeys.asc <KEY_ID>
 ```
 1. Export the public keys:
-```bash
+```shell
 $ gpg --export --armor --output public-keys.asc <KEY_ID>
 ```
 1. Import the public keys into the keyring:
-```bash
+```shell
 $ gpg --import public-keys.asc
 ```
 1. Import the secret subkeys, without the master secret key, into the daily
 use keyring:
-```bash
+```shell
 $ gpg --import secret-subkeys.asc
 ```
 
-#### Verify the Daily-use Keyring
+### Verify the Daily-use Keyring
 
 Regardless of which approach you took, the output from the `gpg -K` command
 should display the master key with a hash character (e.g., `sec#`) indicating

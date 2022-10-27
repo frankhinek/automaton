@@ -47,14 +47,14 @@ brew "gnupg"
 brew "go"
 # Colorize logfiles and command output
 brew "grc"
+# Mac App Store command-line interface
+brew "mas"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
 # Cross-shell prompt for astronauts
 brew "starship"
-# Terminal multiplexer
-brew "tmux"
 # Tool for managing your YubiKey configuration
 brew "ykman"
 # Shell extension to navigate your filesystem faster
@@ -63,17 +63,16 @@ brew "zoxide"
 # brew 'getantibody/tap/antibody'
 # brew 'awscli'
 # brew 'frankhinek/tap/defaultbrowser'
-# brew 'gnupg'
 # brew 'graphviz'
 # brew 'hopenpgp-tools'
 # brew 'kubectl'
-# brew 'mas'
 # brew 'n'
 # brew 'paperkey'
 # brew 'pyenv-virtualenv'
-# brew 'pinentry-mac'
 # brew 'pyenv'
 # brew 'terraform'
+# Terminal multiplexer
+# brew "tmux"
 # brew 'tree'
 # brew 'watch'
 # brew 'wget'
@@ -89,14 +88,19 @@ brew "zoxide"
 
 # GPU-accelerated terminal emulator
 cask "alacritty"
+# Voice and text chat software
+cask 'discord'
 # Docker Desktop to build and share containerized applications
 cask 'docker'
 # Fast, feature-rich, GPU based terminal emulator
 cask "kitty"
 # Blazingly fast, totally extendable launcher
 cask "raycast"
+# Microsoft Visual Studio Code
+cask "visual-studio-code"
+# Application for configuring any YubiKey
+cask "yubico-yubikey-manager"
 
-# cask '1password'
 # cask 'alfred'
 # cask 'android-studio'
 # cask 'frankhinek/tap/automounter-helper'
@@ -104,13 +108,10 @@ cask "raycast"
 # cask 'firefox'
 # cask 'google-cloud-sdk'
 # cask 'grammarly'
-# cask 'iterm2-beta'
 # cask 'kindle'
 # cask 'sketch'
 # cask 'slack'
-# cask 'sourcetree'
 # cask 'typora'
-# cask 'visual-studio-code'
 
 # Quick Look Plugins - https://github.com/sindresorhus/quick-look-plugins
 # cask 'qlcolorcode'
@@ -143,15 +144,14 @@ cask 'font-fira-code'
 
 # Casks to install only on Personal macOS systems
 {% if 'personal' in group_names %}
-# Application for configuring any YubiKey
-cask "yubico-yubikey-manager"
+# Password manager that keeps all passwords secure behind one password
+cask '1password'
 
 # ARCHIVE
 # cask 'adobe-creative-cloud'
 # cask 'arq'
 # cask 'box-drive'
 # cask 'microsoft-office'
-# cask 'private-internet-access'
 # cask 'pycharm'
 # cask 'transmission'
 # cask 'virtualbox'
