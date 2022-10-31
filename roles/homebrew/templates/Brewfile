@@ -105,6 +105,8 @@ cask "elgato-stream-deck"
 cask "elgato-wave-link"
 # Fast, feature-rich, GPU based terminal emulator
 cask "kitty"
+# Logitech Options
+cask "logitech-options"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Blazingly fast, totally extendable launcher
