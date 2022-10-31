@@ -99,6 +99,8 @@ cask "docker"
 cask "elgato-camera-hub"
 # Elgato Control Center
 cask "elgato-control-center"
+# Elgato Stream Deck
+cask "elgato-stream-deck"
 # Fast, feature-rich, GPU based terminal emulator
 cask "kitty"
 # Knowledge base that works on top of a local folder of plain text Markdown files
