@@ -97,6 +97,8 @@ cask "discord"
 cask "docker"
 # Elgato FACECAM configuration tool
 cask "elgato-camera-hub"
+# Elgato Control Center
+cask "elgato-control-center"
 # Fast, feature-rich, GPU based terminal emulator
 cask "kitty"
 # Knowledge base that works on top of a local folder of plain text Markdown files
