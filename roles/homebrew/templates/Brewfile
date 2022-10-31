@@ -92,11 +92,15 @@ brew "zoxide"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Voice and text chat software
-cask 'discord'
+cask "discord"
 # Docker Desktop to build and share containerized applications
-cask 'docker'
+cask "docker"
+# Elgato FACECAM configuration tool
+cask "elgato-camera-hub"
 # Fast, feature-rich, GPU based terminal emulator
 cask "kitty"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
 # Blazingly fast, totally extendable launcher
 cask "raycast"
 # Microsoft Visual Studio Code
