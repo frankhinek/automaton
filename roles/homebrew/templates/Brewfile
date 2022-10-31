@@ -143,8 +143,11 @@ cask "yubico-yubikey-manager"
 # monospace
 # cask 'font-camingocode'
 # cask 'font-open-sans'
-cask 'font-fira-code'
+cask "font-fira-code"
 # cask "font-fira-code-nerd-font"
+# apps
+brew "svn" # Only needed for DM Sans font download
+cask "font-dm-sans"
 # presentations
 # cask 'font-bebas-neue'
 # cask 'font-fontawesome'
