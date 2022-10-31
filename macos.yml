@@ -7,6 +7,6 @@
     - { role: dotfiles, tags: dotfiles }
     - { role: shell, tags: shell }
     # - { role: browsers, tags: browsers }
-    # - { role: macdefaults, tags: macdefaults }
+    - { role: macdefaults, tags: macdefaults }
   vars:
     - is_macos: ansible_os_family == 'Darwin'

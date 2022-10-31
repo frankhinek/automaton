@@ -1,0 +1,7 @@
+---
+# Use "log show --process cron --info" to verify the cron job is running
+- name: Ensure a job that runs ever 5 minutes exists. Creates an entry like "*/5 * * * * /Users/frankhinek/.automaton/roles/macdefaults/files/handoff.sh"
+  ansible.builtin.cron:
+    name: "enable handoff"
+    minute: "*/5"
+    job: "{{ playbook_dir }}/roles/macdefaults/files/handoff.sh"

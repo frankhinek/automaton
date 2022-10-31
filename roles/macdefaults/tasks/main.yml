@@ -15,6 +15,21 @@
 #
 
 ###############################################################################
+# Continuity                                                                        #
+###############################################################################
+
+# Last tested: [12.6.0]
+- name: macdefaults | System Preferences -> General -> Allow Handoff between this Mac and your iCloud devices
+  community.general.osx_defaults: domain=com.apple.coreservices.useractivityd host=currentHost key=ActivityAdvertisingAllowed type=bool value=true
+- name: macdefaults | System Preferences -> General -> Allow Handoff between this Mac and your iCloud devices
+  community.general.osx_defaults: domain=com.apple.coreservices.useractivityd host=currentHost key=ActivityReceivingAllowed type=bool value=true
+
+# Block periodically disables Handoff, so setup a crontab on work systems
+- include_tasks: crontab-handoff.yml
+  when:
+    - "'work' in group_names"
+
+###############################################################################
 # Dock                                                                        #
 ###############################################################################
 
@@ -33,68 +48,68 @@
   when: dockinit_check.stat.exists == False
 
 # Last tested: [10.12.6]
-- name: macdefaults | enable highlight hover effect for the grid view of a stack (Dock)
-  osx_defaults: domain=com.apple.dock key=mouse-over-hilite-stack type=bool value=true
+# - name: macdefaults | enable highlight hover effect for the grid view of a stack (Dock)
+#   community.general.osx_defaults: domain=com.apple.dock key=mouse-over-hilite-stack type=bool value=true
 
-# Last tested: [10.12.6]
+# Last tested: [12.6.0]
 - name: macdefaults | set the icon size of Dock items to 64 pixels
-  osx_defaults: domain=com.apple.dock key=tilesize type=int value=64
+  community.general.osx_defaults: domain=com.apple.dock key=tilesize type=float value=64
 
 # Last tested: [10.12.6]
-- name: macdefaults | System Preferences -> Dock -> Minimize windows using Scale effect
-  osx_defaults: domain=com.apple.dock key=mineffect type=string value=scale
+# - name: macdefaults | System Preferences -> Dock -> Minimize windows using Scale effect
+#   community.general.osx_defaults: domain=com.apple.dock key=mineffect type=string value=scale
 
 # Last tested: [10.12.6]
-- name: macdefaults | System Preferences -> Dock -> Minimize windows into application icon
-  osx_defaults: domain=com.apple.dock key=minimize-to-application type=bool value=true
+# - name: macdefaults | System Preferences -> Dock -> Minimize windows into application icon
+#   community.general.osx_defaults: domain=com.apple.dock key=minimize-to-application type=bool value=true
 
 # Last tested: [10.12.6]
-- name: macdefaults | System Preferences -> Dock -> Show indicators for open applications
-  osx_defaults: domain=com.apple.dock key=show-process-indicators type=bool value=true
+# - name: macdefaults | System Preferences -> Dock -> Show indicators for open applications
+#   community.general.osx_defaults: domain=com.apple.dock key=show-process-indicators type=bool value=true
 
-# Last tested: [10.12.6]
+# Last tested: [12.6.0]
 - name: macdefaults | System Preferences -> Dock -> Automatically hide and show Dock
-  osx_defaults: domain=com.apple.dock key=autohide type=bool value=true
+  community.general.osx_defaults: domain=com.apple.dock key=autohide type=bool value=true
 
 ###############################################################################
 # Input devices                                                               #
 ###############################################################################
 
 # Last tested [10.12.6]
-- name: macdefaults | System Preferences -> Trackpad -> Point & Click -> Tap to click (Tap with one finger) - built-in Trackpad
-  command: defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
-- name: macdefaults | System Preferences -> Trackpad -> Point & Click -> Tap to click (Tap with one finger) - external Trackpad
-  command: defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+# - name: macdefaults | System Preferences -> Trackpad -> Point & Click -> Tap to click (Tap with one finger) - built-in Trackpad
+#   command: defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+# - name: macdefaults | System Preferences -> Trackpad -> Point & Click -> Tap to click (Tap with one finger) - external Trackpad
+#   command: defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 
 # Last tested [10.12.6]
-- name: macdefaults | enable tap to click (Trackpad) for the login screen
-  osx_defaults: domain=NSGlobalDomain host=currentHost key=com.apple.mouse.tapBehavior type=int value=1
-- name: macdefaults | enable tap to click (Trackpad) for this user
-  osx_defaults: domain=NSGlobalDomain key=com.apple.mouse.tapBehavior type=int value=1
+# - name: macdefaults | enable tap to click (Trackpad) for the login screen
+#   community.general.osx_defaults: domain=NSGlobalDomain host=currentHost key=com.apple.mouse.tapBehavior type=int value=1
+# - name: macdefaults | enable tap to click (Trackpad) for this user
+#   community.general.osx_defaults: domain=NSGlobalDomain key=com.apple.mouse.tapBehavior type=int value=1
 
 # Last tested [10.12.6]
-- name: macdefaults | System Preferences -> Accessibility -> Mouse & Trackpad -> Trackpad Options -> Enable dragging (with drag lock) - built-in Trackpad
-  command: defaults write com.apple.AppleMultitouchTrackpad DragLock -bool true
-- name: macdefaults | System Preferences -> Accessibility -> Mouse & Trackpad -> Trackpad Options -> Enable dragging (with drag lock) - built-in Trackpad
-  command: defaults write com.apple.AppleMultitouchTrackpad Dragging -bool true
-- name: macdefaults | System Preferences -> Accessibility -> Mouse & Trackpad -> Trackpad Options -> Enable dragging (with drag lock) - external Trackpad
-  command: defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad DragLock -bool true
-- name: macdefaults | System Preferences -> Accessibility -> Mouse & Trackpad -> Trackpad Options -> Enable dragging (with drag lock) - external Trackpad
-  command: defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -bool true
+# - name: macdefaults | System Preferences -> Accessibility -> Mouse & Trackpad -> Trackpad Options -> Enable dragging (with drag lock) - built-in Trackpad
+#   command: defaults write com.apple.AppleMultitouchTrackpad DragLock -bool true
+# - name: macdefaults | System Preferences -> Accessibility -> Mouse & Trackpad -> Trackpad Options -> Enable dragging (with drag lock) - built-in Trackpad
+#   command: defaults write com.apple.AppleMultitouchTrackpad Dragging -bool true
+# - name: macdefaults | System Preferences -> Accessibility -> Mouse & Trackpad -> Trackpad Options -> Enable dragging (with drag lock) - external Trackpad
+#   command: defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad DragLock -bool true
+# - name: macdefaults | System Preferences -> Accessibility -> Mouse & Trackpad -> Trackpad Options -> Enable dragging (with drag lock) - external Trackpad
+#   command: defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -bool true
 
 # Last tested [10.13.6]
-- name: macdefaults | System Preferences -> Keyboard  -> Text -> Use smart quotes and dashes
-  command: defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-- name: macdefaults | System Preferences -> Keyboard  -> Text -> Use smart quotes and dashes
-  command: defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+# - name: macdefaults | System Preferences -> Keyboard  -> Text -> Use smart quotes and dashes
+#   command: defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+# - name: macdefaults | System Preferences -> Keyboard  -> Text -> Use smart quotes and dashes
+#   command: defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
 # Last tested [10.13.6]
-- name: macdefaults | disable auto capitalize
-  command: defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+# - name: macdefaults | disable auto capitalize
+#   command: defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
 
 # Last tested [10.13.6]
-- name: macdefaults | disable auto period insert
-  command: defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+# - name: macdefaults | disable auto period insert
+#   command: defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 
 ###############################################################################
 # Energy Saver                                                                #
@@ -132,21 +147,21 @@
 #     or if the system is bound to a network and wake for network access is
 #     enabled.
 
-- name: macdefaults | set standby delay for battery to 12 hours (default is 3)
-  command: pmset -b standbydelay 43200
-  become: true
+# - name: macdefaults | set standby delay for battery to 12 hours (default is 3)
+#   command: pmset -b standbydelay 43200
+#   become: true
 
-- name: macdefaults | set standby delay for charger to 12 hours (default is 3)
-  command: pmset -c standbydelay 43200
-  become: true
+# - name: macdefaults | set standby delay for charger to 12 hours (default is 3)
+#   command: pmset -c standbydelay 43200
+#   become: true
 
-- name: macdefaults | set auto power off delay for battery to 24 hours (default is 8)
-  command: pmset -b autopoweroffdelay 86400
-  become: true
+# - name: macdefaults | set auto power off delay for battery to 24 hours (default is 8)
+#   command: pmset -b autopoweroffdelay 86400
+#   become: true
 
-- name: macdefaults | set auto power off delay for charger to 24 hours (default is 8)
-  command: pmset -c autopoweroffdelay 86400
-  become: true
+# - name: macdefaults | set auto power off delay for charger to 24 hours (default is 8)
+#   command: pmset -c autopoweroffdelay 86400
+#   become: true
 
-- name: macdefaults | show battery percentage in menu battery
-  osx_defaults: domain=com.apple.menuextra.battery key=ShowPercent type=string value=YES
+# - name: macdefaults | show battery percentage in menu battery
+#   community.general.osx_defaults: domain=com.apple.menuextra.battery key=ShowPercent type=string value=YES
