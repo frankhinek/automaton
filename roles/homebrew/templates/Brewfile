@@ -101,6 +101,8 @@ cask "elgato-camera-hub"
 cask "elgato-control-center"
 # Elgato Stream Deck
 cask "elgato-stream-deck"
+# Elgato Wave Link
+cask "elgato-wave-link"
 # Fast, feature-rich, GPU based terminal emulator
 cask "kitty"
 # Knowledge base that works on top of a local folder of plain text Markdown files
