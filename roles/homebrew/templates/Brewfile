@@ -109,14 +109,14 @@ cask "kitty"
 cask "logitech-options"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
+# Collaboration platform for API development
+cask "postman"
 # Blazingly fast, totally extendable launcher
 cask "raycast"
 # Microsoft Visual Studio Code
 cask "visual-studio-code"
 # Application for configuring any YubiKey
 cask "yubico-yubikey-manager"
-# Video communication and virtual meeting platform
-cask "zoom"
 
 # ARCHIVE - Old apps I used to use
 # GPU-accelerated terminal emulator
@@ -169,6 +169,8 @@ cask "font-dm-sans"
 {% if 'personal' in group_names %}
 # Multi-cloud backup application
 cask "arq"
+# Video communication and virtual meeting platform
+cask "zoom"
 
 # ARCHIVE
 # cask 'adobe-creative-cloud'
@@ -181,6 +183,8 @@ cask "arq"
 
 # Casks to install only on Work macOS systems
 {% if 'work' in group_names %}
+# Collaborative team software
+cask "figma"
 # cask 'microsoft-remote-desktop-beta'
 # cask 'microsoft-teams'
 # cask 'sketchup-pro'
