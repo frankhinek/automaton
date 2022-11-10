@@ -53,6 +53,10 @@ brew "mas"
 brew "neovim"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
+# Python package management tool
+brew "poetry"
+# Python 2 and 3 compatibility utilities (Can be removed if "poetry" formula is removed)
+brew "six"
 # Cross-shell prompt for astronauts
 brew "starship"
 # JavaScript toolchain manager for reproducible environments
@@ -185,6 +189,10 @@ cask "zoom"
 {% if 'work' in group_names %}
 # Collaborative team software
 cask "figma"
+# App to manage software development and track bugs
+cask "linear-linear"
+
+# ARCHIVE
 # cask 'microsoft-remote-desktop-beta'
 # cask 'microsoft-teams'
 # cask 'sketchup-pro'
