@@ -88,7 +88,8 @@ brew "zoxide"
 
 # Packages to install only on Work macOS systems
 {% if 'work' in group_names %}
-# brew 's3cmd'
+brew "awscli"
+brew "amazon-ecs-cli"
 {% endif %}
 
 # Applications to install on all macOS systems
