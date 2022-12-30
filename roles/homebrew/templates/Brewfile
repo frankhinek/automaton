@@ -90,6 +90,8 @@ brew "zoxide"
 {% if 'work' in group_names %}
 brew "awscli"
 brew "amazon-ecs-cli"
+brew "jq"
+brew "mage"
 {% endif %}
 
 # Applications to install on all macOS systems
