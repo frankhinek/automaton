@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 if test (uname) != Darwin
-	exit
+    exit
 end
 
 set homebrew_bin_path (dirname (which brew))
