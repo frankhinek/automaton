@@ -15,6 +15,7 @@
 	compression = -1  # default, Zlib
 	editor = vim
 	excludesfile = ~/.gitignore
+	ignorecase = false
 {% if is_macos %}
 	precomposeunicode = true
 {% endif %}
