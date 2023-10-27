@@ -16,7 +16,6 @@ function _docker_start
 	case Darwin
 		if test (pgrep com.docker.driver | wc -l) -eq 0
 			open -g -j -a Docker.app
-            sleep 2
 			while ! command docker stats --no-stream >/dev/null 2>&1
 				echo -n .
 				sleep 1
