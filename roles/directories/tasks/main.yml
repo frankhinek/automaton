@@ -1,3 +1,0 @@
----
-- name: directories | create development projects directory
-  file: path={{ directories.dev_projects }} state=directory mode=0700
