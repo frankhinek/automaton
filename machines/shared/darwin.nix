@@ -38,6 +38,7 @@
     casks = [
       "1password"
       "appcleaner"
+      "arc"
       "cleanshot"
       "google-chrome"
       "imageoptim"
@@ -71,7 +72,7 @@
         mru-spaces = false;
         persistent-apps = [
           "/Applications/Arc.app"
-          "/Applications/Discord.app"
+          "/Applications/Slack.app"
         ];
       };
       NSGlobalDomain = {
