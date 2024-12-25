@@ -55,11 +55,6 @@
     # };
   };
 
-  # ensures ~/Pictures/screenshots directory exists.
-  home.activation.pictures.screenshots = ''
-    mkdir -p ~/Pictures/screenshots
-  '';
-
   system = {
     defaults = {
       dock = {
