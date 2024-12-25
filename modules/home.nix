@@ -13,8 +13,8 @@
     PROJECTS = "$HOME/Developer";
   };
 
-  # ensures ~/Developer folder exists.
-  # this folder is later assumed by other activations, specially on darwin.
+  # ensures ~/Developer directory exists.
+  # this directory is later assumed by other activations, specially on darwin.
   home.activation.developer = ''
     mkdir -p ~/Developer
   '';
