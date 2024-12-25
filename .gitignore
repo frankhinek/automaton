@@ -1,4 +1,6 @@
 # Nix specific
+dist
+.direnv/
 build/
 result
 *.drv
