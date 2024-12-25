@@ -55,6 +55,11 @@
     # };
   };
 
+  # Ensure the screenshots directory exists
+  environment.etc."Pictures/screenshots".source = ''
+    mkdir -p ~/Pictures/screenshots
+  '';
+
   system = {
     defaults = {
       dock = {
