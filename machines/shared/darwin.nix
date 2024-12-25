@@ -70,12 +70,12 @@
         launchanim = false;
         mineffect = "scale";
         mru-spaces = false;
-        screencapture.location = "~/Pictures/screenshots";
         persistent-apps = [
           "/Applications/Arc.app"
           "/Applications/Slack.app"
         ];
       };
+      screencapture.location = "~/Pictures/screenshots";
       NSGlobalDomain = {
         ApplePressAndHoldEnabled = true;
         KeyRepeat = 2;

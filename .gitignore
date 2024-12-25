@@ -1,6 +1,6 @@
 # Nix specific
 build/
-result/
+result
 *.drv
 *.nar
 *.narinfo
