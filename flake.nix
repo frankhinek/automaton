@@ -57,6 +57,7 @@
                 imports = [
                   ./modules/home.nix
                   ./modules/nixos.nix
+                  ./modules/git
                   ./modules/shell.nix
                   nix-index-database.hmModules.nix-index
                 ];
@@ -80,6 +81,7 @@
                 imports = [
                   ./modules/home.nix
                   ./modules/darwin
+                  ./modules/git
                   ./modules/shell.nix
                   nix-index-database.hmModules.nix-index
                 ];
