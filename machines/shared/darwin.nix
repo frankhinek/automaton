@@ -55,8 +55,8 @@
     # };
   };
 
-  # Ensure the screenshots directory exists
-  environment.etc."Pictures/screenshots".source = ''
+  # ensures ~/Pictures/screenshots directory exists.
+  home.activation.pictures.screenshots = ''
     mkdir -p ~/Pictures/screenshots
   '';
 
