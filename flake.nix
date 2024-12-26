@@ -102,12 +102,6 @@
               (writeScriptBin "dot-clean" ''
                 nix-collect-garbage -d --delete-older-than 30d
               '')
-              (writeScriptBin "dot-sync" ''
-                git pull --rebase origin main
-                nix flake update
-                dot-clean
-                dot-apply
-              '')
               (writeScriptBin "dot-apply" ''
                 if test $(uname -s) == "Linux"; then
                   sudo nixos-rebuild switch --flake .#
@@ -116,6 +110,12 @@
                   nix build "./#darwinConfigurations.$(hostname | cut -f1 -d'.').system"
                   ./result/sw/bin/darwin-rebuild switch --flake .
                 fi
+              '')
+              (writeScriptBin "dot-sync" ''
+                git pull --rebase origin main
+                nix flake update
+                dot-clean
+                dot-apply
               '')
             ];
           };
