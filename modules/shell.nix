@@ -8,7 +8,7 @@
     # ./direnv.nix
   ];
 
-  # programs.zoxide.enable = true;
+  programs.zoxide.enable = true;
   # programs.ranger = {
   #   enable = true;
   #   settings = {
