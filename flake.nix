@@ -57,6 +57,7 @@
                 imports = [
                   ./modules/home.nix
                   ./modules/nixos.nix
+                  ./modules/neovim
                   ./modules/git
                   ./modules/gh
                   ./modules/shell.nix
@@ -82,6 +83,7 @@
                 imports = [
                   ./modules/home.nix
                   ./modules/darwin
+                  ./modules/neovim
                   ./modules/git
                   ./modules/gh
                   ./modules/shell.nix
