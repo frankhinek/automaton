@@ -58,6 +58,7 @@
                   ./modules/home.nix
                   ./modules/nixos.nix
                   ./modules/git
+                  ./modules/gh
                   ./modules/shell.nix
                   nix-index-database.hmModules.nix-index
                 ];
@@ -82,6 +83,7 @@
                   ./modules/home.nix
                   ./modules/darwin
                   ./modules/git
+                  ./modules/gh
                   ./modules/shell.nix
                   nix-index-database.hmModules.nix-index
                 ];
