@@ -115,7 +115,9 @@
                 git pull --rebase origin main
                 nix flake update
                 dot-clean
-                dot-apply
+                echo "Current PATH: $PATH"  # This will print the PATH
+                echo "Attempting to run dot-apply..."
+                dot-apply || echo "dot-apply command not found"
               '')
             ];
           };
