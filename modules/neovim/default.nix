@@ -28,7 +28,7 @@ in
     plugins = with pkgs.vimPlugins; [
       # ui
       tokyonight-nvim
-      # nvim-web-devicons
+      nvim-web-devicons
       # nvim-notify
       # lualine-nvim
       # dressing-nvim
@@ -135,7 +135,7 @@ in
     ];
   };
 
-  # xdg.configFile."nvim" = {
-  #   source = config.lib.file.mkOutOfStoreSymlink ./config;
-  # };
+  xdg.configFile."nvim" = {
+    source = config.lib.file.mkOutOfStoreSymlink ./config;
+  };
 }
