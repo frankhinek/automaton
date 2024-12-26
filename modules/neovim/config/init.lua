@@ -1,12 +1,12 @@
-require("user.options")
+-- require("user.options")
 -- require("user.keymaps")
 -- require("user.autocommands")
 
 --
 -- UI
 --
-require("user.colorscheme")
-require("nvim-web-devicons").setup()
+-- require("user.colorscheme")
+-- require("nvim-web-devicons").setup()
 -- require("user.notify")
 -- require("user.lualine")
 -- require("colorizer").setup()
