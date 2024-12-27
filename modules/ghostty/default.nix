@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, ghostty, ... }:
 {
   home.packages = [
     ghostty.packages.aarch64-darwin.default
