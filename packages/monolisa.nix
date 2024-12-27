@@ -6,7 +6,6 @@ stdenvNoCC.mkDerivation rec {
   src = builtins.fetchGit {
     # Use SSH URL for cloning
     url = "git@github.com:frankhinek/fonts-licensed.git";
-    ref = "main";
   };
 
   buildPhase = "true"; # No build needed
