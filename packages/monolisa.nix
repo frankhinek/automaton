@@ -1,13 +1,9 @@
-{ builtins, lib, stdenvNoCC }:
+{ lib, stdenvNoCC }:
 
 stdenvNoCC.mkDerivation rec {
   pname = "monolisa-fonts";
   version = "v2.000";
-  src = builtins.fetchGit {
-    # Use SSH URL for cloning
-    url = "git@github.com:frankhinek/fonts-licensed.git";
-    ref = "80624e90e6eaee82ba1ad68256273cef42d39f16";
-  };
+  src = ../modules/fonts/licensed;
 
   buildPhase = "true"; # No build needed
 

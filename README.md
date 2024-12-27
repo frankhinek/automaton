@@ -4,6 +4,20 @@ Human readable automation instructions designed to predictably manage the config
 
 ## First Run
 
+### Clone Repository
+
+Clone the repository:
+
+```shell
+git clone https://github.com/frankhinek/dotfiles.git
+```
+
+Initialize submodules:
+
+```shell
+git submodule update --init --recursive
+```
+
 ### Host Name
 
 Change my primary MacBook's host name using the terminal:
