@@ -85,7 +85,7 @@
                 imports = [
                   ./modules/home.nix
                   ./modules/darwin
-                  ./modules/fonts.nix
+                  ./modules/packages.nix
                   ./modules/ghostty
                   ./modules/neovim
                   ./modules/git
