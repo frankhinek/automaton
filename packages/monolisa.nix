@@ -1,15 +1,17 @@
-{ lib, stdenvNoCC }:
-
-stdenvNoCC.mkDerivation rec {
-  pname = "monolisa-fonts";
+{
+  stdenvNoCC,
+  lib,
+}:
+stdenvNoCC.mkDerivation {
+  pname = "monolisa-nerdfonts";
   version = "v2.000";
-  src = ../modules/fonts/licensed;
+  src = ./.;
 
   buildPhase = "true"; # No build needed
 
   installPhase = ''
     mkdir -p $out/share/fonts/truetype
-    cp "$src/MonoLisa-Plus/$version/ttf-nerd-font/"*.ttf $out/share/fonts/truetype/
+    cp "$src/fonts/MonoLisa-Plus/$version/ttf-nerd-font/"*.ttf $out/share/fonts/truetype/
   '';
 
   # Adding meta information
