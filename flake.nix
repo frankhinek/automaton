@@ -6,7 +6,7 @@
     ghostty.url = "github:ghostty-org/ghostty";
 
     fonts-licensed = {
-      url = "git+ssh://git@github.com/frankhinek/fonts-licensed.git?ref=main&rev=80624e90e6eaee82ba1ad68256273cef42d39f16";
+      url = "git+ssh://git@github.com/frankhinek/fonts-licensed.git?rev=80624e90e6eaee82ba1ad68256273cef42d39f16";
     };
 
     home-manager = {
