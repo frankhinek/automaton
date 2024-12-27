@@ -1,4 +1,4 @@
-{ lib, stdenvNoCC }:
+{ builtins, lib, stdenvNoCC }:
 
 stdenvNoCC.mkDerivation rec {
   pname = "monolisa-fonts";
