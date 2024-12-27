@@ -1,6 +1,6 @@
 { pkgs, config, lib, ... }:
 let
-  monolisa-typeface = pkgs.callPackage ./packages/monolisa.nix { inherit pkgs };
+  monolisa-typeface = pkgs.callPackage ./packages/monolisa.nix { };
 in {
   home.packages = [
      monolisa-typeface
