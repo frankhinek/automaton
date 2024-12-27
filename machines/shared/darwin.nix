@@ -40,6 +40,7 @@
       "appcleaner"
       "arc"
       "cleanshot"
+      "ghostty"
       "google-chrome"
       "imageoptim"
       "monodraw"
