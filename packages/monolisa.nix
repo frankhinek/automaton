@@ -6,12 +6,16 @@
 stdenvNoCC.mkDerivation rec {
   pname = "monolisa-fonts";
   version = "v2.000";
-  src = fetchFromGitHub {
+  src = (fetchFromGitHub {
     owner = "frankhinek";
     repo = "fonts-licensed";
     rev = "main";
     sha256 = "11s01ysxg3777zvg85zb7snpfymr7zg8276vb7923nzvrvqq25a9";
-  };
+  }).overrideAttrs (_: {
+    GIT_CONFIG_COUNT = 1;
+    GIT_CONFIG_KEY_0 = "url.https://github.com/.insteadOf";
+    GIT_CONFIG_VALUE_0 = "ssh+git@github.com:";
+  });
 
   buildPhase = "true"; # No build needed
 
