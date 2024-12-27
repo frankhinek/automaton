@@ -86,6 +86,7 @@
                   ./modules/home.nix
                   ./modules/darwin
                   ./modules/packages.nix
+                  ./modules/fonts.nix
                   ./modules/ghostty
                   ./modules/neovim
                   ./modules/git

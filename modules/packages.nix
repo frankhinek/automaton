@@ -10,9 +10,6 @@
     with pkgs;
     with pkgs.nodePackages_latest;
     [
-      # custom packages
-      # (pkgs.callPackage ../pkgs/bins { })
-
       jq
       wget
     ];
