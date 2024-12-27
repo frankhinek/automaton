@@ -5,10 +5,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     ghostty.url = "github:ghostty-org/ghostty";
 
-    fonts-licensed = {
-      url = "git+ssh://git@github.com/frankhinek/fonts-licensed.git";
-    };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,7 +24,6 @@
   outputs =
     {
       ghostty,
-      fonts-licensed,
       darwin,
       home-manager,
       nix-index-database,
