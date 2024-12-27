@@ -76,6 +76,11 @@
           system = "aarch64-darwin";
           modules = [
             { nixpkgs.overlays = overlays; }
+            {
+              environment.systemPackages = [
+                ghostty.packages.aarch64-darwin.default
+              ];
+            }
             ./machines/wintermute
             home-manager.darwinModules.home-manager
             {
