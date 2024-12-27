@@ -1,12 +1,12 @@
 { lib
 , stdenvNoCC
-, fetchGit
+, builtins
 }:
 
 stdenvNoCC.mkDerivation rec {
   pname = "monolisa-fonts";
   version = "v2.000";
-  src = fetchGit {
+  src = builtins.fetchGit {
     # Use SSH URL for cloning
     url = "git@github.com:frankhinek/fonts-licensed.git";
     ref = "main";
