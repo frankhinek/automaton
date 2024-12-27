@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    ghostty.url = "github:ghostty-org/ghostty";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -22,6 +23,7 @@
 
   outputs =
     {
+      ghostty,
       darwin,
       home-manager,
       nix-index-database,
@@ -83,6 +85,7 @@
                 imports = [
                   ./modules/home.nix
                   ./modules/darwin
+                  ./modules/ghostty
                   ./modules/neovim
                   ./modules/git
                   ./modules/gh

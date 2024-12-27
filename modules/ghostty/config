@@ -1,0 +1,8 @@
+# vi:ft=conf
+#
+# https://github.com/mitchellh/ghostty/blob/main/src/config/Config.zig
+#
+
+window-decoration = true
+window-theme = "dark"
+confirm-close-surface = true
