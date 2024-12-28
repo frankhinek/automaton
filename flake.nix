@@ -117,7 +117,7 @@
                 fi
                 if test $(uname -s) == "Darwin"; then
                   nix build "./#darwinConfigurations.$(hostname | cut -f1 -d'.').system"
-                  ./result/sw/bin/darwin-rebuild switch --flake .
+                  ./result/sw/bin/darwin-rebuild switch --flake .?submodules=1#
                 fi
               '')
               (writeScriptBin "dot-sync" ''
