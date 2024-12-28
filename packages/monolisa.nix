@@ -11,6 +11,7 @@ stdenvNoCC.mkDerivation {
 
   installPhase = ''
     mkdir -p $out/share/fonts/truetype
+    cd $src && pwd
     ls -al $src
     cp $src/thing/MonoLisa-Plus/$version/ttf-nerd-font/*.ttf $out/share/fonts/truetype/
   '';
