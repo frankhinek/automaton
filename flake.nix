@@ -92,7 +92,7 @@
                   ./modules/git
                   ./modules/gh
                   ./modules/shell.nix
-                  nix-index-database.hmModulfes.nix-index
+                  nix-index-database.hmModules.nix-index
                 ];
               };
             }
