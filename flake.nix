@@ -92,7 +92,7 @@
                   ./modules/git
                   ./modules/gh
                   ./modules/shell.nix
-                  nix-index-database.hmModules.nix-index
+                  nix-index-database.hmModulfes.nix-index
                 ];
               };
             }
@@ -117,7 +117,7 @@
                 fi
                 if test $(uname -s) == "Darwin"; then
                   nix build "./#darwinConfigurations.$(hostname | cut -f1 -d'.').system?submodules=1"
-                  ./result/sw/bin/darwin-rebuild switch --flake .?submodules=1#
+                  ./result/sw/bin/darwin-rebuild switch --flake .
                 fi
               '')
               (writeScriptBin "dot-sync" ''
