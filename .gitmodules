@@ -1,0 +1,3 @@
+[submodule "packages/fonts"]
+	path = packages/fonts
+	url = git@github.com:frankhinek/fonts-licensed.git
