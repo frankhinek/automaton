@@ -5,7 +5,7 @@
 stdenvNoCC.mkDerivation {
   pname = "monolisa-nerdfonts";
   version = "v2.000";
-  src = "./fonts;
+  src = ./fonts;
 
   buildPhase = "true"; # No build needed
 
