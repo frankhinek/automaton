@@ -116,7 +116,7 @@
                   sudo nixos-rebuild switch --flake .#
                 fi
                 if test $(uname -s) == "Darwin"; then
-                  nix build "./#darwinConfigurations.$(hostname | cut -f1 -d'.').system?submodules=1"
+                  nix build "./#darwinConfigurations.$(hostname | cut -f1 -d'.').system"
                   ./result/sw/bin/darwin-rebuild switch --flake .
                 fi
               '')
