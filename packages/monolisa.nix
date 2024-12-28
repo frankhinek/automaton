@@ -11,7 +11,12 @@ stdenvNoCC.mkDerivation {
 
   installPhase = ''
     mkdir -p $out/share/fonts/truetype
-    cp "$src/fonts/MonoLisa-Plus/$version/ttf-nerd-font/"*.ttf $out/share/fonts/truetype/
+    if [ -d "$src/thing" ]; then
+      cp -r $src/MonoLisa-Plus/$version/ttf-nerd-font/*.ttf $out/share/fonts/truetype/
+    else
+      echo "No fonts found in $src/thing"
+      exit 0
+    fi
   '';
 
   # Adding meta information
