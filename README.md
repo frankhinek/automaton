@@ -4,20 +4,6 @@ Human readable automation instructions designed to predictably manage the config
 
 ## First Run
 
-### Clone Repository
-
-Clone the repository:
-
-```shell
-git clone https://github.com/frankhinek/dotfiles.git
-```
-
-Initialize submodules:
-
-```shell
-git submodule update --init --recursive
-```
-
 ### Host Name
 
 Change my primary MacBook's host name using the terminal:
@@ -89,11 +75,24 @@ Hello, world!
 
 ### Bootstrap Nix
 
-The general idea is that we want to have one configuration that sets our system up as we want it.  Bootstrapping this new configuration can be done by cloning the repo and running a single command:
+### Clone the Source Repositories
+
+Clone the dotfiles repository:
 
 ```shell
 git clone https://github.com/frankhinek/automaton ~/automaton
 cd ~/automaton
+```
+
+Clone the licensed fonts repository:
+
+```shell
+git clone https://github.com/frankhinek/fonts-licensed.git packages/fonts
+```
+
+The general idea is that we want to have one configuration that sets our system up as we want it.  Bootstrapping this new configuration can be done by cloning the repo and running a single command:
+
+```shell
 nix develop -c dot-apply
 ```
 
