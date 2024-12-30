@@ -42,7 +42,8 @@ To ensure that the Terminal app has full disk access on macOS, follow these step
 2. Select **System Settings** from the menu.
 3. In the System Preferences window, click on **Privacy & Security**.
 4. Click on **Full Disk Access**.
-5. Click the **+** button to add a new entry. 6. Locate the **Terminal** app under **/Applications/Utilities**.
+5. Click the **+** button to add a new entry.
+6. Locate the **Terminal** app under **/Applications/Utilities**.
 6. Close the Terminal application and reopen it to ensure that the changes take effect.
 
 ### Linux Prerequisites
