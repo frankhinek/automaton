@@ -158,7 +158,7 @@ just clean
   [dotfiles.fish](https://github.com/caarlos0/dotfiles.fish) projects.
 - Thanks to [khaneliman](https://github.com/khaneliman/khanelinix) for the
   [khanelinix](https://github.com/khaneliman/khanelinix) project.
-- Thanks to [khaneliman](https://github.com/jakehamilton) for the
+- Thanks to [jakehamilton](https://github.com/jakehamilton) for the
   [config](https://github.com/jakehamilton/config) and
   [Snowfall Lib](https://github.com/snowfallorg/lib) projects.
 
