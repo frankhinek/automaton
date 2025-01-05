@@ -9,6 +9,14 @@ apply:
         nixos-rebuild switch --flake . --use-remote-sudo
     fi
 
+check flake:
+    #!/usr/bin/env bash
+    if [[ $(uname) == "Darwin" ]]; then
+        nom build .#darwinConfigurations.{{ flake }}.system
+    else
+        nom build .#nixosConfigurations.{{ flake }}.config.system.build.toplevel
+    fi
+
 clean:
     #!/usr/bin/env bash
     nix-collect-garbage -d --delete-older-than 30d
