@@ -1,0 +1,5 @@
+https://snowfall.org/reference/lib/
+https://github.com/jakehamilton/config/tree/6158f53f916dc9522068aee3fdf7e14907045352/modules/darwin/suites
+https://github.com/khaneliman/khanelinix/blob/cd39947292a7345a780823aa17c09227c1088c7b/homes/aarch64-darwin/khaneliman%40khanelimac/default.nix
+https://github.com/Yash-Garg/dotfiles/blob/54df66feb55e922ee27bf288d6ae34d6f25fdea2/modules/darwin/homebrew/default.nix
+https://github.com/caarlos0/dotfiles/tree/main/modules/darwin
