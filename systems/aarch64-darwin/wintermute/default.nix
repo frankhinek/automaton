@@ -56,6 +56,13 @@ in
     };
 
     system = {
+      fonts = {
+        enable = true;
+        fonts = with pkgs; [
+          fira-code
+          open-sans
+        ];
+      };
       input = enabled;
       interface = enabled;
       power = enabled;
