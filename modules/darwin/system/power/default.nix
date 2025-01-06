@@ -18,6 +18,10 @@ in
     system.activationScripts.postActivation.text = ''
       # Prevent automatic sleeping on power adapter when the display is off.
       sudo pmset -c sleep 0
+      # Set display sleep to 2 minutes on battery
+      sudo pmset -b displaysleep 2
+      # Set display sleep to 20 minutes when on power adapter
+      sudo pmset -c displaysleep 20
     '';
   };
 }
