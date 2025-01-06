@@ -2,6 +2,7 @@
   config,
   lib,
   namespace,
+  pkgs,
   ...
 }:
 let
@@ -17,6 +18,11 @@ in
   config = mkIf cfg.enable {
     system.defaults = {
       CustomUserPreferences = {
+        "com.apple.dock" = {
+          # Lock the dock size so it cannot be changed by dragging the separator. Default is false.
+          size-immutable = true;
+        };
+
         "com.apple.Safari" = {
           # Do not prompt user to make Safari their default browser
           DefaultBrowserPromptingState3 = 4;
@@ -82,6 +88,44 @@ in
           # Disable auto-correct
           WebAutomaticSpellingCorrectionEnabled = 0;
         };
+      };
+
+      # Dock configuration
+      dock = {
+        # Automatically hide and show the dock. The default is false.
+        autohide = true;
+        # Eliminate the autohide delay. The default is 0.24.
+        autohide-delay = 0.0;
+        # Minimize windows into their application icon. The default is false.
+        minimize-to-application = true;
+        # Enable highlight hover effect for the grid view of a stack in the Dock.
+        mouse-over-hilite-stack = true;
+        # Do not automatically rearrange spaces based on most recent use. The default is true.
+        mru-spaces = false;
+        # Position of the dock on screen. The default is "bottom".
+        orientation = "bottom";
+        # Show indicator lights for open applications in the Dock. The default is true.
+        show-process-indicators = true;
+        # Do not show recent applications in the dock. The default is true.
+        show-recents = false;
+        # Make icons of hidden applications translucent. The default is false.
+        showhidden = true;
+        # Size of the icons in the dock.  The default is 64.
+        tilesize = 50;
+
+        # Persistent applications in the dock.
+        persistent-apps = [
+          # "/Applications/Thunderbird.app"
+          "/System/Applications/Messages.app"
+          "${pkgs.discord}/Applications/Discord.app"
+          # { spacer.small = true; }
+          # Arc
+          "/System/Cryptexes/App/System/Applications/Safari.app"
+          # { spacer.small = true; }
+          "${pkgs.vscode}/Applications/Visual Studio Code.app"
+          # { spacer.small = true; }
+          "/Applications/Ghostty.app"
+        ];
       };
     };
   };
