@@ -115,11 +115,12 @@ in
 
         # Persistent applications in the dock.
         persistent-apps = [
-          # "/Applications/Thunderbird.app"
+          "/Applications/Thunderbird.app"
           "/System/Applications/Messages.app"
+          "/Applications/Slack.app"
           "${pkgs.discord}/Applications/Discord.app"
           # { spacer.small = true; }
-          # Arc
+          "/Applications/Arc.app"
           "/System/Cryptexes/App/System/Applications/Safari.app"
           # { spacer.small = true; }
           "${pkgs.vscode}/Applications/Visual Studio Code.app"
