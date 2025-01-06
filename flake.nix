@@ -13,6 +13,10 @@
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Private licensed fonts
+    fonts-licensed.url = "git+ssh://git@github.com/frankhinek/fonts-licensed";
+    fonts-licensed.inputs.nixpkgs.follows = "nixpkgs";
+
     # Weekly updating nix-index database
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";

@@ -31,7 +31,6 @@ Thumbs.db
 venv
 node_modules
 .sass-cache
-
 .idea*
 
 # ░█▀█░▀█▀░█░█░█▀█░█▀▀

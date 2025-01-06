@@ -1,13 +1,18 @@
-#{ pkgs, lib, ... }:
 {
+  inputs,
   lib,
   config,
   namespace,
   pkgs,
+  system,
   ...
 }:
+with lib.${namespace};
 let
+  inherit (inputs) fonts-licensed;
   inherit (lib.${namespace}) enabled;
+
+  inherit (fonts-licensed.packages.${system}) monolisa-nerdfonts;
 
   debugConfig =
     conf:
@@ -60,6 +65,7 @@ in
         enable = true;
         fonts = with pkgs; [
           fira-code
+          monolisa-nerdfonts
           open-sans
         ];
       };

@@ -84,19 +84,11 @@ Hello, world!
 
 ### Bootstrap Nix
 
-### Clone the Source Repositories
-
 Clone the dotfiles repository:
 
 ```shell
 git clone https://github.com/frankhinek/automaton ~/.automaton
 cd ~/.automaton
-```
-
-Clone the licensed fonts repository:
-
-```shell
-git clone https://github.com/frankhinek/fonts-licensed.git packages/fonts
 ```
 
 The [Nix-Darwin](https://github.com/LnL7/nix-darwin) package manager is used to
