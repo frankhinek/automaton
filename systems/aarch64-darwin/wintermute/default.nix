@@ -55,8 +55,12 @@ in
 
       gui = {
         _1password = enabled;
+        affinity = enabled;
         docker = enabled;
         ghostty = enabled;
+        raycast = enabled;
+        slack = enabled;
+        thunderbird = enabled;
       };
     };
 
