@@ -56,10 +56,15 @@ in
       gui = {
         _1password = enabled;
         affinity = enabled;
+        arc = enabled;
         docker = enabled;
+        elgato = enabled;
         ghostty = enabled;
+        magnet = enabled;
+        obs = enabled;
         raycast = enabled;
         slack = enabled;
+        steermouse = enabled;
         thunderbird = enabled;
       };
     };
