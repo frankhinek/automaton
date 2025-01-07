@@ -17,6 +17,12 @@ in
 
   config = mkIf cfg.enable {
     system.defaults = {
+      controlcenter = {
+        # Show a bluetooth control in menu bar. Default is null.
+        # Apple menu > System Preferences > Control Center > Bluetooth
+        Bluetooth = true;
+      };
+
       CustomUserPreferences = {
         "com.apple.dock" = {
           # Lock the dock size so it cannot be changed by dragging the separator. Default is false.
