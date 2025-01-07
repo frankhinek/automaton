@@ -17,6 +17,11 @@ in
   config = mkIf cfg.enable (mkMerge [
     {
       system = {
+        activationScripts.postActivation.text = ''
+          # Clear the UserKeyMapping for the Advantage360 Pro keyboard.
+          hidutil property --match '{"VendorID":0x1d50, "ProductID":0x615e}' --set '{"UserKeyMapping": [] }'
+        '';
+
         keyboard = {
           enableKeyMapping = true;
           # Remap the Caps Lock key to Control.
