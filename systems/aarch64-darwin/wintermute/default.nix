@@ -63,6 +63,7 @@ in
         ghostty = enabled;
         magnet = enabled;
         obs = enabled;
+        obsidian = enabled;
         raycast = enabled;
         slack = enabled;
         steermouse = enabled;
