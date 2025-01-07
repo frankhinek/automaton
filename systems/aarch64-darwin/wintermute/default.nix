@@ -59,6 +59,7 @@ in
         arc = enabled;
         docker = enabled;
         elgato = enabled;
+        figma = enabled;
         ghostty = enabled;
         magnet = enabled;
         obs = enabled;
