@@ -115,6 +115,35 @@ just apply
 gh auth login
 ```
 
+### Configure SteerMouse
+
+[SteerMouse](https://plentycom.jp/en/steermouse/) is a utility that lets you
+customize buttons, wheels and cursor speed. It is used to configure the
+additional button on an Elecom trackball. Although the app can be installed by
+Automaton, there currently is no way to programmatically configure settings.
+
+Some SteerMouse settings can be manually imported:
+
+1. Open the SteerMouse app.
+2. Ensure the "HUGE TrackBall" device is selected and has a green status
+   indicator.
+3. Click the **Edit** button next to the "Default" drop-down menu.
+4. In the bottom-left corner, click the button that has a round circle and three
+   dots and select **Import**.
+5. Select the `modules/darwin/programs/steermouse/Default.smsetting_app` file
+   and click **Open**.
+6. Click **Ok** to return to the main SteerMouse window and then close the app.
+
+Additional settings must be manually configured:
+
+1. In SteerMouse, click on the **Cursor** tab, set **Acceleration** to `1`, and
+   ensure that **Sensitivity** is set to `1600`.
+2. Click on thte **Device** tab and change the **Button Count** ttto `8`.
+3. Click on the **License & Support** tab, click **Purchase or Enter License**,
+   enter the **ID** and **CODE** stored in 1Password, and click **OK**.
+
+You can now close the SteerMouse app.
+
 ## Usage
 
 ### Updating
