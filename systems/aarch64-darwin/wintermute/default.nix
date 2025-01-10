@@ -68,6 +68,7 @@ in
         slack = enabled;
         steermouse = enabled;
         thunderbird = enabled;
+        xcode = enabled;
       };
     };
 
