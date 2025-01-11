@@ -27,7 +27,7 @@
 
     # NixPkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Simplified Nix Flakes on the command line
     snowfall-flake.url = "github:snowfallorg/flake";
