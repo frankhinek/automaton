@@ -56,6 +56,7 @@ in
       gui = {
         _1password = enabled;
         affinity = enabled;
+        android-studio = enabled;
         arc = enabled;
         docker = enabled;
         elgato = enabled;
