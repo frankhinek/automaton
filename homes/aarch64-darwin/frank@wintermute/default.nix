@@ -48,6 +48,7 @@ in
 
       gui = {
         discord = enabled;
+        firefox = enabled;
         vscode = {
           enable = true;
           declarativeConfig = true;

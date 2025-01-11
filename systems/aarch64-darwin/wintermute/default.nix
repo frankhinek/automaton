@@ -61,6 +61,7 @@ in
         docker = enabled;
         elgato = enabled;
         figma = enabled;
+        firefox = enabled;
         ghostty = enabled;
         magnet = enabled;
         mullvad-vpn = enabled;
