@@ -63,6 +63,7 @@ in
         figma = enabled;
         ghostty = enabled;
         magnet = enabled;
+        mullvad-vpn = enabled;
         obs = enabled;
         obsidian = enabled;
         raycast = enabled;
