@@ -29,6 +29,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Nix User Repository
+    # nur.url = "github:nix-community/NUR";
+
     # Simplified Nix Flakes on the command line
     snowfall-flake.url = "github:snowfallorg/flake";
 
@@ -74,5 +77,9 @@
       outputs-builder = channels: {
         formatter = inputs.treefmt-nix.lib.mkWrapper channels.nixpkgs ./treefmt.nix;
       };
+
+      # overlays = with inputs; [
+      #   nur.overlay
+      # ];
     };
 }
