@@ -17,31 +17,50 @@ in
   config = mkIf cfg.enable (mkMerge [
     {
       system = {
+        # To figure out the VendorID and ProductID of a keyboard use the
+        # command: hidutil list | grep "Apple Internal"
+        # The first two columns are the VendorID and ProductID.
         activationScripts.postActivation.text = ''
-          # Clear the UserKeyMapping for the Advantage360 Pro keyboard.
-          hidutil property --match '{"VendorID":0x1d50, "ProductID":0x615e}' --set '{"UserKeyMapping": [] }'
+          # Swap Caps Lock and Left Control keys.
+          echo "configuring Apple keyboard..." >&2
+          hidutil property \
+            --match '{"VendorID":0x0, "ProductID":0x0}' \
+            --set '{"UserKeyMapping": [
+              {
+                "HIDKeyboardModifierMappingSrc": 30064771300,
+                "HIDKeyboardModifierMappingDst": 30064771129
+              },
+              {
+                "HIDKeyboardModifierMappingSrc": 30064771296,
+                "HIDKeyboardModifierMappingDst": 30064771129
+              },
+              {
+                "HIDKeyboardModifierMappingSrc": 30064771129,
+                "HIDKeyboardModifierMappingDst": 30064771300
+              }
+            ] }'
         '';
 
-        keyboard = {
-          enableKeyMapping = true;
-          # Remap the Caps Lock key to Control.
-          # remapCapsLockToControl = true;
-          # Swap Caps Lock and Left Control keys.
-          userKeyMapping = [
-            {
-              HIDKeyboardModifierMappingSrc = 30064771300;
-              HIDKeyboardModifierMappingDst = 30064771129;
-            }
-            {
-              HIDKeyboardModifierMappingSrc = 30064771296;
-              HIDKeyboardModifierMappingDst = 30064771129;
-            }
-            {
-              HIDKeyboardModifierMappingSrc = 30064771129;
-              HIDKeyboardModifierMappingDst = 30064771300;
-            }
-          ];
-        };
+        # keyboard = {
+        #   enableKeyMapping = true;
+        #   # Remap the Caps Lock key to Control.
+        #   # remapCapsLockToControl = true;
+        #   # Swap Caps Lock and Left Control keys.
+        #   userKeyMapping = [
+        #     {
+        #       HIDKeyboardModifierMappingSrc = 30064771300;
+        #       HIDKeyboardModifierMappingDst = 30064771129;
+        #     }
+        #     {
+        #       HIDKeyboardModifierMappingSrc = 30064771296;
+        #       HIDKeyboardModifierMappingDst = 30064771129;
+        #     }
+        #     {
+        #       HIDKeyboardModifierMappingSrc = 30064771129;
+        #       HIDKeyboardModifierMappingDst = 30064771300;
+        #     }
+        #   ];
+        # };
 
         defaults = {
           # Trackpad settings.
