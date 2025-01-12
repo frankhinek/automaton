@@ -40,10 +40,12 @@ _: {
 
     gr = "git remote -v";
 
+    gs = "git status -sb";
+
+    gus = "git restore --staged";
+
     gm = "git switch (git main-branch)";
     gw = "git switch";
     gwc = "git switch -c";
-
-    gs = "git status -sb";
   };
 }
