@@ -38,7 +38,7 @@ in
                 "HIDKeyboardModifierMappingSrc": 30064771129,
                 "HIDKeyboardModifierMappingDst": 30064771300
               }
-            ] }'
+            ] }' > /dev/null
         '';
 
         # keyboard = {
