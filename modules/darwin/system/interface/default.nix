@@ -98,25 +98,25 @@ in
 
       # Dock configuration
       dock = {
-        # Automatically hide and show the dock. The default is false.
+        # Automatically hide and show the dock (default: false)
         autohide = true;
-        # Eliminate the autohide delay. The default is 0.24.
+        # Eliminate the autohide delay (default: 0.24)
         autohide-delay = 0.0;
-        # Minimize windows into their application icon. The default is false.
+        # Minimize windows into their application icon (default: false)
         minimize-to-application = true;
-        # Enable highlight hover effect for the grid view of a stack in the Dock.
+        # Enable highlight hover effect for the grid view of a stack in the Dock (default: false)
         mouse-over-hilite-stack = true;
-        # Do not automatically rearrange spaces based on most recent use. The default is true.
+        # Do not automatically rearrange spaces based on most recent use (default: true)
         mru-spaces = false;
-        # Position of the dock on screen. The default is "bottom".
+        # Position of the dock on screen (default: "bottom")
         orientation = "bottom";
-        # Show indicator lights for open applications in the Dock. The default is true.
+        # Show indicator lights for open applications in the Dock (default: true)
         show-process-indicators = true;
-        # Do not show recent applications in the dock. The default is true.
+        # Do not show recent applications in the dock (default: true)
         show-recents = false;
-        # Make icons of hidden applications translucent. The default is false.
+        # Make icons of hidden applications translucent (default: false)
         showhidden = true;
-        # Size of the icons in the dock.  The default is 64.
+        # Size of the icons in the dock (default: 64)
         tilesize = 50;
 
         # Persistent applications in the dock.
@@ -133,6 +133,20 @@ in
           # { spacer.small = true; }
           "/Applications/Ghostty.app"
         ];
+      };
+
+      # Finder configuration
+      finder = {
+        # Show all file extensions in Finder (default: false)
+        AppleShowAllExtensions = true;
+        # Default search scope: SCcf = Current Folder (default: "SCev" = This Mac)
+        FXDefaultSearchScope = "SCcf";
+        # List folders before files when sorting (default: false)
+        _FXSortFoldersFirst = true;
+        # Show the path bar at bottom of Finder windows (default: false)
+        ShowPathbar = true;
+        # Show the status bar at bottom of Finder windows (default: false)
+        ShowStatusBar = true;
       };
     };
   };
