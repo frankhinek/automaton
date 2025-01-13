@@ -7,8 +7,8 @@
 # https://github.com/search?q=path%3Aghostty%2Fconfig&type=code
 
 # ghostty +list-fonts
-# font-family = "Berkeley Mono"
-# window-title-font-family = "Maple Mono"
+font-family = "MonoLisa Nerd Font"
+window-title-font-family = "MonoLisa Nerd Font"
 font-size = 15
 font-feature = zero
 # font-feature = ss01
