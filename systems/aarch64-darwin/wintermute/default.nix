@@ -58,6 +58,7 @@ in
         affinity = enabled;
         android-studio = enabled;
         arc = enabled;
+        cursor = enabled;
         docker = enabled;
         elgato = enabled;
         figma = enabled;
@@ -71,6 +72,7 @@ in
         slack = enabled;
         steermouse = enabled;
         thunderbird = enabled;
+        windsurf = enabled;
         xcode = enabled;
       };
     };
