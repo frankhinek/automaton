@@ -71,6 +71,7 @@ in
         raycast = enabled;
         slack = enabled;
         steermouse = enabled;
+        superwhisper = enabled;
         thunderbird = enabled;
         windsurf = enabled;
         xcode = enabled;
