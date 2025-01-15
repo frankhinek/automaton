@@ -73,6 +73,7 @@ in
         steermouse = enabled;
         superwhisper = enabled;
         thunderbird = enabled;
+        utm = enabled;
         windsurf = enabled;
         xcode = enabled;
         zoom = enabled;
