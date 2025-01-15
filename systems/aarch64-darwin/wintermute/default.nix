@@ -75,6 +75,7 @@ in
         thunderbird = enabled;
         windsurf = enabled;
         xcode = enabled;
+        zoom = enabled;
       };
     };
 
