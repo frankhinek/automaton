@@ -64,6 +64,7 @@ in
         figma = enabled;
         firefox = enabled;
         ghostty = enabled;
+        lunar = enabled;
         magnet = enabled;
         mullvad-vpn = enabled;
         obs = enabled;
