@@ -5,5 +5,5 @@ function flakify
         echo "use flake" >.envrc
         direnv allow
     end
-    eval (env $EDITOR "flake.nix")
+    env $EDITOR "flake.nix"
 end

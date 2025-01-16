@@ -11,6 +11,6 @@ function nixify
             ];
           }'
         echo $code | sed "s/'/'\\\\''/g" | xargs echo >default.nix
-        eval (env $EDITOR "default.nix")
+        env $EDITOR "default.nix"
     end
 end
