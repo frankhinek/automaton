@@ -66,6 +66,8 @@ in
         ghostty = enabled;
         lunar = enabled;
         magnet = enabled;
+        microsoft-office = enabled;
+        microsoft-outlook = enabled;
         mullvad-vpn = enabled;
         obs = enabled;
         obsidian = enabled;
