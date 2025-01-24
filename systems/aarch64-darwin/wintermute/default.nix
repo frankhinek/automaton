@@ -61,6 +61,7 @@ in
         cursor = enabled;
         docker = enabled;
         elgato = enabled;
+        element = enabled;
         figma = enabled;
         firefox = enabled;
         ghostty = enabled;
