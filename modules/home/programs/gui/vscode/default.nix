@@ -83,6 +83,9 @@ in
         "editor.fontLigatures" = "'ss02' on, 'calt' on, 'liga' on, 'zero' on"; # (Default: null)
         "editor.fontSize" = 14; # (Default: 12)
         "editor.lineHeight" = 0; # (Default: 0 - automatic)
+
+        # Terminal
+        "terminal.integrated.defaultProfile.osx" = "fish"; # (Default: "bash")
         "terminal.integrated.fontLigatures.enabled" = true; # (Default: false)
         "terminal.integrated.fontSize" = 13; # (Default: 12)
         "terminal.integrated.lineHeight" = 0; # (Default: 0 - automatic)
