@@ -38,6 +38,7 @@ in
         jnoortheen.nix-ide
         pkief.material-icon-theme
         rust-lang.rust-analyzer
+        bradlc.vscode-tailwindcss
       ];
 
       keybindings = [
@@ -72,6 +73,7 @@ in
         # Editor Appearance
         "editor.minimap.enabled" = false;
         "editor.rulers" = [ 80 ];
+        "editor.tabSize" = 2;
         "workbench.editor.tabActionCloseVisibility" = false;
         "workbench.productIconTheme" = "fluent-icons";
         "workbench.sideBar.location" = "right";
@@ -81,7 +83,7 @@ in
         "editor.fontLigatures" = "'ss02' on, 'calt' on, 'liga' on, 'zero' on"; # (Default: null)
         "editor.fontSize" = 14; # (Default: 12)
         "editor.lineHeight" = 0; # (Default: 0 - automatic)
-        "terminal.integrated.fontLigatures" = true; # (Default: false)
+        "terminal.integrated.fontLigatures.enabled" = true; # (Default: false)
         "terminal.integrated.fontSize" = 13; # (Default: 12)
         "terminal.integrated.lineHeight" = 0; # (Default: 0 - automatic)
       };
