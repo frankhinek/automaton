@@ -80,6 +80,7 @@ in
         utm = enabled;
         windsurf = enabled;
         xcode = enabled;
+        yaak = enabled;
         zoom = enabled;
       };
     };
