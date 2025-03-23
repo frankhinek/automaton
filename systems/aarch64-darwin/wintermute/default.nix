@@ -66,6 +66,7 @@ in
         firefox = enabled;
         ghostty = enabled;
         github = enabled;
+        hoppscotch = enabled;
         lunar = enabled;
         magnet = enabled;
         microsoft-office = enabled;
