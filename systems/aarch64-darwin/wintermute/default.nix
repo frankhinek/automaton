@@ -65,6 +65,7 @@ in
         figma = enabled;
         firefox = enabled;
         ghostty = enabled;
+        github = enabled;
         lunar = enabled;
         magnet = enabled;
         microsoft-office = enabled;
