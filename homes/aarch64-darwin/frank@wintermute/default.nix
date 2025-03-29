@@ -32,6 +32,7 @@ in
           curl = enabled;
           direnv = enabled;
           eza = enabled;
+          gh = enabled;
           git = {
             enable = true;
             inherit (config.${namespace}.user) signingKey;
