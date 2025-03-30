@@ -44,8 +44,8 @@ _: {
 
     gus = "git restore --staged";
 
-    gm = "git switch (git main-branch)";
     gw = "git switch";
     gwc = "git switch -c";
+    gwm = "git switch (git-main-branch)";
   };
 }
