@@ -78,7 +78,6 @@ in
         slack = enabled;
         steermouse = enabled;
         superwhisper = enabled;
-        thunderbird = enabled;
         utm = enabled;
         windsurf = enabled;
         xcode = enabled;
