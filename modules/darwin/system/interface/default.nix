@@ -121,7 +121,7 @@ in
 
         # Persistent applications in the dock.
         persistent-apps = [
-          "/Applications/Thunderbird.app"
+          "/Applications/Microsoft Outlook.app"
           "/System/Applications/Messages.app"
           "/Applications/Slack.app"
           "${pkgs.discord}/Applications/Discord.app"
@@ -129,6 +129,7 @@ in
           "/Applications/Arc.app"
           "/System/Cryptexes/App/System/Applications/Safari.app"
           # { spacer.small = true; }
+          "/Applications/Cursor.app"
           "${pkgs.vscode}/Applications/Visual Studio Code.app"
           # { spacer.small = true; }
           "/Applications/Ghostty.app"
