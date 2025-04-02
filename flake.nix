@@ -3,7 +3,7 @@
 
   inputs = {
     # macOS Support
-    darwin.url = "github:lnl7/nix-darwin";
+    darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-24.11";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     # Provides pre-commit hook management for Git repositories
