@@ -88,6 +88,10 @@ in
             ui = true;
           };
 
+          core = {
+            ignoreCase = false;
+          };
+
           # credential = {
           #   helper =
           #     lib.optionalString cfg.wslAgentBridge cfg.wslGitCredentialManagerPath
