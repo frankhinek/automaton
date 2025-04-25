@@ -75,6 +75,7 @@ in
         obs = enabled;
         obsidian = enabled;
         raycast = enabled;
+        screen-studio = enabled;
         slack = enabled;
         steermouse = enabled;
         superwhisper = enabled;
