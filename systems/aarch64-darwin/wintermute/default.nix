@@ -80,6 +80,7 @@ in
         steermouse = enabled;
         superwhisper = enabled;
         utm = enabled;
+        voiceink = enabled;
         windsurf = enabled;
         xcode = enabled;
         yaak = enabled;
