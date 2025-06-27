@@ -17,7 +17,7 @@ in
   config = mkIf cfg.enable {
     homebrew = {
       casks = [
-        "docker"
+        "docker-desktop"
       ];
     };
   };
