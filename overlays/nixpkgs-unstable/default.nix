@@ -4,7 +4,12 @@
 # Reference: https://gitlab.com/usmcamp0811/dotfiles/-/blob/nixos/overlays/nix-unstable/default.nix?ref_type=heads
 { nixpkgs-unstable, ... }:
 _final: prev: {
-  nix-unstable = nixpkgs-unstable.legacyPackages.${prev.system};
+  nix-unstable = import nixpkgs-unstable {
+    inherit (prev) system;
+    config = {
+      allowUnfree = true;
+    };
+  };
 }
 
 # Alternative approach the defines specific packages which will be overriden

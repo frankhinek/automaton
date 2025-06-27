@@ -64,7 +64,7 @@
     lib.mkFlake {
       # Applied to all nixpkgs channels (stable, unstable, etc.)
       channels-config = {
-        # Enable packages with non-free licenses (e.g., vscode, discord))
+        # Enable packages with non-free licenses (e.g., vscode, discord)
         allowUnfree = true;
       };
 
