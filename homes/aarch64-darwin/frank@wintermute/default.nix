@@ -22,6 +22,8 @@ in
 
     programs = {
       cli = {
+        claude-code = enabled;
+
         shells = {
           fish = enabled;
         };

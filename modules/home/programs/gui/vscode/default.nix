@@ -62,6 +62,14 @@ in
           key = "cmd+k cmd+x";
           command = "workbench.view.extensions";
         }
+        {
+          command = "workbench.action.terminal.sendSequence";
+          key = "shift+enter";
+          args = {
+            text = " \r";
+          };
+          when = "terminalFocus";
+        }
       ];
 
       userSettings = mkIf cfg.declarativeConfig {
