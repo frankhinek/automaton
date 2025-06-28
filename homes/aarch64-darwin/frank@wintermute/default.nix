@@ -44,6 +44,7 @@ in
           jq = enabled;
           just = enabled;
           lsd = enabled;
+          ripgrep = enabled;
           wget = enabled;
           zoxide = enabled;
         };
