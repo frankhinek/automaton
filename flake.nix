@@ -1,5 +1,5 @@
 {
-  description = "My Flake";
+  description = "Automaton";
 
   inputs = {
     # macOS Support
