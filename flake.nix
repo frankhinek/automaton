@@ -72,7 +72,7 @@
       # Modules that will be included in all home configurations
       homes.modules = with inputs; [
         # Enable nix-locate and command-not-found suggestions
-        nix-index-database.hmModules.nix-index
+        nix-index-database.homeModules.nix-index
       ];
 
       outputs-builder = channels: {
