@@ -18,7 +18,7 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      pkgs.nix-unstable.claude-code
+      pkgs.${namespace}.claude-code
     ];
   };
 }
