@@ -34,6 +34,8 @@
 
     # Simplified Nix Flakes on the command line
     snowfall-flake.url = "github:snowfallorg/flake";
+    # Requires newer nixpkgs for helper functions used by the package
+    snowfall-flake.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     # Snowfall Lib
     snowfall-lib.url = "github:snowfallorg/lib?ref=v3.0.3";
@@ -80,6 +82,7 @@
 
       overlays = with inputs; [
         # nur.overlay
+        snowfall-flake.overlays."package/flake"
       ];
     };
 }
