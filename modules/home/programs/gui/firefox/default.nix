@@ -97,7 +97,7 @@ in
             default = "Searx"; # Sets Searx as the default search engine
             order = [
               "Searx"
-              "Google"
+              "google"
             ]; # Defines search engine order in the search bar
             engines = {
               "Nix Packages" = {
@@ -121,18 +121,16 @@ in
               };
               "NixOS Wiki" = {
                 urls = [ { template = "https://nixos.wiki/index.php?search={searchTerms}"; } ];
-                iconUpdateURL = "https://nixos.wiki/favicon.png";
-                updateInterval = 24 * 60 * 60 * 1000; # every day
+                icon = "https://nixos.wiki/favicon.png";
                 definedAliases = [ "@nw" ];
               };
               "Searx" = {
                 urls = [ { template = "https://searx.aicampground.com/?q={searchTerms}"; } ];
-                iconUpdateURL = "https://nixos.wiki/favicon.png";
-                updateInterval = 24 * 60 * 60 * 1000; # every day
+                icon = "https://nixos.wiki/favicon.png";
                 definedAliases = [ "@searx" ];
               };
-              "Bing".metaData.hidden = true;
-              "Google".metaData.alias = "@g"; # builtin engines only support specifying one additional alias
+              bing.metaData.hidden = true;
+              google.metaData.alias = "@g"; # builtin engines only support specifying one additional alias
             };
           };
           # extensions = with pkgs.nur.repos.rycee.firefox-addons; [
