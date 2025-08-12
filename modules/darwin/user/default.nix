@@ -48,6 +48,10 @@ in
           assertion = cfg.fullName != null;
           message = "${namespace}.user.fullName must be set in systems/*-darwin/<hostname>";
         }
+        {
+          assertion = builtins.elem cfg.name config.users.knownUsers;
+          message = "${namespace}.user.name must be in users.knownUsers";
+        }
       ];
 
       # Add user to nix-darwin's knownUsers list to enable management of user attributes

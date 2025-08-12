@@ -22,7 +22,6 @@ let
         user.email: ${toString config.${namespace}.user.email}
         user.fullName: ${toString config.${namespace}.user.fullName}
         user.home: ${toString config.${namespace}.user.home}
-        knownUsers: ${builtins.toJSON (lib.attrByPath [ "users" "knownUsers" ] [] config)}
     '' conf;
 in
 {
