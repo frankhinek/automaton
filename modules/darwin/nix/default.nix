@@ -79,7 +79,6 @@ in
             Hour = 3;
           };
           options = "--delete-older-than 30d";
-          user = config.${namespace}.user.name;
         };
 
         # flake-utils-plus

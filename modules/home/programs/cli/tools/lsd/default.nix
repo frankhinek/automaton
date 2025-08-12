@@ -19,6 +19,8 @@ in
   config = mkIf cfg.enable {
     programs.lsd = {
       enable = true;
+      # Avoid setting default fish aliases like `la` which may conflict with eza
+      enableFishIntegration = false;
 
       settings = {
         blocks = [

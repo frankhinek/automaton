@@ -22,7 +22,7 @@ let
         user.email: ${toString config.${namespace}.user.email}
         user.fullName: ${toString config.${namespace}.user.fullName}
         user.home: ${toString config.${namespace}.user.home}
-        knownUsers: ${builtins.toJSON config.users.knownUsers}
+        knownUsers: ${builtins.toJSON (lib.attrByPath [ "users" "knownUsers" ] [] config)}
     '' conf;
 in
 {
@@ -104,12 +104,15 @@ in
   };
 
   # Add ability to use TouchID for sudo authentication
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
-  system.activationScripts.postUserActivation.text = ''
+  system.activationScripts.postActivation.text = ''
     # Reload system settings immediately instead of waiting for next login.
     /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
   '';
+
+  # Required by nix-darwin 25.x for options that apply to the primary user
+  system.primaryUser = config.${namespace}.user.name;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog

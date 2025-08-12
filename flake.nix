@@ -3,14 +3,14 @@
 
   inputs = {
     # macOS Support
-    darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-24.11";
+    darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     # Provides pre-commit hook management for Git repositories
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
 
     # Home Manager
-    home-manager.url = "github:nix-community/home-manager/release-24.11";
+    home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Private licensed fonts
@@ -26,7 +26,7 @@
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
     # NixPkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Nix User Repository

@@ -29,77 +29,82 @@ in
   config = mkIf cfg.enable {
     programs.vscode = {
       enable = true;
-      enableUpdateCheck = true;
       package = pkgs.vscode;
 
-      extensions = with pkgs.vscode-extensions; [
-        enkia.tokyo-night
-        fluent-icons
-        jnoortheen.nix-ide
-        pkief.material-icon-theme
-        rust-lang.rust-analyzer
-        bradlc.vscode-tailwindcss
-      ];
+      profiles = {
+        default = lib.mkMerge [
+          {
+            enableUpdateCheck = true;
 
-      keybindings = [
-        {
-          key = "cmd+k cmd+e";
-          command = "workbench.view.explorer";
-        }
-        {
-          key = "cmd+k cmd+f";
-          command = "workbench.view.search";
-        }
-        {
-          key = "cmd+k cmd+g";
-          command = "workbench.view.scm";
-        }
-        {
-          key = "cmd+k cmd+d";
-          command = "workbench.view.debug";
-        }
-        {
-          key = "cmd+k cmd+x";
-          command = "workbench.view.extensions";
-        }
-        {
-          command = "workbench.action.terminal.sendSequence";
-          key = "shift+enter";
-          args = {
-            text = " \r";
-          };
-          when = "terminalFocus";
-        }
-      ];
+            extensions = with pkgs.vscode-extensions; [
+              enkia.tokyo-night
+              fluent-icons
+              jnoortheen.nix-ide
+              pkief.material-icon-theme
+              rust-lang.rust-analyzer
+              bradlc.vscode-tailwindcss
+            ];
 
-      userSettings = mkIf cfg.declarativeConfig {
-        # Color theme
-        "material-icon-theme.folders.theme" = "none";
-        "workbench.colorTheme" = "Tokyo Night";
-        "workbench.iconTheme" = "material-icon-theme";
+            keybindings = [
+              {
+                key = "cmd+k cmd+e";
+                command = "workbench.view.explorer";
+              }
+              {
+                key = "cmd+k cmd+f";
+                command = "workbench.view.search";
+              }
+              {
+                key = "cmd+k cmd+g";
+                command = "workbench.view.scm";
+              }
+              {
+                key = "cmd+k cmd+d";
+                command = "workbench.view.debug";
+              }
+              {
+                key = "cmd+k cmd+x";
+                command = "workbench.view.extensions";
+              }
+              {
+                command = "workbench.action.terminal.sendSequence";
+                key = "shift+enter";
+                args = {
+                  text = " \r";
+                };
+                when = "terminalFocus";
+              }
+            ];
+          }
+          (mkIf cfg.declarativeConfig {
+            userSettings = {
+              # Color theme
+              "material-icon-theme.folders.theme" = "none";
+              "workbench.colorTheme" = "Tokyo Night";
+              "workbench.iconTheme" = "material-icon-theme";
 
-        # Editor Appearance
-        "editor.minimap.enabled" = false;
-        "editor.rulers" = [
-          80
-          100
+              # Editor Appearance
+              "editor.minimap.enabled" = false;
+              "editor.rulers" = [ 80 100 ];
+              "editor.tabSize" = 2;
+              "workbench.editor.tabActionCloseVisibility" = false;
+              "workbench.productIconTheme" = "fluent-icons";
+              "workbench.sideBar.location" = "right";
+
+              # Typography
+              "editor.fontFamily" = "MonoLisa Nerd Font"; # (Default: Menlo, Monaco, 'Courier New', monospace)
+              "editor.fontLigatures" = "'ss02' on, 'calt' on, 'liga' on, 'zero' on"; # (Default: null)
+              "editor.fontSize" = 14; # (Default: 12)
+              "editor.lineHeight" = 0; # (Default: 0 - automatic)
+
+              # Terminal
+              "terminal.integrated.defaultProfile.osx" = "fish"; # (Default: "bash")
+              "terminal.integrated.fontLigatures.enabled" = true; # (Default: false)
+              "terminal.integrated.fontSize" = 13; # (Default: 12)
+              "terminal.integrated.lineHeight" = 0; # (Default: 0 - automatic)
+            };
+          })
         ];
-        "editor.tabSize" = 2;
-        "workbench.editor.tabActionCloseVisibility" = false;
-        "workbench.productIconTheme" = "fluent-icons";
-        "workbench.sideBar.location" = "right";
-
-        # Typography
-        "editor.fontFamily" = "MonoLisa Nerd Font"; # (Default: Menlo, Monaco, 'Courier New', monospace)
-        "editor.fontLigatures" = "'ss02' on, 'calt' on, 'liga' on, 'zero' on"; # (Default: null)
-        "editor.fontSize" = 14; # (Default: 12)
-        "editor.lineHeight" = 0; # (Default: 0 - automatic)
-
-        # Terminal
-        "terminal.integrated.defaultProfile.osx" = "fish"; # (Default: "bash")
-        "terminal.integrated.fontLigatures.enabled" = true; # (Default: false)
-        "terminal.integrated.fontSize" = 13; # (Default: 12)
-        "terminal.integrated.lineHeight" = 0; # (Default: 0 - automatic)
       };
     };
   };
