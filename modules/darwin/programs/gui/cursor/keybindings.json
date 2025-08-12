@@ -1,0 +1,30 @@
+[
+	{
+		"command": "workbench.view.explorer",
+		"key": "cmd+k cmd+e"
+	},
+	{
+		"command": "workbench.view.search",
+		"key": "cmd+k cmd+f"
+	},
+	{
+		"command": "workbench.view.scm",
+		"key": "cmd+k cmd+g"
+	},
+	{
+		"command": "workbench.view.debug",
+		"key": "cmd+k cmd+d"
+	},
+	{
+		"command": "workbench.view.extensions",
+		"key": "cmd+k cmd+x"
+	},
+	{
+		"args": {
+			"text": " \r"
+		},
+		"command": "workbench.action.terminal.sendSequence",
+		"key": "shift+enter",
+		"when": "terminalFocus"
+	}
+]
