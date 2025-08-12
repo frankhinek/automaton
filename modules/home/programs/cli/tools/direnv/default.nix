@@ -16,9 +16,13 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.sessionVariables = {
-      DIRENV_LOG_FORMAT = "";
-    };
+    # Reduce direnv verbosity and hide env diff output
+    xdg.configFile."direnv/direnv.toml".text = ''
+      [global]
+      hide_env_diff = true
+      # Set to "-" to silence all direnv logs; comment out to keep minimal logs
+      log_format = "-"
+    '';
 
     programs.direnv = {
       enable = true;
