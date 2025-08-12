@@ -26,7 +26,6 @@
     gofmt.enable = true;
     isort.enable = true;
     nixfmt.enable = true;
-    nufmt.enable = true;
     ruff-check.enable = true;
     ruff-format.enable = true;
     rustfmt.enable = true;
