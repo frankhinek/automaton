@@ -59,12 +59,7 @@ shell installer, which is a one-liner as described in their
 [GitHub repository](https://github.com/DeterminateSystems/nix-installer):
 
 ```shell
-curl \
-  --proto '=https' \
-  --tlsv1.2 \
-  -sSf \
-  -L https://install.determinate.systems/nix \
-  | sh -s -- install
+curl -fsSL https://install.determinate.systems/nix | sh -s -- install
 ```
 
 The installation takes a minute or two. After running the command, the installer
