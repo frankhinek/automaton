@@ -94,6 +94,8 @@ in
           fira-code
           monolisa-nerdfonts
           open-sans
+          raleway
+          roboto
         ];
       };
       input = enabled;
