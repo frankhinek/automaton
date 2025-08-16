@@ -23,7 +23,9 @@ in
         activationScripts.postActivation.text = ''
           # Swap Caps Lock and Left Control keys.
           echo "configuring Apple keyboard..." >&2
-          hidutil property \
+          user="${config.${namespace}.user.name}"
+          uid="$(/usr/bin/id -u "$user")"
+          /usr/bin/sudo -u "$user" /bin/launchctl asuser "$uid" /usr/bin/hidutil property \
             --match '{"VendorID":0x0, "ProductID":0x0}' \
             --set '{"UserKeyMapping": [
               {
@@ -39,6 +41,9 @@ in
                 "HIDKeyboardModifierMappingDst": 30064771300
               }
             ] }' > /dev/null
+
+          # Ensure trackpad DragLock is enabled for both built-in and Bluetooth trackpads
+          /usr/bin/sudo -u "$user" /bin/launchctl asuser "$uid" /usr/bin/defaults -currentHost write com.apple.AppleMultitouchTrackpad DragLock -bool true
         '';
 
         # keyboard = {

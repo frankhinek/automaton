@@ -107,9 +107,16 @@ in
   # Add ability to use TouchID for sudo authentication
   security.pam.services.sudo_local.touchIdAuth = true;
 
-  system.activationScripts.postActivation.text = ''
-    # Reload system settings immediately instead of waiting for next login.
-    /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+  system.activationScripts.postActivation.text = lib.mkAfter ''
+    user="${config.${namespace}.user.name}"
+    uid="$(/usr/bin/id -u "$user")"
+
+    # Reload settings after applying input changes so they take effect immediately
+    echo "Reloading system settings immediately as ($user)" >&2
+    /usr/bin/sudo -u "$user" /bin/launchctl asuser "$uid" \
+      /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+    # Also bounce cfprefsd to ensure new values are read
+    /usr/bin/sudo -u "$user" /bin/launchctl asuser "$uid" /usr/bin/killall cfprefsd || true
   '';
 
   # Required by nix-darwin 25.x for options that apply to the primary user

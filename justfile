@@ -4,7 +4,7 @@ default:
 apply:
     #!/usr/bin/env bash
     if [[ $(uname) == "Darwin" ]]; then
-        sudo -H nix run nix-darwin -- switch --flake .
+        sudo darwin-rebuild switch --flake .
     else
         nixos-rebuild switch --flake . --use-remote-sudo
     fi
