@@ -8,11 +8,11 @@
 
 stdenv.mkDerivation rec {
   pname = "claude-code";
-  version = "1.0.73"; # Latest version as of 2025-08-03
+  version = "1.0.84";
 
   src = fetchurl {
     url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-${version}.tgz";
-    hash = "sha256-W7LJLgI6ABkKxNDpZ/ekHX/VgS5U3KPkl1K41XjZ6xg=";
+    hash = "sha256-m4yrbnak2Et48CkJmOKZ7zfvi4j+WL+ZMeTTx5rERR0=";
   };
 
   nativeBuildInputs = [ makeWrapper ];
@@ -26,13 +26,13 @@ stdenv.mkDerivation rec {
 
     # Create the installation directory
     mkdir -p $out/lib/claude-code
-    
+
     # Extract and install the package
     tar -xf $src --strip-components=1 -C $out/lib/claude-code
-    
+
     # Create bin directory
     mkdir -p $out/bin
-    
+
     # Create wrapper for the claude command
     makeWrapper ${nodejs_20}/bin/node $out/bin/claude \
       --add-flags "$out/lib/claude-code/cli.js" \
