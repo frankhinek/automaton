@@ -42,34 +42,44 @@ in
           }
         '';
 
-      interactiveShellInit =
-        ''
-          # 1password plugin
-          if [ -f ~/.config/op/plugins.sh ];
-              source ~/.config/op/plugins.sh
-          end
-        ''
-        + lib.optionalString pkgs.stdenv.isDarwin ''
-          # Nix
-          if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish' ];
-           source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
-          end
-          if [ -f '/nix/var/nix/profiles/default/etc/profile.d/nix.fish' ];
-           source '/nix/var/nix/profiles/default/etc/profile.d/nix.fish'
-          end
-          # End Nix
-        ''
-        + ''
-          # Disable greeting
-          set fish_greeting
+      interactiveShellInit = ''
+        # 1password plugin
+        if [ -f ~/.config/op/plugins.sh ];
+            source ~/.config/op/plugins.sh
+        end
+      ''
+      + lib.optionalString pkgs.stdenv.isDarwin ''
+        # Nix
+        if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish' ];
+         source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
+        end
+        if [ -f '/nix/var/nix/profiles/default/etc/profile.d/nix.fish' ];
+         source '/nix/var/nix/profiles/default/etc/profile.d/nix.fish'
+        end
+        # End Nix
+      ''
+      + ''
+        # Disable greeting
+        set fish_greeting
 
-          ${lib.optionalString config.programs.fastfetch.enable "fastfetch"}
-        '';
+        # Hydro
+        set hydro_color_pwd brcyan
+        set hydro_color_git brmagenta
+        set hydro_color_error brred
+        set hydro_color_prompt brgreen
+        set hydro_color_duration bryellow
+
+        ${lib.optionalString config.programs.fastfetch.enable "fastfetch"}
+      '';
 
       plugins = [
         {
           name = "autopair";
           inherit (pkgs.fishPlugins.autopair) src;
+        }
+        {
+          name = "hydro";
+          inherit (pkgs.fishPlugins.hydro) src;
         }
       ];
     };
