@@ -85,7 +85,11 @@ in
 
               # Editor Appearance
               "editor.minimap.enabled" = false;
-              "editor.rulers" = [ 80 100 ];
+              "editor.renderWhitespace" = "trailing";
+              "editor.rulers" = [
+                80
+                100
+              ];
               "editor.tabSize" = 2;
               "workbench.editor.tabActionCloseVisibility" = false;
               "workbench.productIconTheme" = "fluent-icons";
