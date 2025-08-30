@@ -23,6 +23,7 @@ in
     programs = {
       cli = {
         claude-code = enabled;
+        codex = enabled;
 
         shells = {
           fish = enabled;
