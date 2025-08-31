@@ -20,6 +20,10 @@
 		"key": "cmd+k cmd+x"
 	},
 	{
+		"key": "cmd+k cmd+a",
+		"command": "chatgpt.sidebarView.focus"
+	},
+	{
 		"args": {
 			"text": " \r"
 		},
