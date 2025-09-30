@@ -54,7 +54,6 @@ in
       gui = {
         discord = enabled;
         firefox = enabled;
-        gitkraken = enabled;
         vscode = {
           enable = true;
           declarativeConfig = true;
