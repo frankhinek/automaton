@@ -81,6 +81,7 @@ in
         utm = enabled;
         voiceink = enabled;
         windsurf = enabled;
+        wireguard = enabled;
         xcode = enabled;
         yaak = enabled;
         zoom = enabled;
