@@ -36,6 +36,7 @@ in
           direnv = enabled;
           eza = enabled;
           gh = enabled;
+          neovim = enabled;
           git = {
             enable = true;
             inherit (config.${namespace}.user) signingKey;
