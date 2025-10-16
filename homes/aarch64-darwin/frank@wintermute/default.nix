@@ -33,6 +33,7 @@ in
           bat = enabled;
           comma = enabled;
           curl = enabled;
+          devenv = enabled;
           direnv = enabled;
           eza = enabled;
           gh = enabled;
