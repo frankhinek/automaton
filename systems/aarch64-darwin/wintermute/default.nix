@@ -57,6 +57,7 @@ in
         affinity = enabled;
         android-studio = enabled;
         arc = enabled;
+        canary = enabled;
         cursor = enabled;
         docker = enabled;
         elgato = enabled;
