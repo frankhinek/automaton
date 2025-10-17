@@ -43,6 +43,7 @@ in
               pkief.material-icon-theme
               rust-lang.rust-analyzer
               bradlc.vscode-tailwindcss
+              github.vscode-github-actions
             ];
 
             keybindings = [
