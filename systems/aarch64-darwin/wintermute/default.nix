@@ -77,6 +77,7 @@ in
         raycast = enabled;
         screen-studio = enabled;
         slack = enabled;
+        sparrow = enabled;
         steermouse = enabled;
         superwhisper = enabled;
         utm = enabled;
