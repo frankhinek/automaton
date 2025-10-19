@@ -82,10 +82,12 @@ in
         superwhisper = enabled;
         utm = enabled;
         voiceink = enabled;
+        vivaldi = enabled;
         windsurf = enabled;
         wireguard = enabled;
         xcode = enabled;
         yaak = enabled;
+        zen = enabled;
       };
     };
 
