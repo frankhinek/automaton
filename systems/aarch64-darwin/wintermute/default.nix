@@ -56,7 +56,6 @@ in
         _1password = enabled;
         affinity = enabled;
         android-studio = enabled;
-        arc = enabled;
         canary = enabled;
         cursor = enabled;
         docker = enabled;
@@ -82,7 +81,6 @@ in
         superwhisper = enabled;
         utm = enabled;
         voiceink = enabled;
-        vivaldi = enabled;
         windsurf = enabled;
         wireguard = enabled;
         xcode = enabled;
