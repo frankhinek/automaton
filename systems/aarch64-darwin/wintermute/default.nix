@@ -50,6 +50,7 @@ in
           enable = true;
           masEnable = true;
         };
+        somo = enabled;
       };
 
       gui = {
