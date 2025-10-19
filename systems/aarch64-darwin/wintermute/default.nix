@@ -44,6 +44,7 @@ in
 
     programs = {
       cli = {
+        bun = enabled;
         fish = enabled;
         gpg = enabled;
         homebrew = {
