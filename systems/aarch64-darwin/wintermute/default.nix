@@ -86,7 +86,6 @@ in
         wireguard = enabled;
         xcode = enabled;
         yaak = enabled;
-        zoom = enabled;
       };
     };
 
