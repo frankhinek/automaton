@@ -7,17 +7,17 @@
 let
   inherit (lib) mkEnableOption mkIf;
 
-  cfg = config.${namespace}.programs.gui.windsurf;
+  cfg = config.${namespace}.programs.gui.warp;
 in
 {
-  options.${namespace}.programs.gui.windsurf = {
-    enable = mkEnableOption "Whether to enable Windsurf.";
+  options.${namespace}.programs.gui.warp = {
+    enable = mkEnableOption "Whether to enable Warp.";
   };
 
   config = mkIf cfg.enable {
     homebrew = {
       casks = [
-        "windsurf"
+        "warp"
       ];
     };
   };

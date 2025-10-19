@@ -82,7 +82,7 @@ in
         superwhisper = enabled;
         utm = enabled;
         voiceink = enabled;
-        windsurf = enabled;
+        warp = enabled;
         wireguard = enabled;
         xcode = enabled;
         yaak = enabled;
