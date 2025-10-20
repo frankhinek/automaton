@@ -59,6 +59,7 @@ in
         affinity = enabled;
         android-studio = enabled;
         canary = enabled;
+        clickup = enabled;
         cursor = enabled;
         docker = enabled;
         elgato = enabled;
