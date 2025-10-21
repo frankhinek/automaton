@@ -55,7 +55,7 @@ in
       };
 
       gui = {
-        discord = enabled;
+        brave = enabled;
         firefox = enabled;
         vscode = {
           enable = true;
