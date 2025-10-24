@@ -23,8 +23,8 @@ fi
 echo "Fetching source hash..."
 SRC_URL="https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-${LATEST_VERSION}.tgz"
 SRC_HASH=$(nix-prefetch-url "$SRC_URL" 2>/dev/null | tail -n 1)
-# SRC_HASH_SRI=$(nix hash convert --hash-algo sha256 --to sri "$SRC_HASH")
-SRC_HASH_SRI=$(nix hash to-sri --type sha256 "$SRC_HASH")
+SRC_HASH_SRI=$(nix hash convert --hash-algo sha256 --to sri "$SRC_HASH")
+# SRC_HASH_SRI=$(nix hash to-sri --type sha256 "$SRC_HASH")
 
 # Update default.nix
 echo "Updating default.nix..."
