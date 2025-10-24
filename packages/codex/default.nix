@@ -8,11 +8,11 @@
 
 stdenv.mkDerivation rec {
   pname = "codex";
-  version = "0.46.0";
+  version = "0.48.0";
 
   src = fetchurl {
     url = "https://registry.npmjs.org/@openai/codex/-/codex-${version}.tgz";
-    hash = "sha256-sh4LQvIvHEnqNFa5g8h7NQsQaIk3VC/ynm9NcgCNUSM=";
+    hash = "sha256-um0D8vxjOSTGMiDYw4bv5ryxb8+TkgrtHt17r/WsGQk=";
   };
 
   nativeBuildInputs = [ makeWrapper ];
