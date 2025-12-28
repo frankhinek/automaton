@@ -57,6 +57,7 @@ in
       gui = {
         brave = enabled;
         firefox = enabled;
+        google-chrome = enabled;
         vscode = {
           enable = true;
           declarativeConfig = true;
