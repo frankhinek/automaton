@@ -1,18 +1,13 @@
-{
-  lib,
-  stdenv,
-  fetchurl,
-  nodejs_20,
-  makeWrapper,
-}:
+{ lib, stdenv, fetchurl, nodejs_20, makeWrapper, }:
 
 stdenv.mkDerivation rec {
   pname = "claude-code";
-  version = "2.0.76";
+  version = "2.1.29";
 
   src = fetchurl {
-    url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-${version}.tgz";
-    hash = "sha256-/KOZNv+OkxDI5MaDPWRVNBuSrNkjF3hfD3c+50ORudk=";
+    url =
+      "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-${version}.tgz";
+    hash = "sha256-Hod4uRcDr5s7AmLUaBlkXDWDzwMjVmYIfaTq+9r3/2A=";
   };
 
   nativeBuildInputs = [ makeWrapper ];
@@ -47,7 +42,8 @@ stdenv.mkDerivation rec {
   passthru.updateScript = ./update.sh;
 
   meta = {
-    description = "Agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster";
+    description =
+      "Agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster";
     homepage = "https://github.com/anthropics/claude-code";
     downloadPage = "https://www.npmjs.com/package/@anthropic-ai/claude-code";
     license = lib.licenses.unfree;
