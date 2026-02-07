@@ -1,18 +1,12 @@
-{
-  lib,
-  stdenv,
-  fetchurl,
-  nodejs_22,
-  makeWrapper,
-}:
+{ lib, stdenv, fetchurl, nodejs_22, makeWrapper, }:
 
 stdenv.mkDerivation rec {
   pname = "codex";
-  version = "0.77.0";
+  version = "0.98.0";
 
   src = fetchurl {
     url = "https://registry.npmjs.org/@openai/codex/-/codex-${version}.tgz";
-    hash = "sha256-ew9ouxfZKo3w0AghcV1H8kh1LDacZq0kENS69c8hAGo=";
+    hash = "sha256-oo/RkmlckH+qBgFTxKrkqZ6KCHhy6TTdCFVkjWW0sqc=";
   };
 
   nativeBuildInputs = [ makeWrapper ];
