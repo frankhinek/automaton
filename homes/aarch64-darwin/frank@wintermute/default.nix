@@ -1,16 +1,9 @@
-{
-  config,
-  lib,
-  namespace,
-  pkgs,
-  ...
-}:
+{ config, lib, namespace, pkgs, ... }:
 with lib.${namespace};
 let
   automatonDir = "$HOME/.automaton";
   projectsDir = "$HOME/Developer";
-in
-{
+in {
   automaton = {
     user = {
       enable = true;
@@ -24,10 +17,9 @@ in
       cli = {
         claude-code = enabled;
         codex = enabled;
+        docs-list = enabled;
 
-        shells = {
-          fish = enabled;
-        };
+        shells = { fish = enabled; };
 
         tools = {
           bat = enabled;
