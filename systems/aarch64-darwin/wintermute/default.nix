@@ -1,12 +1,4 @@
-{
-  inputs,
-  lib,
-  config,
-  namespace,
-  pkgs,
-  system,
-  ...
-}:
+{ inputs, lib, config, namespace, pkgs, system, ... }:
 with lib.${namespace};
 let
   inherit (inputs) fonts-licensed;
@@ -14,8 +6,7 @@ let
 
   inherit (fonts-licensed.packages.${system}) monolisa-nerdfonts;
 
-  debugConfig =
-    conf:
+  debugConfig = conf:
     builtins.trace ''
       Darwin Configuration:
         user.name: ${toString config.${namespace}.user.name}
@@ -23,13 +14,10 @@ let
         user.fullName: ${toString config.${namespace}.user.fullName}
         user.home: ${toString config.${namespace}.user.home}
     '' conf;
-in
-{
+in {
   environment = debugConfig {
     systemPath = lib.mkBefore [ "/opt/homebrew/bin" ];
-    variables = {
-      LANG = "en_US.UTF-8";
-    };
+    variables = { LANG = "en_US.UTF-8"; };
   };
 
   automaton = {
@@ -51,6 +39,7 @@ in
           enable = true;
           masEnable = true;
         };
+        multipass = enabled;
         somo = enabled;
       };
 
