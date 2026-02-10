@@ -58,6 +58,7 @@ in {
         ghostty = enabled;
         github = enabled;
         hoppscotch = enabled;
+        legcord = enabled;
         lunar = enabled;
         magnet = enabled;
         microsoft-office = enabled;
