@@ -1,54 +1,64 @@
-{ lib, stdenv, fetchurl, nodejs_20, makeWrapper, }:
+{ lib, stdenvNoCC, fetchurl }:
 
-stdenv.mkDerivation rec {
+let
+  version = "2.1.39";
+  releaseBaseUrl =
+    "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases";
+
+  arch = if stdenvNoCC.hostPlatform.isx86_64 then
+    "x64"
+  else if stdenvNoCC.hostPlatform.isAarch64 then
+    "arm64"
+  else
+    throw
+    "claude-code: unsupported architecture ${stdenvNoCC.hostPlatform.system}";
+
+  platform = if stdenvNoCC.hostPlatform.isDarwin then
+    "darwin-${arch}"
+  else if stdenvNoCC.hostPlatform.isLinux then
+    if stdenvNoCC.hostPlatform.isMusl then
+      "linux-${arch}-musl"
+    else
+      "linux-${arch}"
+  else
+    throw "claude-code: unsupported platform ${stdenvNoCC.hostPlatform.system}";
+
+  sourceHashes = {
+    "darwin-arm64" = "sha256-2NeiuZamkQNqU5M6JZpTIlSkAJNK7kUuKJ4fREMCbYI=";
+    "darwin-x64" = "sha256-LLokpBClIm+XULj+foPb6aYUhe+bDrKGsLAEOKqZDQU=";
+    "linux-arm64" = "sha256-j2bgKlvopiDihvbmNPtCS1rAZXMbBIrz10XPcZsseFE=";
+    "linux-x64" = "sha256-aOR3Wyk9leBtFoWBxSP8XBUjloF5Ip0xoCnyhbKs6v8=";
+    "linux-arm64-musl" = "sha256-ggVc4+wrvPzRG46uS28IIm360psQrItiMf61nlW4cw0=";
+    "linux-x64-musl" = "sha256-q4FhyBAvAx3jT2F2SNJQQyQz+/bClFy+WmvQmoQf1bY=";
+  };
+in stdenvNoCC.mkDerivation {
   pname = "claude-code";
-  version = "2.1.34";
+  inherit version;
 
   src = fetchurl {
-    url =
-      "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-${version}.tgz";
-    hash = "sha256-9poksTheZl3zwxmGwTNwAmUmTooZCY5huFqe73RYh1A=";
+    url = "${releaseBaseUrl}/${version}/${platform}/claude";
+    hash = sourceHashes.${platform};
   };
 
-  nativeBuildInputs = [ makeWrapper ];
-
-  buildInputs = [ nodejs_20 ];
-
-  dontBuild = true;
+  dontUnpack = true;
 
   installPhase = ''
     runHook preInstall
-
-    # Create the installation directory
-    mkdir -p $out/lib/claude-code
-
-    # Extract and install the package
-    tar -xf $src --strip-components=1 -C $out/lib/claude-code
-
-    # Create bin directory
-    mkdir -p $out/bin
-
-    # Create wrapper for the claude command
-    makeWrapper ${nodejs_20}/bin/node $out/bin/claude \
-      --add-flags "$out/lib/claude-code/cli.js" \
-      --set NODE_PATH "$out/lib/claude-code:$out/lib/claude-code/node_modules" \
-      --set DISABLE_AUTOUPDATER 1 \
-      --set AUTHORIZED 1 \
-      --unset DEV
-
+    install -Dm755 "$src" "$out/bin/claude"
     runHook postInstall
   '';
 
   passthru.updateScript = ./update.sh;
 
-  meta = {
+  meta = with lib; {
     description =
       "Agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster";
-    homepage = "https://github.com/anthropics/claude-code";
-    downloadPage = "https://www.npmjs.com/package/@anthropic-ai/claude-code";
-    license = lib.licenses.unfree;
-    maintainers = with lib.maintainers; [ ];
-    platforms = lib.platforms.all;
+    homepage = "https://docs.anthropic.com/en/docs/claude-code";
+    downloadPage =
+      "https://docs.anthropic.com/en/docs/claude-code/getting-started";
+    license = licenses.unfree;
+    maintainers = with maintainers; [ ];
+    platforms = platforms.linux ++ platforms.darwin;
     mainProgram = "claude";
   };
 }
