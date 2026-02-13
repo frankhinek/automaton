@@ -1,41 +1,61 @@
-{ lib, stdenv, fetchurl, nodejs_22, makeWrapper, }:
+{ lib, stdenvNoCC, fetchurl, makeWrapper, installShellFiles }:
 
-stdenv.mkDerivation rec {
+let
+  version = "0.101.0";
+
+  platform = if stdenvNoCC.hostPlatform.isDarwin
+  && stdenvNoCC.hostPlatform.isAarch64 then
+    "aarch64-apple-darwin"
+  else
+    throw "codex: unsupported platform ${stdenvNoCC.hostPlatform.system}";
+
+  sourceHashes = {
+    "aarch64-apple-darwin" =
+      "sha256-/Ah+kAK+DhcL/qonZZ43eCHhWrl4tKSQde+V21+CB/g=";
+  };
+in stdenvNoCC.mkDerivation {
   pname = "codex";
-  version = "0.98.0";
+  inherit version;
 
   src = fetchurl {
-    url = "https://registry.npmjs.org/@openai/codex/-/codex-${version}.tgz";
-    hash = "sha256-oo/RkmlckH+qBgFTxKrkqZ6KCHhy6TTdCFVkjWW0sqc=";
+    url =
+      "https://github.com/openai/codex/releases/download/rust-v${version}/codex-${platform}.tar.gz";
+    hash = sourceHashes.${platform};
   };
 
-  nativeBuildInputs = [ makeWrapper ];
+  nativeBuildInputs = [ makeWrapper installShellFiles ];
 
-  buildInputs = [ nodejs_22 ];
-
-  dontBuild = true;
+  dontUnpack = true;
 
   installPhase = ''
     runHook preInstall
 
-    # Create the installation directory
-    mkdir -p $out/lib/codex
+    mkdir -p "$out/libexec" "$out/bin"
 
-    # Extract and install the package
-    tar -xf $src --strip-components=1 -C $out/lib/codex
+    tmpdir="$(mktemp -d)"
+    tar -xzf "$src" -C "$tmpdir"
 
-    # Create bin directory
-    mkdir -p $out/bin
+    codex_bin="$tmpdir/codex-${platform}"
+    if [ ! -f "$codex_bin" ]; then
+      echo "codex binary not found in archive"
+      exit 1
+    fi
 
-    # Create wrapper for the codex command
-    makeWrapper ${nodejs_22}/bin/node $out/bin/codex \
-      --add-flags "$out/lib/codex/bin/codex.js" \
-      --set NODE_PATH "$out/lib/codex:$out/lib/codex/node_modules" \
+    install -Dm755 "$codex_bin" "$out/libexec/codex"
+
+    makeWrapper "$out/libexec/codex" "$out/bin/codex" \
       --set DISABLE_AUTOUPDATER 1 \
       --set AUTHORIZED 1 \
       --unset DEV
 
     runHook postInstall
+  '';
+
+  postInstall = ''
+    installShellCompletion --cmd codex \
+      --bash <("$out/bin/codex" completion bash) \
+      --fish <("$out/bin/codex" completion fish) \
+      --zsh <("$out/bin/codex" completion zsh)
   '';
 
   passthru.updateScript = ./update.sh;
@@ -45,7 +65,7 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/openai/codex";
     license = licenses.asl20;
     maintainers = with maintainers; [ ];
-    platforms = platforms.all;
+    platforms = [ "aarch64-darwin" ];
     mainProgram = "codex";
   };
 }

@@ -3,33 +3,56 @@
 
 set -euo pipefail
 
-# Get the directory of this script
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DEFAULT_NIX="$SCRIPT_DIR/default.nix"
+GITHUB_REPO="openai/codex"
+PLATFORM="aarch64-apple-darwin"
 
-# Fetch the latest version from npm
-LATEST_VERSION=$(curl -s https://registry.npmjs.org/@openai/codex/latest | jq -r '.version')
+replace_in_file() {
+    local expression="$1"
+    local file="$2"
+    local tmp
+    tmp="$(mktemp)"
+    sed "$expression" "$file" >"$tmp"
+    mv "$tmp" "$file"
+}
+
+LATEST_TAG="$(
+    curl -fsSL "https://api.github.com/repos/$GITHUB_REPO/releases" |
+        jq -r '[ .[]
+            | select(.prerelease | not)
+            | .tag_name
+            | select(test("^rust-v[0-9]+\\.[0-9]+\\.[0-9]+$"))
+          ][0] // empty'
+)"
+
+if [[ -z $LATEST_TAG ]]; then
+    echo "Unable to find latest stable rust-vX.Y.Z release tag for $GITHUB_REPO" >&2
+    exit 1
+fi
+
+LATEST_VERSION="${LATEST_TAG#rust-v}"
 echo "Latest version: $LATEST_VERSION"
 
-# Get the current version from default.nix
-CURRENT_VERSION=$(grep -oP 'version = "\K[^"]+' "$SCRIPT_DIR/default.nix" || echo "unknown")
+CURRENT_VERSION="$(
+    sed -n 's/^  version = "\([^"]*\)";$/\1/p' "$DEFAULT_NIX" | head -n 1
+)"
+CURRENT_VERSION="${CURRENT_VERSION:-unknown}"
 echo "Current version: $CURRENT_VERSION"
 
-if [ "$LATEST_VERSION" = "$CURRENT_VERSION" ]; then
+if [[ $LATEST_VERSION == "$CURRENT_VERSION" ]]; then
     echo "Already up to date!"
     exit 0
 fi
 
-# Fetch the source hash
 echo "Fetching source hash..."
-SRC_URL="https://registry.npmjs.org/@openai/codex/-/codex-${LATEST_VERSION}.tgz"
+SRC_URL="https://github.com/$GITHUB_REPO/releases/download/$LATEST_TAG/codex-${PLATFORM}.tar.gz"
 SRC_HASH=$(nix-prefetch-url "$SRC_URL" 2>/dev/null | tail -n 1)
-# SRC_HASH_SRI=$(nix hash convert --hash-algo sha256 --to sri "$SRC_HASH")
 SRC_HASH_SRI=$(nix hash to-sri --type sha256 "$SRC_HASH")
 
-# Update default.nix
 echo "Updating default.nix..."
-sed -i "s/version = \".*\"/version = \"$LATEST_VERSION\"/" default.nix
-sed -i "s|hash = \".*\"|hash = \"$SRC_HASH_SRI\"|" default.nix
+replace_in_file "s/^  version = \".*\";/  version = \"$LATEST_VERSION\";/" "$DEFAULT_NIX"
+replace_in_file "s|\"$PLATFORM\" = .*;|\"$PLATFORM\" = \"$SRC_HASH_SRI\";|" "$DEFAULT_NIX"
 
 echo "Updated codex to version $LATEST_VERSION"
 echo "New source hash: $SRC_HASH_SRI"
