@@ -39,7 +39,6 @@ in {
           enable = true;
           masEnable = true;
         };
-        multipass = enabled;
         somo = enabled;
       };
 
@@ -64,6 +63,7 @@ in {
         microsoft-office = enabled;
         microsoft-outlook = enabled;
         mullvad-vpn = enabled;
+        multipass = enabled;
         obs = enabled;
         obsidian = enabled;
         raycast = enabled;

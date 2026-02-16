@@ -2,9 +2,9 @@
 let
   inherit (lib) mkEnableOption mkIf;
 
-  cfg = config.${namespace}.programs.cli.multipass;
+  cfg = config.${namespace}.programs.gui.multipass;
 in {
-  options.${namespace}.programs.cli.multipass = {
+  options.${namespace}.programs.gui.multipass = {
     enable = mkEnableOption "Whether to enable Multipass.";
   };
 
