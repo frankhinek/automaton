@@ -18,6 +18,7 @@ in {
         claude-code = enabled;
         codex = enabled;
         docs-list = enabled;
+        lima = enabled;
 
         shells = { fish = enabled; };
 
