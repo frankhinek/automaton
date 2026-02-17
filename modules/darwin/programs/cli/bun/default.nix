@@ -10,7 +10,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ bun ];
+    environment.systemPackages = with pkgs; [ nix-unstable.bun ];
 
     environment.variables = { BUN_INSTALL = bunInstallDir; };
 
