@@ -52,7 +52,8 @@ SRC_HASH_SRI=$(nix hash to-sri --type sha256 "$SRC_HASH")
 
 echo "Updating default.nix..."
 replace_in_file "s/^  version = \".*\";/  version = \"$LATEST_VERSION\";/" "$DEFAULT_NIX"
-replace_in_file "s|\"$PLATFORM\" = .*;|\"$PLATFORM\" = \"$SRC_HASH_SRI\";|" "$DEFAULT_NIX"
+replace_in_file "s|\"$PLATFORM\" = \"sha256-[^\"]*\";|\"$PLATFORM\" = \"$SRC_HASH_SRI\";|" "$DEFAULT_NIX"
+replace_in_file "/\"$PLATFORM\" =/{n; s|\"sha256-[^\"]*\";|\"$SRC_HASH_SRI\";|;}" "$DEFAULT_NIX"
 
 echo "Updated codex to version $LATEST_VERSION"
 echo "New source hash: $SRC_HASH_SRI"
