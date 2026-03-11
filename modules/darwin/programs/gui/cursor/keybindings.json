@@ -1,34 +1,46 @@
 [
 	{
 		"command": "workbench.view.explorer",
-		"key": "cmd+k cmd+e"
+		"key": "cmd+; cmd+e"
 	},
 	{
 		"command": "workbench.view.search",
-		"key": "cmd+k cmd+f"
+		"key": "cmd+; cmd+f"
 	},
 	{
 		"command": "workbench.view.scm",
-		"key": "cmd+k cmd+g"
+		"key": "cmd+; cmd+g"
 	},
 	{
 		"command": "workbench.view.debug",
-		"key": "cmd+k cmd+d"
+		"key": "cmd+; cmd+d"
 	},
 	{
 		"command": "workbench.view.extensions",
-		"key": "cmd+k cmd+x"
+		"key": "cmd+; cmd+x"
 	},
 	{
-		"key": "cmd+k cmd+a",
+		"key": "cmd+; cmd+a",
 		"command": "chatgpt.sidebarView.focus"
 	},
 	{
-		"args": {
-			"text": " \r"
-		},
-		"command": "workbench.action.terminal.sendSequence",
-		"key": "shift+enter",
-		"when": "terminalFocus"
+		"key": "cmd+; cmd+k",
+		"command": "cursorai.action.generateInTerminal",
+		"when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported || terminalHasBeenCreated && terminalPromptBarVisible || terminalProcessSupported && terminalPromptBarVisible"
+	},
+	{
+		"key": "cmd+k",
+		"command": "-cursorai.action.generateInTerminal",
+		"when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported || terminalHasBeenCreated && terminalPromptBarVisible || terminalProcessSupported && terminalPromptBarVisible"
+	},
+	{
+		"key": "cmd+; cmd+k",
+		"command": "aipopup.action.modal.generate",
+		"when": "editorFocus && !composerBarIsVisible"
+	},
+	{
+		"key": "cmd+k",
+		"command": "-aipopup.action.modal.generate",
+		"when": "editorFocus && !composerBarIsVisible"
 	}
 ]
