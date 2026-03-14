@@ -49,6 +49,7 @@ in {
 
       gui = {
         brave = enabled;
+        codex-app = enabled;
         firefox = enabled;
         google-chrome = enabled;
         vscode = {
