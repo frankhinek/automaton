@@ -4,7 +4,7 @@ let
     extensions = [ "rust-src" "rust-analyzer" ];
   };
 in mkShell {
-  packages = with pkgs; [ cargo-nextest rustToolchain ];
+  packages = with pkgs; [ cargo-nextest cmake rustToolchain ];
 
   RUST_SRC_PATH = "${rustToolchain}/lib/rustlib/src/rust/library";
 
