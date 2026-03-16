@@ -29,6 +29,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Pinned Rust toolchains via rustup channels
+    rust-overlay.url = "github:oxalica/rust-overlay";
+    rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
     # Nix User Repository
     # nur.url = "github:nix-community/NUR";
 
@@ -45,8 +49,7 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
-  outputs =
-    inputs:
+  outputs = inputs:
     let
       lib = inputs.snowfall-lib.mkLib {
         # Pass in both flake inputs and the root directory of the flake
@@ -62,8 +65,7 @@
           namespace = "automaton";
         };
       };
-    in
-    lib.mkFlake {
+    in lib.mkFlake {
       # Applied to all nixpkgs channels (stable, unstable, etc.)
       channels-config = {
         # Enable packages with non-free licenses (e.g., vscode, discord)
@@ -71,17 +73,20 @@
       };
 
       # Modules that will be included in all home configurations
-      homes.modules = with inputs; [
-        # Enable nix-locate and command-not-found suggestions
-        nix-index-database.homeModules.nix-index
-      ];
+      homes.modules = with inputs;
+        [
+          # Enable nix-locate and command-not-found suggestions
+          nix-index-database.homeModules.nix-index
+        ];
 
       outputs-builder = channels: {
-        formatter = inputs.treefmt-nix.lib.mkWrapper channels.nixpkgs ./treefmt.nix;
+        formatter =
+          inputs.treefmt-nix.lib.mkWrapper channels.nixpkgs ./treefmt.nix;
       };
 
       overlays = with inputs; [
         # nur.overlay
+        rust-overlay.overlays.default
         snowfall-flake.overlays."package/flake"
       ];
     };

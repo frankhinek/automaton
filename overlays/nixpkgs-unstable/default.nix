@@ -5,10 +5,9 @@
 { nixpkgs-unstable, ... }:
 _final: prev: {
   nix-unstable = import nixpkgs-unstable {
-    inherit (prev) system;
-    config = {
-      allowUnfree = true;
-    };
+    # `system` moved to `stdenv.hostPlatform.system` in newer nixpkgs.
+    inherit (prev.stdenv.hostPlatform) system;
+    config = { allowUnfree = true; };
   };
 }
 

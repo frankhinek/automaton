@@ -1,4 +1,4 @@
-{
+{ pkgs, ... }: {
   projectRootFile = "flake.nix";
 
   programs = {
@@ -8,24 +8,20 @@
       settings.formatter.formatWithErrors = true;
     };
     clang-format.enable = true;
-    deadnix = {
-      enable = true;
-    };
+    deadnix = { enable = true; };
     deno = {
       enable = true;
       # Using biome for these
-      excludes = [
-        "*.ts"
-        "*.js"
-        "*.json"
-        "*.jsonc"
-      ];
+      excludes = [ "*.ts" "*.js" "*.json" "*.jsonc" ];
     };
     fantomas.enable = true;
     fish_indent.enable = true;
     gofmt.enable = true;
     isort.enable = true;
-    nixfmt.enable = true;
+    nixfmt = {
+      enable = true;
+      package = pkgs.nixfmt-classic;
+    };
     ruff-check.enable = true;
     ruff-format.enable = true;
     rustfmt.enable = true;
