@@ -29,6 +29,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Pinned devenv release
+    devenv.url = "github:cachix/devenv/v2.0.5";
+
     # Pinned Rust toolchains via rustup channels
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
