@@ -1,7 +1,7 @@
 { lib, stdenvNoCC, fetchurl, makeWrapper }:
 
 let
-  version = "0.41.0";
+  version = "0.43.0";
 
   platform = if stdenvNoCC.hostPlatform.isDarwin
   && stdenvNoCC.hostPlatform.isAarch64 then
@@ -11,8 +11,8 @@ let
 
   sourceByPlatform = {
     "aarch64-darwin" = {
-      assetId = "01KM43CF4CBRBWKAHVK4GMQV6H";
-      hash = "sha256-4Tz7jHVRRW+a/TW+WHZySpDtV6xV9f0oRWg7w5Psdcw=";
+      assetId = "01KM7APSYNZGPHXHAY5DGT2MM0";
+      hash = "sha256-bRayUyLcaBCPjkOe4jnq5j3tCN06Ua8zWTyUpikPhgA=";
     };
   };
 
