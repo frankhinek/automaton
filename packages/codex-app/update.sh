@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i bash -p curl python3 nix nix-prefetch
+#!nix-shell -i bash -p curl python3 nix unzip
 
 set -euo pipefail
 
@@ -64,11 +64,34 @@ print(url)
 PY
 }
 
+prefetch_fetchzip_hash() {
+    local url="$1"
+    local tmp_dir
+    local archive_path
+    local unpack_dir
+
+    tmp_dir="$(mktemp -d)"
+    archive_path="$tmp_dir/source.zip"
+    unpack_dir="$tmp_dir/unpacked"
+    trap 'rm -rf "$tmp_dir"' RETURN
+
+    curl -fsSL "$url" -o "$archive_path"
+    mkdir -p "$unpack_dir"
+    unzip -q "$archive_path" -d "$unpack_dir"
+
+    nix hash path "$unpack_dir"
+}
+
 CURRENT_VERSION="$(
     sed -n 's/^  version = "\([^"]*\)";$/\1/p' "$DEFAULT_NIX" | sed -n '1p'
 )"
 CURRENT_VERSION="${CURRENT_VERSION:-unknown}"
 echo "Current version: $CURRENT_VERSION"
+CURRENT_HASH="$(
+    sed -n 's|^    hash = "\(sha256-[^\"]*\)";$|\1|p' "$DEFAULT_NIX" | sed -n '1p'
+)"
+CURRENT_HASH="${CURRENT_HASH:-unknown}"
+echo "Current hash: $CURRENT_HASH"
 
 mapfile -t release_info < <(read_latest_release)
 if [[ ${#release_info[@]} -lt 2 ]]; then
@@ -87,22 +110,29 @@ fi
 echo "Latest version: $LATEST_VERSION"
 echo "Source URL: $SRC_URL"
 
-if [[ $LATEST_VERSION == "$CURRENT_VERSION" ]]; then
+echo "Fetching source hash..."
+SRC_HASH_SRI="$(prefetch_fetchzip_hash "$SRC_URL")"
+if [[ $SRC_HASH_SRI != sha256-* ]]; then
+    SRC_HASH_SRI="$(nix hash to-sri --type sha256 "$SRC_HASH_SRI")"
+fi
+
+if [[ $LATEST_VERSION == "$CURRENT_VERSION" && $SRC_HASH_SRI == "$CURRENT_HASH" ]]; then
     echo "Already up to date!"
     exit 0
 fi
 
-echo "Fetching source hash..."
-SRC_HASH="$(nix-prefetch-url --unpack "$SRC_URL" 2>/dev/null | sed -n '$p')"
-SRC_HASH_SRI="$(nix hash convert --hash-algo sha256 --to sri "$SRC_HASH")"
-
 echo "Updating default.nix..."
-replace_in_file "s/^  version = \".*\";/  version = \"$LATEST_VERSION\";/" "$DEFAULT_NIX"
-replace_in_file "s|^    hash = \"sha256-[^\"]*\";|    hash = \"$SRC_HASH_SRI\";|" "$DEFAULT_NIX"
+if [[ $LATEST_VERSION != "$CURRENT_VERSION" ]]; then
+    replace_in_file "s/^  version = \".*\";/  version = \"$LATEST_VERSION\";/" "$DEFAULT_NIX"
+fi
+if [[ $SRC_HASH_SRI != "$CURRENT_HASH" ]]; then
+    replace_in_file "s|^    hash = \"sha256-[^\"]*\";|    hash = \"$SRC_HASH_SRI\";|" "$DEFAULT_NIX"
+fi
 
 echo ""
-echo "Updated codex-app to version $LATEST_VERSION"
-echo "New source hash: $SRC_HASH_SRI"
+echo "Updated codex-app metadata"
+echo "Version: $CURRENT_VERSION -> $LATEST_VERSION"
+echo "Source hash: $CURRENT_HASH -> $SRC_HASH_SRI"
 echo ""
 echo "Please test the build with:"
 echo "  nix build .#codex-app --impure"
