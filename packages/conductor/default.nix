@@ -1,7 +1,7 @@
 { lib, stdenvNoCC, fetchurl, makeWrapper }:
 
 let
-  version = "0.44.0";
+  version = "0.49.5";
 
   platform = if stdenvNoCC.hostPlatform.isDarwin
   && stdenvNoCC.hostPlatform.isAarch64 then
@@ -11,8 +11,8 @@ let
 
   sourceByPlatform = {
     "aarch64-darwin" = {
-      assetId = "01KMH7GB1FS480WDBQ43P43HJ4";
-      hash = "sha256-2/4yF3crtV+aizi35BwA5Pw48cCdyO8SJb1y2yHycL4=";
+      assetId = "01KQ0Z63RRHPXMQFX01XH25ZFD";
+      hash = "sha256-LD1fDRdq8jP3zZ4gxOk/xj4qjGBjR0+sfNVsfa4CH9Y=";
     };
   };
 
@@ -44,6 +44,8 @@ in stdenvNoCC.mkDerivation {
     fi
 
     cp -R "$tmpdir/Conductor.app" "$out/Applications/Conductor.app"
+    install -Dm755 ${./backup-conductor} "$out/bin/backup-conductor"
+    install -Dm755 ${./restore-conductor} "$out/bin/restore-conductor"
 
     makeWrapper "$out/Applications/Conductor.app/Contents/MacOS/conductor" "$out/bin/conductor"
 
