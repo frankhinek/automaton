@@ -48,6 +48,7 @@ in {
         android-studio = enabled;
         canary = enabled;
         clickup = enabled;
+        conductor = enabled;
         cursor = enabled;
         docker = enabled;
         elgato = enabled;
