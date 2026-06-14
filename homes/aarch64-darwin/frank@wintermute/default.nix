@@ -42,7 +42,6 @@ in {
           lsd = enabled;
           ripgrep = enabled;
           wget = enabled;
-          zed = enabled;
           zoxide = enabled;
         };
       };

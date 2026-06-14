@@ -78,6 +78,7 @@ in {
         wireguard = enabled;
         xcode = enabled;
         yaak = enabled;
+        zed = enabled;
         zen = enabled;
       };
     };
