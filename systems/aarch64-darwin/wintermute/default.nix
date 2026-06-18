@@ -47,6 +47,7 @@ in {
         affinity = enabled;
         android-studio = enabled;
         canary = enabled;
+        claude = enabled;
         clickup = enabled;
         conductor = enabled;
         cursor = enabled;
