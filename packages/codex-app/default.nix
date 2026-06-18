@@ -1,7 +1,7 @@
 { lib, stdenvNoCC, fetchzip, makeWrapper }:
 
 let
-  version = "26.609.30741";
+  version = "26.611.62324";
 
   platform = if stdenvNoCC.hostPlatform.isDarwin
   && stdenvNoCC.hostPlatform.isAarch64 then
@@ -15,7 +15,7 @@ in stdenvNoCC.mkDerivation {
   src = fetchzip {
     url =
       "https://persistent.oaistatic.com/codex-app-prod/Codex-darwin-arm64-${version}.zip";
-    hash = "sha256-AqTiGnk6rAQf2jNmk5NCfkDyGOmP+DQzp6zwLjCj0+o=";
+    hash = "sha256-3eJ1V0SZ9kb58B+/fsT6WkB+9Dj+vCXjbTOmwbXc+0Q=";
     stripRoot = false;
   };
 
