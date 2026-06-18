@@ -1,16 +1,10 @@
-{
-  config,
-  lib,
-  namespace,
-  ...
-}:
+{ config, lib, namespace, ... }:
 let
   inherit (lib) mkIf;
   inherit (lib.${namespace}) mkBoolOpt;
 
   cfg = config.${namespace}.programs.cli.homebrew;
-in
-{
+in {
   options.${namespace}.programs.cli.homebrew = {
     enable = mkBoolOpt false "Whether to enable homebrew.";
     masEnable = mkBoolOpt false "Whether to enable Mac App Store downloads.";
@@ -36,14 +30,11 @@ in
 
       onActivation = {
         autoUpdate = false;
-        cleanup = "zap";
+        # Homebrew 6 expanded bundle cleanup to Mac App Store apps and
+        # deprecated `brew bundle install --cleanup`, so keep activation safe.
+        cleanup = "none";
         upgrade = false;
       };
-
-      taps = [
-        "homebrew/bundle"
-        "homebrew/services"
-      ];
     };
   };
 }
