@@ -15,6 +15,7 @@ in {
 
     programs = {
       cli = {
+        agent-browser = enabled;
         claude-code = enabled;
         codex = enabled;
         docs-list = enabled;
