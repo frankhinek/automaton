@@ -1,7 +1,7 @@
 { lib, stdenvNoCC, fetchurl, makeWrapper, installShellFiles }:
 
 let
-  version = "0.141.0";
+  version = "0.142.3";
 
   platform = if stdenvNoCC.hostPlatform.isDarwin
   && stdenvNoCC.hostPlatform.isAarch64 then
@@ -11,7 +11,7 @@ let
 
   sourceHashes = {
     "aarch64-apple-darwin" =
-      "sha256-q96tX+68JZ3squwzRlQju7eQSzBJ+ijpIgnLkkaTwPQ=";
+      "sha256-wwMVy0HWbQAPya1mc19CiNn/DH/nSPaPcautcC1y+DI=";
   };
 in stdenvNoCC.mkDerivation {
   pname = "codex";
