@@ -32,6 +32,7 @@ in {
 
     programs = {
       cli = {
+        _1password-cli = enabled;
         bun = enabled;
         fish = enabled;
         gpg = enabled;
