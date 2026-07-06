@@ -2,13 +2,13 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "docs-list";
-  version = "unstable-2026-02-08";
+  version = "unstable-2026-07-06";
 
   src = fetchFromGitHub {
     owner = "frankhinek";
     repo = "agent-handbook";
-    rev = "a1b188bdf8b6a6b75d69dab10d354e8cc8099b34";
-    hash = "sha256-nHylNgYWXsaC51WGn84nEPIiWDLSqknMvfP1uVDhxE0=";
+    rev = "c4688e279f98d28a4cf72eb90b252c351ea50c55";
+    hash = "sha256-iXDwwI8UJDDcHYMTDlkvys2FHVAaJk41cZTJ2MPmtto=";
   };
 
   sourceRoot = "source/tooling/docs-list";
