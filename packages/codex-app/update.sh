@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i bash -p curl python3 nix unzip
+#!nix-shell -i bash -p curl nix unzip
 
 set -euo pipefail
 
@@ -16,52 +16,49 @@ replace_in_file() {
     mv "$tmp" "$file"
 }
 
+parse_appcast() {
+    local item_xml
+    local url
+    local version
+
+    item_xml="$(sed -n '/<item>/,/<\/item>/{p; /<\/item>/q;}')"
+    if [[ -z $item_xml ]]; then
+        echo "Unable to find latest item in appcast" >&2
+        return 1
+    fi
+
+    url="$(
+        sed -n 's/.*<enclosure[^>]*url="\([^"]*\)".*/\1/p' <<<"$item_xml" |
+            sed -n '1p'
+    )"
+    if [[ -z $url ]]; then
+        echo "Missing enclosure URL in appcast" >&2
+        return 1
+    fi
+
+    version="$(
+        sed -n 's|.*<sparkle:shortVersionString>\([^<]*\)</sparkle:shortVersionString>.*|\1|p' <<<"$item_xml" |
+            sed -n '1p'
+    )"
+    if [[ -z $version ]]; then
+        version="$(
+            sed -n 's/.*sparkle:shortVersionString="\([^"]*\)".*/\1/p' <<<"$item_xml" |
+                sed -n '1p'
+        )"
+    fi
+    if [[ -z $version && $url =~ -darwin-arm64-([0-9.]+)\.zip(\?.*)?$ ]]; then
+        version="${BASH_REMATCH[1]}"
+    fi
+    if [[ ! $version =~ ^[0-9]+(\.[0-9]+)+$ ]]; then
+        echo "Unable to derive valid version from appcast: ${version:-missing}" >&2
+        return 1
+    fi
+
+    printf '%s\n%s\n' "$version" "$url"
+}
+
 read_latest_release() {
-    local appcast_xml
-    appcast_xml="$(curl -fsSL "$APPCAST_URL")"
-
-    python3 - "$appcast_xml" <<'PY'
-import re
-import sys
-import xml.etree.ElementTree as ET
-
-if len(sys.argv) < 2:
-    raise SystemExit("Missing appcast content")
-
-content = sys.argv[1]
-if not content.strip():
-    raise SystemExit("Appcast response was empty")
-
-root = ET.fromstring(content)
-
-channel = root.find("channel")
-if channel is None:
-    raise SystemExit("Unable to find RSS channel in appcast")
-
-item = channel.find("item")
-if item is None:
-    raise SystemExit("Unable to find latest item in appcast")
-
-enclosure = item.find("enclosure")
-if enclosure is None:
-    raise SystemExit("Unable to find enclosure in appcast item")
-
-url = enclosure.attrib.get("url", "").strip()
-if not url:
-    raise SystemExit("Missing enclosure URL in appcast")
-
-sparkle_short = enclosure.attrib.get("{http://www.andymatuschak.org/xml-namespaces/sparkle}shortVersionString", "").strip()
-if sparkle_short:
-    version = sparkle_short
-else:
-    match = re.search(r"Codex-darwin-arm64-([0-9.]+)\.zip$", url)
-    if not match:
-        raise SystemExit(f"Unable to derive version from URL: {url}")
-    version = match.group(1)
-
-print(version)
-print(url)
-PY
+    curl -fsSL "$APPCAST_URL" | parse_appcast
 }
 
 prefetch_fetchzip_hash() {
@@ -75,23 +72,26 @@ prefetch_fetchzip_hash() {
     unpack_dir="$tmp_dir/unpacked"
     trap 'rm -rf "$tmp_dir"' RETURN
 
-    curl -fsSL "$url" -o "$archive_path"
+    if ! curl -fsSL "$url" -o "$archive_path"; then
+        echo "Failed to fetch source: $url" >&2
+        return 1
+    fi
     mkdir -p "$unpack_dir"
     unzip -q "$archive_path" -d "$unpack_dir"
 
     nix hash path "$unpack_dir"
 }
 
+if [[ ${1:-} == "--parse-appcast" ]]; then
+    parse_appcast
+    exit
+fi
+
 CURRENT_VERSION="$(
     sed -n 's/^  version = "\([^"]*\)";$/\1/p' "$DEFAULT_NIX" | sed -n '1p'
 )"
 CURRENT_VERSION="${CURRENT_VERSION:-unknown}"
-echo "Current version: $CURRENT_VERSION"
-CURRENT_HASH="$(
-    sed -n 's|^    hash = "\(sha256-[^\"]*\)";$|\1|p' "$DEFAULT_NIX" | sed -n '1p'
-)"
-CURRENT_HASH="${CURRENT_HASH:-unknown}"
-echo "Current hash: $CURRENT_HASH"
+printf 'Current version: %s\n' "$CURRENT_VERSION"
 
 mapfile -t release_info < <(read_latest_release)
 if [[ ${#release_info[@]} -lt 2 ]]; then
@@ -107,32 +107,25 @@ if [[ -z ${LATEST_VERSION:-} || -z ${SRC_URL:-} ]]; then
     exit 1
 fi
 
-echo "Latest version: $LATEST_VERSION"
-echo "Source URL: $SRC_URL"
+printf 'Latest version:  %s\n' "$LATEST_VERSION"
 
-echo "Fetching source hash..."
+if [[ $LATEST_VERSION == "$CURRENT_VERSION" ]]; then
+    echo "Already up to date!"
+    exit 0
+fi
+
+echo "Fetching source..."
 SRC_HASH_SRI="$(prefetch_fetchzip_hash "$SRC_URL")"
 if [[ $SRC_HASH_SRI != sha256-* ]]; then
     SRC_HASH_SRI="$(nix hash to-sri --type sha256 "$SRC_HASH_SRI")"
 fi
 
-if [[ $LATEST_VERSION == "$CURRENT_VERSION" && $SRC_HASH_SRI == "$CURRENT_HASH" ]]; then
-    echo "Already up to date!"
-    exit 0
-fi
-
 echo "Updating default.nix..."
-if [[ $LATEST_VERSION != "$CURRENT_VERSION" ]]; then
-    replace_in_file "s/^  version = \".*\";/  version = \"$LATEST_VERSION\";/" "$DEFAULT_NIX"
-fi
-if [[ $SRC_HASH_SRI != "$CURRENT_HASH" ]]; then
-    replace_in_file "s|^    hash = \"sha256-[^\"]*\";|    hash = \"$SRC_HASH_SRI\";|" "$DEFAULT_NIX"
-fi
+replace_in_file "s/^  version = \".*\";/  version = \"$LATEST_VERSION\";/" "$DEFAULT_NIX"
+replace_in_file "s|^    hash = \"sha256-[^\"]*\";|    hash = \"$SRC_HASH_SRI\";|" "$DEFAULT_NIX"
 
 echo ""
-echo "Updated codex-app metadata"
-echo "Version: $CURRENT_VERSION -> $LATEST_VERSION"
-echo "Source hash: $CURRENT_HASH -> $SRC_HASH_SRI"
+echo "Updated codex-app: $CURRENT_VERSION -> $LATEST_VERSION"
 echo ""
 echo "Please test the build with:"
 echo "  nix build .#codex-app --impure"

@@ -1,7 +1,7 @@
 { lib, stdenvNoCC, fetchzip, makeWrapper }:
 
 let
-  version = "26.623.141536";
+  version = "26.715.72359";
 
   platform = if stdenvNoCC.hostPlatform.isDarwin
   && stdenvNoCC.hostPlatform.isAarch64 then
@@ -14,8 +14,8 @@ in stdenvNoCC.mkDerivation {
 
   src = fetchzip {
     url =
-      "https://persistent.oaistatic.com/codex-app-prod/Codex-darwin-arm64-${version}.zip";
-    hash = "sha256-5Z2X639OUTg158jUwTSPIEuZbMMjyvwNXeuHx9gnrzg=";
+      "https://persistent.oaistatic.com/codex-app-prod/ChatGPT-darwin-arm64-${version}.zip";
+    hash = "sha256-CjHxfFACs6VBXyAtIWH7qyAodJ9qussNUxVRsse1+nE=";
     stripRoot = false;
   };
 
@@ -27,10 +27,10 @@ in stdenvNoCC.mkDerivation {
     runHook preInstall
 
     mkdir -p "$out/Applications" "$out/bin"
-    cp -R "Codex.app" "$out/Applications/Codex.app"
+    cp -R "ChatGPT.app" "$out/Applications/Codex.app"
 
     # Keep user profile and extensions scoped to a dedicated directory.
-    makeWrapper "$out/Applications/Codex.app/Contents/MacOS/Codex" "$out/bin/codex-app" \
+    makeWrapper "$out/Applications/Codex.app/Contents/MacOS/ChatGPT" "$out/bin/codex-app" \
       --add-flags "--user-data-dir ''${XDG_STATE_HOME:-$HOME/.local/state}/codex-app-nix/user-data" \
       --add-flags "--extensions-dir ''${XDG_STATE_HOME:-$HOME/.local/state}/codex-app-nix/extensions"
 
