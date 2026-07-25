@@ -40,6 +40,7 @@ in {
           enable = true;
           masEnable = true;
         };
+        nodejs = enabled;
         somo = enabled;
       };
 

@@ -2,7 +2,7 @@
 mkShell {
   packages = with pkgs; [
     bun
-    nodejs_22
+    nix-unstable.nodejs_24
     nodePackages.typescript
     nodePackages.typescript-language-server
     nodePackages.pnpm
