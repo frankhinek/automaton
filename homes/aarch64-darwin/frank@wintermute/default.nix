@@ -61,6 +61,8 @@ in {
   };
 
   home = {
+    sessionPath = [ "$HOME/.local/bin" ];
+
     # Ensures the projects directory exists.
     # This directory is later assumed by other activations.
     activation.developer = ''
