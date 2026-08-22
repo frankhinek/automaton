@@ -1,4 +1,4 @@
-{ lib, stdenvNoCC, fetchurl, makeWrapper, installShellFiles }:
+{ lib, stdenvNoCC, fetchurl, makeWrapper, installShellFiles, ripgrep }:
 
 let
   version = "0.149.0";
@@ -10,8 +10,20 @@ let
     throw "codex: unsupported platform ${stdenvNoCC.hostPlatform.system}";
 
   sourceHashes = {
-    "aarch64-apple-darwin" =
-      "sha256-DO9Plimve2vMS03irbYzN9HnegCoEeZigdpTVuPnT8Y=";
+    "aarch64-apple-darwin" = {
+      codex = "sha256-DO9Plimve2vMS03irbYzN9HnegCoEeZigdpTVuPnT8Y=";
+      codeModeHost = "sha256-7WpqCJxQ5yfvHwZC7nwGEbphHXbXICkxagUTvpG/skQ=";
+    };
+  };
+
+  hashes = sourceHashes.${platform};
+
+  # Shipped as its own release asset. Codex fails closed without it, so it has
+  # to be installed alongside the main binary rather than fetched at runtime.
+  codeModeHostSrc = fetchurl {
+    url =
+      "https://github.com/openai/codex/releases/download/rust-v${version}/codex-code-mode-host-${platform}.tar.gz";
+    hash = hashes.codeModeHost;
   };
 in stdenvNoCC.mkDerivation {
   pname = "codex";
@@ -20,7 +32,7 @@ in stdenvNoCC.mkDerivation {
   src = fetchurl {
     url =
       "https://github.com/openai/codex/releases/download/rust-v${version}/codex-${platform}.tar.gz";
-    hash = sourceHashes.${platform};
+    hash = hashes.codex;
   };
 
   nativeBuildInputs = [ makeWrapper installShellFiles ];
@@ -43,7 +55,23 @@ in stdenvNoCC.mkDerivation {
 
     install -Dm755 "$codex_bin" "$out/libexec/codex"
 
+    # Codex resolves helper programs relative to its own executable
+    # (InstallContext::from_exe), so the code-mode host must be a sibling of
+    # $out/libexec/codex. Without it Code Mode fails closed and no tool calls
+    # work at all.
+    tar -xzf "${codeModeHostSrc}" -C "$tmpdir"
+
+    code_mode_host_bin="$tmpdir/codex-code-mode-host-${platform}"
+    if [ ! -f "$code_mode_host_bin" ]; then
+      echo "codex-code-mode-host binary not found in archive"
+      exit 1
+    fi
+
+    install -Dm755 "$code_mode_host_bin" "$out/libexec/codex-code-mode-host"
+
+    # Upstream bundles ripgrep; codex shells out to `rg` for file search.
     makeWrapper "$out/libexec/codex" "$out/bin/codex" \
+      --prefix PATH : ${lib.makeBinPath [ ripgrep ]} \
       --set DISABLE_AUTOUPDATER 1 \
       --set AUTHORIZED 1 \
       --unset DEV

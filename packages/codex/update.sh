@@ -17,6 +17,17 @@ replace_in_file() {
     mv "$tmp" "$file"
 }
 
+prefetch_sri() {
+    local url="$1"
+    local hash
+    hash="$(nix-prefetch-url "$url" 2>/dev/null | tail -n 1)"
+    if [[ -z $hash ]]; then
+        echo "Failed to prefetch $url" >&2
+        exit 1
+    fi
+    nix hash to-sri --type sha256 "$hash"
+}
+
 LATEST_TAG="$(
     curl -fsSL "https://api.github.com/repos/$GITHUB_REPO/releases" |
         jq -r '[ .[]
@@ -45,18 +56,24 @@ if [[ $LATEST_VERSION == "$CURRENT_VERSION" ]]; then
     exit 0
 fi
 
-echo "Fetching source hash..."
-SRC_URL="https://github.com/$GITHUB_REPO/releases/download/$LATEST_TAG/codex-${PLATFORM}.tar.gz"
-SRC_HASH=$(nix-prefetch-url "$SRC_URL" 2>/dev/null | tail -n 1)
-SRC_HASH_SRI=$(nix hash to-sri --type sha256 "$SRC_HASH")
+RELEASE_URL="https://github.com/$GITHUB_REPO/releases/download/$LATEST_TAG"
+
+echo "Fetching codex source hash..."
+CODEX_HASH_SRI="$(prefetch_sri "$RELEASE_URL/codex-${PLATFORM}.tar.gz")"
+
+# codex resolves this helper relative to its own executable, so it is versioned
+# and installed in lockstep with the main binary.
+echo "Fetching codex-code-mode-host source hash..."
+CODE_MODE_HOST_HASH_SRI="$(prefetch_sri "$RELEASE_URL/codex-code-mode-host-${PLATFORM}.tar.gz")"
 
 echo "Updating default.nix..."
 replace_in_file "s/^  version = \".*\";/  version = \"$LATEST_VERSION\";/" "$DEFAULT_NIX"
-replace_in_file "s|\"$PLATFORM\" = \"sha256-[^\"]*\";|\"$PLATFORM\" = \"$SRC_HASH_SRI\";|" "$DEFAULT_NIX"
-replace_in_file "/\"$PLATFORM\" =/{n; s|\"sha256-[^\"]*\";|\"$SRC_HASH_SRI\";|;}" "$DEFAULT_NIX"
+replace_in_file "s|^\( *codex = \)\"sha256-[^\"]*\";|\1\"$CODEX_HASH_SRI\";|" "$DEFAULT_NIX"
+replace_in_file "s|^\( *codeModeHost = \)\"sha256-[^\"]*\";|\1\"$CODE_MODE_HOST_HASH_SRI\";|" "$DEFAULT_NIX"
 
 echo "Updated codex to version $LATEST_VERSION"
-echo "New source hash: $SRC_HASH_SRI"
+echo "New codex hash: $CODEX_HASH_SRI"
+echo "New codex-code-mode-host hash: $CODE_MODE_HOST_HASH_SRI"
 echo ""
 echo "Please test the build with:"
 echo "  nix build .#codex --impure"
