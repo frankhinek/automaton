@@ -1,7 +1,7 @@
 { lib, stdenvNoCC, fetchzip, makeWrapper }:
 
 let
-  version = "26.730.61639";
+  version = "26.908.40834";
 
   platform = if stdenvNoCC.hostPlatform.isDarwin
   && stdenvNoCC.hostPlatform.isAarch64 then
@@ -15,7 +15,7 @@ in stdenvNoCC.mkDerivation {
   src = fetchzip {
     url =
       "https://persistent.oaistatic.com/codex-app-prod/ChatGPT-darwin-arm64-${version}.zip";
-    hash = "sha256-JQ0AtOCFQw9KjbV0j6aZn2pXIO5Q5GESGs1JD/cf+iM=";
+    hash = "sha256-Ncp2pqSOWckkGypeGENVJbFKFh5WyPu6UEI+2LmjmbI=";
     stripRoot = false;
   };
 
