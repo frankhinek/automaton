@@ -1,7 +1,7 @@
 { lib, stdenvNoCC, fetchurl }:
 
 let
-  version = "2.1.270";
+  version = "2.1.281";
   releaseBaseUrl =
     "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases";
 
@@ -24,12 +24,12 @@ let
     throw "claude-code: unsupported platform ${stdenvNoCC.hostPlatform.system}";
 
   sourceHashes = {
-    "darwin-arm64" = "sha256-pQa22XCkz0T2q9tTqB3c1dOwzgQqlcUC/p0flGvbiAc=";
-    "darwin-x64" = "sha256-s+4yN6AZuKWrswCPHH3dRilaDm5lq5RUWnnJuZfciSg=";
-    "linux-arm64" = "sha256-e/nzOswSTfmrzPbyNmOXqCp0A3jVNfoS1Cb6d/28mUY=";
-    "linux-x64" = "sha256-OmJKWnzXm7rU0yvX2zbxGX7PRYvFvx4q7YGDSgGtPvA=";
-    "linux-arm64-musl" = "sha256-BnsyLfyg7YFSG1Yu8Fgl6L4oLutcg0QeS+gkQVVy28A=";
-    "linux-x64-musl" = "sha256-OPmDOP8jr85JxmyDrFfqI4+E5/TowXrnzHSz7q7popk=";
+    "darwin-arm64" = "sha256-qSKYH287VaJR75+duqBiGl+Zy8tcpn+KeXR2zPyD9iY=";
+    "darwin-x64" = "sha256-qTVcuw0pHOlI789hpu85dAFnL2T6Xl5nvKCS/tbNkIg=";
+    "linux-arm64" = "sha256-3SezZDik/tFnDNKbrS/aanO2KLbaVUQ+XC9kf+btMo8=";
+    "linux-x64" = "sha256-Vv49qIRYRl+yfX6Smd3bP+rVV1D7nC3nlfIzte6m3OE=";
+    "linux-arm64-musl" = "sha256-T3LruwhwZlHnoiBDA3k3AGmPQEa8MfPn5ls4EGO3whA=";
+    "linux-x64-musl" = "sha256-MCIKXPBihjRZng7eE6XMgU0hiAEWq/di8FmKM2Nve8o=";
   };
 in stdenvNoCC.mkDerivation {
   pname = "claude-code";
