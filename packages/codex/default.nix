@@ -1,7 +1,7 @@
 { lib, stdenvNoCC, fetchurl, makeWrapper, installShellFiles, ripgrep }:
 
 let
-  version = "0.153.0";
+  version = "0.156.1";
 
   platform = if stdenvNoCC.hostPlatform.isDarwin
   && stdenvNoCC.hostPlatform.isAarch64 then
@@ -11,8 +11,8 @@ let
 
   sourceHashes = {
     "aarch64-apple-darwin" = {
-      codex = "sha256-jN7NC46+I/IOs3MBD9kelReXfoQLaJQe9qZGtAnLMuE=";
-      codeModeHost = "sha256-hf2wRhY26dWAb6IAtPAApc0odFbzZvavR5ekwy1dUOk=";
+      codex = "sha256-K9ZK8U3t1HeV8va/1dElz3kZmswse6IiFE4IEnERpco=";
+      codeModeHost = "sha256-JiXQI+K24D0rzEN6Pg4IMcJdPHItKFRjio50kh/3m9k=";
     };
   };
 
