@@ -1,4 +1,4 @@
-{ lib, stdenvNoCC, fetchurl, makeWrapper, installShellFiles, ripgrep }:
+{ lib, stdenvNoCC, fetchurl, makeWrapper, installShellFiles }:
 
 let
   version = "0.157.0";
@@ -10,68 +10,62 @@ let
     throw "codex: unsupported platform ${stdenvNoCC.hostPlatform.system}";
 
   sourceHashes = {
-    "aarch64-apple-darwin" = {
-      codex = "sha256-DxUiNiv4yLu1i/L6ijxgCgtyPx1ONAWrgxr+2jJDiQk=";
-      codeModeHost = "sha256-pbM/9selATTQiF+78ZTK8c4nRbxXlGRFy2ZBZbBtI1c=";
-    };
-  };
-
-  hashes = sourceHashes.${platform};
-
-  # Shipped as its own release asset. Codex fails closed without it, so it has
-  # to be installed alongside the main binary rather than fetched at runtime.
-  codeModeHostSrc = fetchurl {
-    url =
-      "https://github.com/openai/codex/releases/download/rust-v${version}/codex-code-mode-host-${platform}.tar.gz";
-    hash = hashes.codeModeHost;
+    "aarch64-apple-darwin" =
+      "sha256-l4Cfkcs1XlVIDNehJvmtJLt7FiIiUV4wKGvKxvupSs0=";
   };
 in stdenvNoCC.mkDerivation {
   pname = "codex";
   inherit version;
 
+  # Upstream's "complete package" tarball (codex-package.json layoutVersion 1):
+  #   bin/codex, bin/codex-code-mode-host, codex-path/rg, codex-resources/…
+  # Since 0.157.0 the CLI launches a shared app-server daemon by copying this
+  # whole tree into ~/.codex/packages/app-server-daemon, and it refuses to start
+  # ("this CLI has no complete local package") when its executable is not
+  # inside such a tree. The bare codex-<platform>.tar.gz binary is no longer
+  # enough on its own.
   src = fetchurl {
     url =
-      "https://github.com/openai/codex/releases/download/rust-v${version}/codex-${platform}.tar.gz";
-    hash = hashes.codex;
+      "https://github.com/openai/codex/releases/download/rust-v${version}/codex-package-${platform}.tar.gz";
+    hash = sourceHashes.${platform};
   };
 
   nativeBuildInputs = [ makeWrapper installShellFiles ];
 
   dontUnpack = true;
 
+  # The Mach-O binaries are Developer ID signed and the bundled voice runtime
+  # pins their sha256 in codex-resources/voice/manifest.json; stripping or
+  # rewriting them would break both.
+  dontStrip = true;
+  dontPatchShebangs = true;
+
   installPhase = ''
     runHook preInstall
 
-    mkdir -p "$out/libexec" "$out/bin"
+    # The package root has to be a directory of its own: codex discovers it as
+    # the parent of the bin/ directory holding its executable
+    # (InstallContext::from_exe), and the daemon installer copies the entire
+    # tree verbatim, so nothing else may live in here.
+    pkgdir="$out/libexec/codex"
+    mkdir -p "$pkgdir" "$out/bin"
+    tar -xzf "$src" -C "$pkgdir"
 
-    tmpdir="$(mktemp -d)"
-    tar -xzf "$src" -C "$tmpdir"
+    # Mirror the daemon's validate_package() so a broken upstream tarball fails
+    # the build instead of failing at first launch.
+    for f in codex-package.json bin/codex bin/codex-code-mode-host codex-path/rg; do
+      if [ ! -f "$pkgdir/$f" ]; then
+        echo "codex: package is missing $f" >&2
+        exit 1
+      fi
+    done
+    for f in bin/codex bin/codex-code-mode-host codex-path/rg; do
+      chmod 755 "$pkgdir/$f"
+    done
 
-    codex_bin="$tmpdir/codex-${platform}"
-    if [ ! -f "$codex_bin" ]; then
-      echo "codex binary not found in archive"
-      exit 1
-    fi
-
-    install -Dm755 "$codex_bin" "$out/libexec/codex"
-
-    # Codex resolves helper programs relative to its own executable
-    # (InstallContext::from_exe), so the code-mode host must be a sibling of
-    # $out/libexec/codex. Without it Code Mode fails closed and no tool calls
-    # work at all.
-    tar -xzf "${codeModeHostSrc}" -C "$tmpdir"
-
-    code_mode_host_bin="$tmpdir/codex-code-mode-host-${platform}"
-    if [ ! -f "$code_mode_host_bin" ]; then
-      echo "codex-code-mode-host binary not found in archive"
-      exit 1
-    fi
-
-    install -Dm755 "$code_mode_host_bin" "$out/libexec/codex-code-mode-host"
-
-    # Upstream bundles ripgrep; codex shells out to `rg` for file search.
-    makeWrapper "$out/libexec/codex" "$out/bin/codex" \
-      --prefix PATH : ${lib.makeBinPath [ ripgrep ]} \
+    # Everything codex needs (ripgrep, code-mode host, zsh, voice runtime) is
+    # resolved relative to the package root, so the wrapper only carries env.
+    makeWrapper "$pkgdir/bin/codex" "$out/bin/codex" \
       --set DISABLE_AUTOUPDATER 1 \
       --set AUTHORIZED 1 \
       --unset DEV

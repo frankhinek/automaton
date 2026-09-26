@@ -58,22 +58,18 @@ fi
 
 RELEASE_URL="https://github.com/$GITHUB_REPO/releases/download/$LATEST_TAG"
 
-echo "Fetching codex source hash..."
-CODEX_HASH_SRI="$(prefetch_sri "$RELEASE_URL/codex-${PLATFORM}.tar.gz")"
-
-# codex resolves this helper relative to its own executable, so it is versioned
-# and installed in lockstep with the main binary.
-echo "Fetching codex-code-mode-host source hash..."
-CODE_MODE_HOST_HASH_SRI="$(prefetch_sri "$RELEASE_URL/codex-code-mode-host-${PLATFORM}.tar.gz")"
+# The complete package tarball bundles codex, codex-code-mode-host, rg and the
+# codex-resources tree under one codex-package.json manifest. Codex >= 0.157.0
+# needs that whole layout next to its executable to start its daemon.
+echo "Fetching codex-package source hash..."
+PACKAGE_HASH_SRI="$(prefetch_sri "$RELEASE_URL/codex-package-${PLATFORM}.tar.gz")"
 
 echo "Updating default.nix..."
 replace_in_file "s/^  version = \".*\";/  version = \"$LATEST_VERSION\";/" "$DEFAULT_NIX"
-replace_in_file "s|^\( *codex = \)\"sha256-[^\"]*\";|\1\"$CODEX_HASH_SRI\";|" "$DEFAULT_NIX"
-replace_in_file "s|^\( *codeModeHost = \)\"sha256-[^\"]*\";|\1\"$CODE_MODE_HOST_HASH_SRI\";|" "$DEFAULT_NIX"
+replace_in_file "s|^\( *\"$PLATFORM\" = \)\"sha256-[^\"]*\";|\1\"$PACKAGE_HASH_SRI\";|" "$DEFAULT_NIX"
 
 echo "Updated codex to version $LATEST_VERSION"
-echo "New codex hash: $CODEX_HASH_SRI"
-echo "New codex-code-mode-host hash: $CODE_MODE_HOST_HASH_SRI"
+echo "New codex-package hash: $PACKAGE_HASH_SRI"
 echo ""
 echo "Please test the build with:"
 echo "  nix build .#codex --impure"
