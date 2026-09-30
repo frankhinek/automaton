@@ -1,7 +1,7 @@
 { lib, stdenvNoCC, fetchurl, makeWrapper, installShellFiles }:
 
 let
-  version = "0.157.0";
+  version = "0.159.2";
 
   platform = if stdenvNoCC.hostPlatform.isDarwin
   && stdenvNoCC.hostPlatform.isAarch64 then
@@ -9,9 +9,10 @@ let
   else
     throw "codex: unsupported platform ${stdenvNoCC.hostPlatform.system}";
 
+  # Keyed by Nix system rather than the upstream triple so each entry stays on
+  # one line under nixfmt, which is what update.sh's sed expects.
   sourceHashes = {
-    "aarch64-apple-darwin" =
-      "sha256-l4Cfkcs1XlVIDNehJvmtJLt7FiIiUV4wKGvKxvupSs0=";
+    "aarch64-darwin" = "sha256-OKr23OYwmf0QmIlI0Du8bAR0JTrvaWH8vmD40VSzkQE=";
   };
 in stdenvNoCC.mkDerivation {
   pname = "codex";
@@ -27,7 +28,7 @@ in stdenvNoCC.mkDerivation {
   src = fetchurl {
     url =
       "https://github.com/openai/codex/releases/download/rust-v${version}/codex-package-${platform}.tar.gz";
-    hash = sourceHashes.${platform};
+    hash = sourceHashes.${stdenvNoCC.hostPlatform.system};
   };
 
   nativeBuildInputs = [ makeWrapper installShellFiles ];

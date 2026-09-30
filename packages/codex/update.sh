@@ -7,6 +7,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DEFAULT_NIX="$SCRIPT_DIR/default.nix"
 GITHUB_REPO="openai/codex"
 PLATFORM="aarch64-apple-darwin"
+SYSTEM="aarch64-darwin"
 
 replace_in_file() {
     local expression="$1"
@@ -66,7 +67,13 @@ PACKAGE_HASH_SRI="$(prefetch_sri "$RELEASE_URL/codex-package-${PLATFORM}.tar.gz"
 
 echo "Updating default.nix..."
 replace_in_file "s/^  version = \".*\";/  version = \"$LATEST_VERSION\";/" "$DEFAULT_NIX"
-replace_in_file "s|^\( *\"$PLATFORM\" = \)\"sha256-[^\"]*\";|\1\"$PACKAGE_HASH_SRI\";|" "$DEFAULT_NIX"
+replace_in_file "s|\"$SYSTEM\" = \"sha256-[^\"]*\";|\"$SYSTEM\" = \"$PACKAGE_HASH_SRI\";|" "$DEFAULT_NIX"
+
+# sed is silent when nothing matches, so make a missed hash fail loudly.
+if ! grep -qF "\"$PACKAGE_HASH_SRI\"" "$DEFAULT_NIX"; then
+    echo "Failed to write the $SYSTEM hash into $DEFAULT_NIX" >&2
+    exit 1
+fi
 
 echo "Updated codex to version $LATEST_VERSION"
 echo "New codex-package hash: $PACKAGE_HASH_SRI"
