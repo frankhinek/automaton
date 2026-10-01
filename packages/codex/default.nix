@@ -1,7 +1,7 @@
 { lib, stdenvNoCC, fetchurl, makeWrapper, installShellFiles }:
 
 let
-  version = "0.159.2";
+  version = "0.159.3";
 
   platform = if stdenvNoCC.hostPlatform.isDarwin
   && stdenvNoCC.hostPlatform.isAarch64 then
@@ -12,7 +12,7 @@ let
   # Keyed by Nix system rather than the upstream triple so each entry stays on
   # one line under nixfmt, which is what update.sh's sed expects.
   sourceHashes = {
-    "aarch64-darwin" = "sha256-OKr23OYwmf0QmIlI0Du8bAR0JTrvaWH8vmD40VSzkQE=";
+    "aarch64-darwin" = "sha256-+tV6VoHKvO8h0yKvWuyTiXXPtxG18l1M5JB+ZWFhbQc=";
   };
 in stdenvNoCC.mkDerivation {
   pname = "codex";
