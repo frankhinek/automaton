@@ -64,6 +64,24 @@ in {
             disown $_hydro_last_pid 2>/dev/null
         end
 
+        # devenv's hook only checks for a project once per prompt, so when it
+        # follows you out of a devenv shell, re-check the new directory and
+        # refresh Hydro (which already ran for the old one) right away
+        if functions -q _devenv_hook
+            functions --copy _devenv_hook _devenv_hook_once
+            function _devenv_hook --on-event fish_prompt
+                set -l start $PWD
+                while true
+                    set -l before $PWD
+                    _devenv_hook_once
+                    test "$PWD" = "$before"; and break
+                end
+                if test "$PWD" != "$start"; and functions -q _hydro_prompt
+                    _hydro_prompt
+                end
+            end
+        end
+
         ${lib.optionalString config.programs.fastfetch.enable "fastfetch"}
       '';
 
