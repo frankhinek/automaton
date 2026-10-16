@@ -10,5 +10,5 @@ in {
   };
 
   config =
-    mkIf cfg.enable { home = { packages = with pkgs; [ devenv_2_3_1 ]; }; };
+    mkIf cfg.enable { home = { packages = with pkgs; [ devenv_2_4_0 ]; }; };
 }

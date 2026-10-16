@@ -58,12 +58,6 @@ in {
         set hydro_color_prompt brgreen
         set hydro_color_duration bryellow
 
-        # Disown Hydro's async git job so it doesn't block devenv's hook `exit`
-        # with "There are still jobs active" when cd'ing out of a project
-        function _hydro_disown_job --on-variable _hydro_last_pid
-            disown $_hydro_last_pid 2>/dev/null
-        end
-
         # devenv's hook only checks for a project once per prompt, so when it
         # follows you out of a devenv shell, re-check the new directory and
         # refresh Hydro (which already ran for the old one) right away
